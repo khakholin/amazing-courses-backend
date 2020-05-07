@@ -929,8 +929,20 @@
         "version": "5895458978605246c35e65d002daf18eb47031841f2b0171516d4e611a33dc5c",
         "signature": "5a5187f38acd485aaacfef914bd85a3e7e35a022d28069cb3182b23c1b329adc"
       },
+      "../src/user/user.service.ts": {
+        "version": "473e7a21f51f618235224e3a7bbc047d7ad0dfc94a9024a829435c0f910441f7",
+        "signature": "87766d73d7dbeee6ba94874f66534c261407facf6ed49d8f080f095f52366e9d"
+      },
+      "../src/user/user.types.ts": {
+        "version": "bd1f7d01ec9791ff23b1c6316360d9237a77e88a3df9534ddae510f59e080a42",
+        "signature": "f1fdacb9828ed32414d149efbdbb3f99b231b67dcf0719b7919d0e567b460135"
+      },
+      "../src/user/user.controller.ts": {
+        "version": "4a9f68a1f6f20ff6830cd2b0c64c0f3949a0bc6ba5fc3c84c265ba5da3ec88dc",
+        "signature": "e20715afebeeeb56406e83a1a7840908e26b09c20ecba457dca351ca71ede940"
+      },
       "../src/app.module.ts": {
-        "version": "5cf7a7d2d203bf7ceed20df7cd33832cdaf4e66fe8f05e19db21373cbe65d33a",
+        "version": "8d76f1b791432bdfa548ab98df1d5e8fdb61b9a422c9bb50972b3a730e432a7b",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644"
       },
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": {
@@ -3293,12 +3305,36 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../src/user/user.service.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/user/user.types.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/user/user.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/user/user.service.ts",
+        "../src/user/user.types.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/app.module.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../src/app.controller.ts",
         "../src/app.service.ts",
         "../src/courses/courses.controller.ts",
         "../src/courses/courses.service.ts",
+        "../src/user/user.controller.ts",
+        "../src/user/user.service.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7107,6 +7143,10 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/user/user.controller.ts": [
+        "../src/user/user.service.ts",
+        "../src/user/user.types.ts"
       ]
     },
     "semanticDiagnosticsPerFile": []

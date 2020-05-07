@@ -11,6 +11,8 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const courses_controller_1 = require("./courses/courses.controller");
 const courses_service_1 = require("./courses/courses.service");
+const user_controller_1 = require("./user/user.controller");
+const user_service_1 = require("./user/user.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -19,10 +21,12 @@ AppModule = __decorate([
         controllers: [
             app_controller_1.AppController,
             courses_controller_1.CoursesController,
+            user_controller_1.UserController,
         ],
         providers: [
             app_service_1.AppService,
             courses_service_1.CoursesService,
+            user_service_1.UserService,
         ],
     })
 ], AppModule);
