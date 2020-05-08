@@ -8,6 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 let UserService = class UserService {
+    constructor() {
+        this.users = [
+            { email: 'admin@admin.ru', login: 'admin', password: 'admin' },
+            { email: 'khakholin@mail.ru', login: 'Alexander', password: '123456' },
+            { email: 'fatykhov@google.com', login: 'Timur', password: '654321' },
+        ];
+    }
+    authenticationUser(potentialUser) {
+        return this.users.find((user) => ((user.login === potentialUser.login) && (user.password === potentialUser.password)));
+    }
+    recoveryPassword(recoveryData) {
+        return this.users.find((user) => user.email === recoveryData.email);
+    }
+    registrationUser(newUser) {
+        this.users.push(newUser);
+    }
 };
 UserService = __decorate([
     common_1.Injectable()

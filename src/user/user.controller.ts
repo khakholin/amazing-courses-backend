@@ -10,17 +10,18 @@ export class UserController {
     }
 
     @Post('auth')
-    authenticationUser(@Body() body: IUserData) {
-        return 'Auth! Login: ' + body.login + ' Password: ' + body.password;
-    }
-
-    @Post('reg')
-    registrationUser(@Body() body: IUserRegData) {
-        return 'Reg! Email: ' + body.email + ' Login: ' + body.login + ' Password: ' + body.password;
+    async authenticationUser(@Body() body: IUserData): Promise<IUserRegData> {
+        return this.usersService.authenticationUser(body);
     }
 
     @Post('recovery')
-    recoveryPassword(@Body() body: IUserRecoveryData) {
-        return 'Recovery! Email: ' + body.email;
+    async recoveryPassword(@Body() body: IUserRecoveryData): Promise<IUserRegData> {
+        return this.usersService.recoveryPassword(body);
     }
+
+    @Post('reg')
+    asyncregistrationUser(@Body() body: IUserRegData) {
+        this.usersService.registrationUser(body);
+    }
+
 }

@@ -3,7 +3,7 @@ import { IUserData, IUserRegData, IUserRecoveryData } from './user.types';
 export declare class UserController {
     private usersService;
     constructor(usersService: UserService);
-    authenticationUser(body: IUserData): string;
-    registrationUser(body: IUserRegData): string;
-    recoveryPassword(body: IUserRecoveryData): string;
+    authenticationUser(body: IUserData): Promise<IUserRegData>;
+    recoveryPassword(body: IUserRecoveryData): Promise<IUserRegData>;
+    asyncregistrationUser(body: IUserRegData): void;
 }

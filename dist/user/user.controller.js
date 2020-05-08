@@ -18,14 +18,14 @@ let UserController = class UserController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    authenticationUser(body) {
-        return 'Auth! Login: ' + body.login + ' Password: ' + body.password;
+    async authenticationUser(body) {
+        return this.usersService.authenticationUser(body);
     }
-    registrationUser(body) {
-        return 'Reg! Email: ' + body.email + ' Login: ' + body.login + ' Password: ' + body.password;
+    async recoveryPassword(body) {
+        return this.usersService.recoveryPassword(body);
     }
-    recoveryPassword(body) {
-        return 'Recovery! Email: ' + body.email;
+    asyncregistrationUser(body) {
+        this.usersService.registrationUser(body);
     }
 };
 __decorate([
@@ -33,22 +33,22 @@ __decorate([
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserController.prototype, "authenticationUser", null);
+__decorate([
+    common_1.Post('recovery'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "recoveryPassword", null);
 __decorate([
     common_1.Post('reg'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], UserController.prototype, "registrationUser", null);
-__decorate([
-    common_1.Post('recovery'),
-    __param(0, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "recoveryPassword", null);
+], UserController.prototype, "asyncregistrationUser", null);
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [user_service_1.UserService])
