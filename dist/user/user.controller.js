@@ -19,10 +19,28 @@ let UserController = class UserController {
         this.usersService = usersService;
     }
     async authenticationUser(body) {
-        return this.usersService.authenticationUser(body);
+        const response = this.usersService.authenticationUser(body);
+        if (response) {
+            return response;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                error: 'INVALID_USER'
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
     }
     async recoveryPassword(body) {
-        return this.usersService.recoveryPassword(body);
+        const response = this.usersService.recoveryPassword(body);
+        if (response) {
+            return response;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                error: 'INVALID_EMAIL'
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
     }
     asyncregistrationUser(body) {
         this.usersService.registrationUser(body);

@@ -1,9 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { IUserRegData, IUserData, IUserRecoveryData } from './user.types';
 
-
+export type User = any;
 @Injectable()
 export class UserService {
+    private readonly testUsers: User[];
+
+    constructor() {
+        this.testUsers = [
+            {
+                userId: 1,
+                username: 'john',
+                password: 'changeme',
+            },
+            {
+                userId: 2,
+                username: 'chris',
+                password: 'secret',
+            },
+            {
+                userId: 3,
+                username: 'maria',
+                password: 'guess',
+            },
+        ];
+    }
+
     private users: IUserRegData[] = [
         { email: 'admin@admin.ru', login: 'admin', password: 'admin' },
         { email: 'khakholin@mail.ru', login: 'Alexander', password: '123456' },
@@ -20,6 +42,10 @@ export class UserService {
 
     registrationUser(newUser: IUserRegData) {
         this.users.push(newUser);
+    }
+
+    async findOne(username: string): Promise<User | undefined> {
+        return this.testUsers.find(user => user.username === username);
     }
 }
 
