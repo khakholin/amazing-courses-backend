@@ -1,6 +1,6 @@
 declare const userList: {
     user: string;
     password: string;
-    courses: import("../courses.types").ICourseData[];
+    courses: any[];
 }[];
 export default userList;

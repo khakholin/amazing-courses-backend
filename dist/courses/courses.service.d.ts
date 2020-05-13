@@ -1,5 +1,10 @@
-import { IUserInformation, IUserData } from './courses.types';
+export declare type Course = any;
 export declare class CoursesService {
-    private users;
-    getUserCourses(user: IUserInformation): IUserData;
+    private readonly courses;
+    constructor();
+    getUserCourses(availableCourses: any): {
+        totalNumOfLectures: number;
+        totalTime: number;
+        data: any[];
+    };
 }

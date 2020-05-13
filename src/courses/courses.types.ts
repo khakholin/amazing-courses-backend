@@ -4,7 +4,6 @@ export interface IUserInformation {
 }
 
 export interface IUserData {
-    user: string;
     totalNumOfLectures: number;
     totalTime: number;
     data: ICourseData[];
@@ -18,8 +17,6 @@ export interface ICourseData {
 }
 
 export interface ILectureData {
-    available: boolean;
-    checked: boolean;
     title: string;
     time: number;
 }

@@ -6,6 +6,7 @@ export declare class JwtStrategy extends JwtStrategy_base {
         userId: any;
         username: any;
         email: any;
+        availableCourses: any;
     }>;
 }
 export {};
