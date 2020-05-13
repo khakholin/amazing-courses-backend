@@ -7,10 +7,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-let AppController = class AppController {
+const passport_1 = require("@nestjs/passport");
+let JwtAuthGuard = class JwtAuthGuard extends passport_1.AuthGuard('jwt') {
 };
-AppController = __decorate([
-    common_1.Controller()
-], AppController);
-exports.AppController = AppController;
-//# sourceMappingURL=app.controller.js.map
+JwtAuthGuard = __decorate([
+    common_1.Injectable()
+], JwtAuthGuard);
+exports.JwtAuthGuard = JwtAuthGuard;
+//# sourceMappingURL=jwt-auth.guard.js.map
