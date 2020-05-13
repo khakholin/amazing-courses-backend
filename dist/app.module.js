@@ -24,7 +24,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     common_1.Module({
         imports: [
-            passport_1.PassportModule,
+            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
             jwt_1.JwtModule.register({
                 secret: auth_constants_1.jwtConstants.secret,
                 signOptions: { expiresIn: '1w' },
