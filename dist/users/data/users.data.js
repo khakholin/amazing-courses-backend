@@ -29,5 +29,14 @@ exports.userList = [
         username: 'Timur',
         password: '654321',
     },
+    {
+        availableCourses: [
+            { title: 'Кулинария', numAvailableLectures: 3, numCheckedLectures: 0 },
+        ],
+        userId: 4,
+        email: 'sveta_penyagina@mail.ru',
+        username: 'Sveta',
+        password: 'cocper6',
+    },
 ];
 //# sourceMappingURL=users.data.js.map

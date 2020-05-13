@@ -17,6 +17,6 @@ export declare class UserController {
         data: any[];
     }>;
     authenticationUser(body: IUserData): Promise<IUserRegData>;
-    recoveryPassword(body: IUserRecoveryData): Promise<IUserRegData>;
+    recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
     asyncregistrationUser(body: IUserRegData): void;
 }
