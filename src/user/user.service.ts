@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IUserRegData, IUserData, IUserRecoveryData } from './user.types';
+import { userList } from './users.data';
 
 export type User = any;
 @Injectable()
@@ -7,23 +8,7 @@ export class UserService {
     private readonly testUsers: User[];
 
     constructor() {
-        this.testUsers = [
-            {
-                userId: 1,
-                username: 'john',
-                password: 'changeme',
-            },
-            {
-                userId: 2,
-                username: 'chris',
-                password: 'secret',
-            },
-            {
-                userId: 3,
-                username: 'maria',
-                password: 'guess',
-            },
-        ];
+        this.testUsers = userList;
     }
 
     private users: IUserRegData[] = [

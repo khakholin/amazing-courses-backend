@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const users_data_1 = require("./users.data");
 let UserService = class UserService {
     constructor() {
         this.users = [
@@ -17,23 +18,7 @@ let UserService = class UserService {
             { email: 'khakholin@mail.ru', login: 'Alexander', password: '123456' },
             { email: 'fatykhov@google.com', login: 'Timur', password: '654321' },
         ];
-        this.testUsers = [
-            {
-                userId: 1,
-                username: 'john',
-                password: 'changeme',
-            },
-            {
-                userId: 2,
-                username: 'chris',
-                password: 'secret',
-            },
-            {
-                userId: 3,
-                username: 'maria',
-                password: 'guess',
-            },
-        ];
+        this.testUsers = users_data_1.userList;
     }
     authenticationUser(potentialUser) {
         return this.users.find((user) => ((user.login === potentialUser.login) && (user.password === potentialUser.password)));

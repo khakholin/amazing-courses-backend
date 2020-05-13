@@ -14,9 +14,19 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
+const local_auth_guard_1 = require("../auth/local-auth.guard");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const auth_service_1 = require("../auth/auth.service");
 let UserController = class UserController {
-    constructor(usersService) {
+    constructor(authService, usersService) {
+        this.authService = authService;
         this.usersService = usersService;
+    }
+    async login(req) {
+        return this.authService.login(req.user);
+    }
+    getProfile(req) {
+        return req.user;
     }
     async authenticationUser(body) {
         const response = this.usersService.authenticationUser(body);
@@ -47,6 +57,22 @@ let UserController = class UserController {
     }
 };
 __decorate([
+    common_1.UseGuards(local_auth_guard_1.LocalAuthGuard),
+    common_1.Post('auth/login'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "login", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('profile'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getProfile", null);
+__decorate([
     common_1.Post('auth'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -69,7 +95,8 @@ __decorate([
 ], UserController.prototype, "asyncregistrationUser", null);
 UserController = __decorate([
     common_1.Controller('user'),
-    __metadata("design:paramtypes", [user_service_1.UserService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService,
+        user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=user.controller.js.map
