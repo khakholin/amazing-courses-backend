@@ -6,6 +6,7 @@ import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
 import { CoursesService } from 'src/courses/courses.service';
+import { sendEmail } from 'src/email/sendEmail';
 
 @Controller('user')
 export class UserController {
@@ -47,16 +48,8 @@ export class UserController {
     }
 
     @Post('recovery')
-    async recoveryPassword(@Body() body: IUserRecoveryData): Promise<IUserRegData> {
-        const response = this.usersService.recoveryPassword(body);
-        if (response) {
-            return response;
-        } else {
-            throw new HttpException({
-                status: HttpStatus.NOT_FOUND,
-                error: 'INVALID_EMAIL'
-            }, HttpStatus.NOT_FOUND);
-        }
+    async recoveryPassword(@Body() body: IUserRecoveryData) {
+        return sendEmail(body.email);
     }
 
     @Post('reg')

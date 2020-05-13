@@ -18,6 +18,7 @@ const local_auth_guard_1 = require("../auth/local-auth.guard");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const auth_service_1 = require("../auth/auth.service");
 const courses_service_1 = require("../courses/courses.service");
+const sendEmail_1 = require("../email/sendEmail");
 let UserController = class UserController {
     constructor(authService, usersService, coursesService) {
         this.authService = authService;
@@ -46,16 +47,7 @@ let UserController = class UserController {
         }
     }
     async recoveryPassword(body) {
-        const response = this.usersService.recoveryPassword(body);
-        if (response) {
-            return response;
-        }
-        else {
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.NOT_FOUND,
-                error: 'INVALID_EMAIL'
-            }, common_1.HttpStatus.NOT_FOUND);
-        }
+        return sendEmail_1.sendEmail(body.email);
     }
     asyncregistrationUser(body) {
         this.usersService.registrationUser(body);

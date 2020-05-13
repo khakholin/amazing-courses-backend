@@ -1206,7 +1206,7 @@
         "signature": "fd8e6c7d59a4f3e3508802239b292eb9be1e7b79506165c7f9d4d52f423a2985"
       },
       "../src/users/data/users.data.ts": {
-        "version": "f27259b78d07c2dee855f1467c573a5624011faa6ec668fbda55c6fb11516222",
+        "version": "6563ba17fa1e85083a028f7c9288659d93ae6d3bce3c6c0c5622cfaab82f4966",
         "signature": "9ef3827dee36ad8acfc71aadadbf5d644a4915b19cfe1baeb44b7f2e77ad4516"
       },
       "../src/users/users.service.ts": {
@@ -1225,9 +1225,13 @@
         "version": "a5756c92095ef9facaa18a162d0602cfb51c01e3eefd2f79163271f9204da60b",
         "signature": "a6a5ba4e7c6cb6f1c38195b302ac65ed9a33d30efc370dce1e1411c46ecdba59"
       },
+      "../src/email/sendEmail.ts": {
+        "version": "0ce4e7fd08ce75d5cef68d00dca821dae94eddd981776b3e8b84414ce328d8b3",
+        "signature": "bd9eeb46d57399eeb71e1a4b79cab3e3670ae0b2d02b31398c208a7b59ad078c"
+      },
       "../src/users/users.controller.ts": {
-        "version": "b1f3c7162bf9a597a35b414c3a49aa9e2813de13c26ff9724dce52161a9382cf",
-        "signature": "b4e274849477328bef85358d04642325e335b6e188783c90813dc411ff47993c"
+        "version": "0f3cba881ab4a25e10ebeb44b1be5fe46ff688a3596bf926a2f5d8805f044cea",
+        "signature": "ea4562198eb94349d8f2954228af32c4ef8d2a9d0c980b6bb5f0fb994c54f783"
       },
       "../node_modules/@types/passport-strategy/index.d.ts": {
         "version": "29d59e921bc723594bbfc98230d24f38f0d5a669f28fcf989b7468f4f95b7c52",
@@ -3987,6 +3991,13 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../src/email/sendEmail.ts": [
+        "../src/users/data/users.data.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/users/users.controller.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../src/users/users.service.ts",
@@ -3995,6 +4006,7 @@
         "../src/auth/jwt-auth.guard.ts",
         "../src/auth/auth.service.ts",
         "../src/courses/courses.service.ts",
+        "../src/email/sendEmail.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
