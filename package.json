@@ -1,8 +1,8 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "amazing-courses-backend",
   "private": true,
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "Amazing Courses Backend",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
