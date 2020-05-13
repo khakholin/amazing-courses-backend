@@ -4,20 +4,20 @@ exports.userList = [
     {
         userId: 1,
         email: 'admin@admin.ru',
-        username: 'john',
-        password: 'changeme',
+        username: 'admin',
+        password: 'admin',
     },
     {
         userId: 2,
         email: 'khakholin@mail.ru',
-        username: 'chris',
-        password: 'secret',
+        username: 'Alexander',
+        password: '123456',
     },
     {
         userId: 3,
         email: 'fatykhov@gmail.com',
-        username: 'maria',
-        password: 'guess',
+        username: 'Timur',
+        password: '654321',
     },
 ];
 //# sourceMappingURL=users.data.js.map
