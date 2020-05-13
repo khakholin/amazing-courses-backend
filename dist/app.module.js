@@ -14,8 +14,8 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const courses_controller_1 = require("./courses/courses.controller");
 const courses_service_1 = require("./courses/courses.service");
-const user_controller_1 = require("./user/user.controller");
-const user_service_1 = require("./user/user.service");
+const users_controller_1 = require("./users/users.controller");
+const users_service_1 = require("./users/users.service");
 const local_strategy_1 = require("./auth/local.strategy");
 const auth_service_1 = require("./auth/auth.service");
 const jwt_strategy_1 = require("./auth/jwt.strategy");
@@ -33,7 +33,7 @@ AppModule = __decorate([
         controllers: [
             app_controller_1.AppController,
             courses_controller_1.CoursesController,
-            user_controller_1.UserController,
+            users_controller_1.UserController,
         ],
         providers: [
             app_service_1.AppService,
@@ -41,7 +41,7 @@ AppModule = __decorate([
             courses_service_1.CoursesService,
             local_strategy_1.LocalStrategy,
             jwt_strategy_1.JwtStrategy,
-            user_service_1.UserService,
+            users_service_1.UserService,
         ],
     })
 ], AppModule);

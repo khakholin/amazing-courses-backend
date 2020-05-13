@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request } from '@nestjs/common';
 
-import { UserService } from './user.service';
-import { IUserData, IUserRegData, IUserRecoveryData } from './user.types';
+import { UserService } from './users.service';
+import { IUserData, IUserRegData, IUserRecoveryData } from './users.types';
 import e = require('express');
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';

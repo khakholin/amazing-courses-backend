@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IUserRegData, IUserData, IUserRecoveryData } from './user.types';
+import { IUserRegData, IUserData, IUserRecoveryData } from './users.types';
 import { userList } from './data/users.data';
 
 export type User = any;
