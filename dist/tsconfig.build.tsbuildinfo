@@ -1189,37 +1189,25 @@
         "version": "eaf8514ce110fa428a93a27408df4d06d133dbd9ed0a775c315ddfdd507853a9",
         "signature": "653711fba8904aa27fd8911b63cf526e7b334e13a292da4cefdbbe179ac3f3f2"
       },
-      "../node_modules/moment/moment.d.ts": {
-        "version": "d62fa6fe33566fa743b3d6715a1a2fe46e937ba9d2ba158563c5744315d438a7",
-        "signature": "d62fa6fe33566fa743b3d6715a1a2fe46e937ba9d2ba158563c5744315d438a7"
-      },
-      "../src/courses/courses.types.ts": {
-        "version": "bbfc359f1d4c1144630c23d9a68df15d727ab3b7401be472b10a5cda58f4984e",
-        "signature": "ec3c5582dbdb5cb473f58971248d4972cc3fac88fb7b0eb8cbfe142f52aead08"
+      "../src/courses/courses.controller.ts": {
+        "version": "874af86f7c3a391e629c4feaeadea0270db69db272a474e2bb1c441227b3e402",
+        "signature": "22d7eef1c85c98dcdf77c1b43cf9c6d208800dbe1fb0a0c9ae3789b9ce290071"
       },
       "../src/courses/data/courses.data.ts": {
-        "version": "b0ebac63a41b5b274d63e3862da137560cbbde76c9c7fa28e392601177f7b803",
-        "signature": "862d179efe6ff1edb5b037e53d4f542aa4c41cde3834079f434b2786b799fc6c"
-      },
-      "../src/courses/data/user-list.data.ts": {
-        "version": "e16445c3dffc59d8162ff3b0b2f3100a63f7ccf927893d088ccfa2e526a1d701",
-        "signature": "4c180fcc6ed0bcff28d0145329185b108b9373c80b0b29e59d1f32963784a9ab"
+        "version": "a818c1cea9fb75d783bddf22373d683b7908478f8e780f74ad020b973e9356cc",
+        "signature": "623c8224ce6d82bfa9d452ed1404b70d77dbc639f5c837868ddd4fe6f2dd91f3"
       },
       "../src/courses/courses.service.ts": {
-        "version": "99628a2fe86904abd53f3557920aebf58863bd9b4f35f10a945d3e480ef66e30",
-        "signature": "28fc73fda0724528300aa497978d5b87ef48d845ff791e5bc95d026a51b04726"
-      },
-      "../src/courses/courses.controller.ts": {
-        "version": "5895458978605246c35e65d002daf18eb47031841f2b0171516d4e611a33dc5c",
-        "signature": "5a5187f38acd485aaacfef914bd85a3e7e35a022d28069cb3182b23c1b329adc"
+        "version": "b74c7ec5894e138ad63d20a72b95f575a06aa45317c2247c0f9e8f5a618f108f",
+        "signature": "f77830a568e1e05adb2255cd4e2b3b3adb0368f1357542b100c9e9a432bcc5bd"
       },
       "../src/users/users.types.ts": {
-        "version": "bd1f7d01ec9791ff23b1c6316360d9237a77e88a3df9534ddae510f59e080a42",
-        "signature": "f1fdacb9828ed32414d149efbdbb3f99b231b67dcf0719b7919d0e567b460135"
+        "version": "2a45b079dd695c379377b7bad2eeba802d031231ae7bae5de1d776dc0d28a7ed",
+        "signature": "fd8e6c7d59a4f3e3508802239b292eb9be1e7b79506165c7f9d4d52f423a2985"
       },
       "../src/users/data/users.data.ts": {
-        "version": "9dbf49440d868cf9409142ffaed7c6982ed78b58b821f18a3e97c13d9a624c39",
-        "signature": "a168f1986a1f3c704a4dbb0e094ca38c434c224ddba10d41d6be39423fed21e3"
+        "version": "93a86ff3e0c9adb2d5240b571b2dca8886bc0c29c42f2e3712211378ec614ce0",
+        "signature": "eded521481b362106bef5d375065eec55dcd6bb21ee3bd0c788a02261c909653"
       },
       "../src/users/users.service.ts": {
         "version": "b09fa23b47ed2ede2a53fc7d749a04e19d6a85d968663f0fd80e65f5beb1c476",
@@ -1234,12 +1222,12 @@
         "signature": "e9629b89f6cd33a040577695d89edf882e66287d30c87121f5fc07f404decd25"
       },
       "../src/auth/auth.service.ts": {
-        "version": "b29e4e60fd2028af3db8cbbbe8da6ffcadd496731c1802ab32040ba001a3b667",
+        "version": "a5756c92095ef9facaa18a162d0602cfb51c01e3eefd2f79163271f9204da60b",
         "signature": "a6a5ba4e7c6cb6f1c38195b302ac65ed9a33d30efc370dce1e1411c46ecdba59"
       },
       "../src/users/users.controller.ts": {
-        "version": "6bf701e4550b311cbd4472a1d5ce030d2a1f4eab20bec6dcd107d86d52778519",
-        "signature": "ce92728853c6c358ae8924288e3809a1269836b678c4ebf3422c081242051073"
+        "version": "b1f3c7162bf9a597a35b414c3a49aa9e2813de13c26ff9724dce52161a9382cf",
+        "signature": "b72a57ffefdebb7d2b26be1507ab91e10973beb0df45a87046afacf3fb201659"
       },
       "../node_modules/@types/passport-strategy/index.d.ts": {
         "version": "29d59e921bc723594bbfc98230d24f38f0d5a669f28fcf989b7468f4f95b7c52",
@@ -1258,8 +1246,8 @@
         "signature": "d306be26f96b4bd9b279cd7da9d1355d5ce4060a2bb254489c1b95c87057eb38"
       },
       "../src/auth/jwt.strategy.ts": {
-        "version": "7f27c3ffcba76fb689cf57eb5eb3c49eb1a9c777ba4ded976f9e48df59b0e29c",
-        "signature": "59602267f96a541ea12faf1f911a4d105badfe8ab82e77caa41433b425770bbb"
+        "version": "e1499a3cd6bf31149801970666aed43e6479264d5e50887cf0a051ab9cae2e72",
+        "signature": "80e4e8aee3d822fd713439cdb1e3cc3bcefc8ad882232085c3608d3ea9c5f38d"
       },
       "../src/app.module.ts": {
         "version": "db1c542d5e54c1b7521bd68146b1b1700f6ab0c385894d7b9adaf8c730069a75",
@@ -1412,6 +1400,10 @@
       "../src/main.ts": {
         "version": "b938bdf7eba05a6e52a3454f281af57230b4b8ad3cf13c10199c9deb18c97aeb",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+      },
+      "../src/courses/courses.types.ts": {
+        "version": "bbfc359f1d4c1144630c23d9a68df15d727ab3b7401be472b10a5cda58f4984e",
+        "signature": "ec3c5582dbdb5cb473f58971248d4972cc3fac88fb7b0eb8cbfe142f52aead08"
       },
       "../src/courses/data/user-courses.data.ts": {
         "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
@@ -3932,27 +3924,14 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/moment/moment.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/courses/courses.types.ts": [
+      "../src/courses/courses.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/courses/data/courses.data.ts": [
-        "../src/courses/courses.types.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/courses/data/user-list.data.ts": [
-        "../src/courses/data/courses.data.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -3960,19 +3939,7 @@
       ],
       "../src/courses/courses.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/moment/moment.d.ts",
         "../src/courses/data/courses.data.ts",
-        "../src/courses/courses.types.ts",
-        "../src/courses/data/user-list.data.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/courses/courses.controller.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../src/courses/courses.service.ts",
-        "../src/courses/courses.types.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4028,10 +3995,10 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../src/users/users.service.ts",
         "../src/users/users.types.ts",
-        "../node_modules/@types/express/index.d.ts",
         "../src/auth/local-auth.guard.ts",
         "../src/auth/jwt-auth.guard.ts",
         "../src/auth/auth.service.ts",
+        "../src/courses/courses.service.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4421,6 +4388,12 @@
       "../src/main.ts": [
         "../node_modules/@nestjs/core/index.d.ts",
         "../src/app.module.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/courses/courses.types.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7029,24 +7002,8 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../node_modules/moment/moment.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/courses/data/courses.data.ts": [
-        "../src/courses/courses.types.ts"
-      ],
-      "../src/courses/data/user-list.data.ts": [
-        "../src/courses/courses.types.ts"
-      ],
-      "../src/courses/courses.service.ts": [
-        "../src/courses/courses.types.ts"
-      ],
-      "../src/courses/courses.controller.ts": [
-        "../src/courses/courses.service.ts",
-        "../src/courses/courses.types.ts"
+      "../src/users/users.service.ts": [
+        "../src/users/users.types.ts"
       ],
       "../src/auth/local-auth.guard.ts": [
         "../node_modules/@nestjs/passport/index.d.ts"
@@ -7057,6 +7014,12 @@
       "../src/auth/auth.service.ts": [
         "../src/users/users.service.ts",
         "../node_modules/@nestjs/jwt/index.d.ts"
+      ],
+      "../src/users/users.controller.ts": [
+        "../src/auth/auth.service.ts",
+        "../src/users/users.service.ts",
+        "../src/courses/courses.service.ts",
+        "../src/users/users.types.ts"
       ],
       "../node_modules/@types/passport-strategy/index.d.ts": [
         "../node_modules/@types/passport/index.d.ts",
@@ -7669,14 +7632,6 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/users/users.controller.ts": [
-        "../src/auth/auth.service.ts",
-        "../src/users/users.service.ts",
-        "../src/users/users.types.ts"
-      ],
-      "../src/users/users.service.ts": [
-        "../src/users/users.types.ts"
       ]
     },
     "semanticDiagnosticsPerFile": []

@@ -2,15 +2,18 @@ import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Requ
 
 import { UserService } from './users.service';
 import { IUserData, IUserRegData, IUserRecoveryData } from './users.types';
-import e = require('express');
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
+import { CoursesService } from 'src/courses/courses.service';
 
 @Controller('user')
 export class UserController {
-    constructor(private authService: AuthService,
-        private usersService: UserService) { }
+    constructor(
+        private authService: AuthService,
+        private usersService: UserService,
+        private coursesService: CoursesService,
+    ) { }
 
     @UseGuards(LocalAuthGuard)
     @Post('auth/login')
@@ -22,6 +25,12 @@ export class UserController {
     @Get('profile')
     getProfile(@Request() req) {
         return req.user;
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('courses')
+    async getCourses(@Request() req) {
+        return this.coursesService.getUserCourses(req.user.availableCourses);
     }
 
     @Post('auth')

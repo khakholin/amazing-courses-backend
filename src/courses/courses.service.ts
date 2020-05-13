@@ -1,31 +1,28 @@
 import { Injectable } from '@nestjs/common';
 
-import * as moment from 'moment';
-import * as courses from './data/courses.data';
-import { IUserInformation, IUserData, ICourseData } from './courses.types';
-import userList from './data/user-list.data';
+import { courseList } from './data/courses.data';
+
+export type Course = any;
 
 @Injectable()
 export class CoursesService {
-    private users = userList;
+    private readonly courses: Course[];
 
-    public getUserCourses(user: IUserInformation): IUserData {
-        let userData = { user: user.user, totalNumOfLectures: 0, totalTime: 0, data: [] };
-        this.users.map((item) => {
-            if (item.user === user.user) {
-                if (item.password === user.password) {
-                    userData.data = item.courses;
+    constructor() {
+        this.courses = courseList;
+    }
+
+    public getUserCourses(availableCourses: string[]) {
+        let userCourses: Course[] = [];
+        availableCourses.map((availableCourse) => {
+            this.courses.map((course) => {
+                if (availableCourse === course.title) {
+                    userCourses.push(course)
                 }
-            }
-        });
-        if (userData.data) {
-            userData.data.map((item) => {
-                userData.totalNumOfLectures += item.numOfLectures;
-                userData.totalTime += item.time;
-            });
-        }
+            })
+        })
 
-        return userData;
+        return userCourses;
     }
 }
 

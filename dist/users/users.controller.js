@@ -17,16 +17,21 @@ const users_service_1 = require("./users.service");
 const local_auth_guard_1 = require("../auth/local-auth.guard");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const auth_service_1 = require("../auth/auth.service");
+const courses_service_1 = require("../courses/courses.service");
 let UserController = class UserController {
-    constructor(authService, usersService) {
+    constructor(authService, usersService, coursesService) {
         this.authService = authService;
         this.usersService = usersService;
+        this.coursesService = coursesService;
     }
     async login(req) {
         return this.authService.login(req.user);
     }
     getProfile(req) {
         return req.user;
+    }
+    async getCourses(req) {
+        return this.coursesService.getUserCourses(req.user.availableCourses);
     }
     async authenticationUser(body) {
         const response = this.usersService.authenticationUser(body);
@@ -73,6 +78,14 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getProfile", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('courses'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getCourses", null);
+__decorate([
     common_1.Post('auth'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -96,7 +109,8 @@ __decorate([
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
-        users_service_1.UserService])
+        users_service_1.UserService,
+        courses_service_1.CoursesService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=users.controller.js.map
