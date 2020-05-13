@@ -17,14 +17,18 @@ let CoursesService = class CoursesService {
     }
     getUserCourses(availableCourses) {
         let userCourses = [];
+        let totalNumOfLectures = 0;
+        let totalTime = 0;
         availableCourses.map((availableCourse) => {
             this.courses.map((course) => {
-                if (availableCourse === course.title) {
+                if (availableCourse.title === course.title) {
                     userCourses.push(course);
+                    totalNumOfLectures += course.numOfLectures;
+                    totalTime += course.time;
                 }
             });
         });
-        return userCourses;
+        return { totalNumOfLectures, totalTime, data: userCourses };
     }
 };
 CoursesService = __decorate([

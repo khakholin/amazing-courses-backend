@@ -1,5 +1,9 @@
 export declare const userList: {
-    availableCourses: string[];
+    availableCourses: {
+        title: string;
+        numAvailableLectures: number;
+        numCheckedLectures: number;
+    }[];
     userId: number;
     email: string;
     username: string;

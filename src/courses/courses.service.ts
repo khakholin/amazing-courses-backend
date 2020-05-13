@@ -12,17 +12,22 @@ export class CoursesService {
         this.courses = courseList;
     }
 
-    public getUserCourses(availableCourses: string[]) {
+    public getUserCourses(availableCourses) {
         let userCourses: Course[] = [];
+        let totalNumOfLectures: number = 0;
+        let totalTime: number = 0;
+
         availableCourses.map((availableCourse) => {
             this.courses.map((course) => {
-                if (availableCourse === course.title) {
-                    userCourses.push(course)
+                if (availableCourse.title === course.title) {
+                    userCourses.push(course);
+                    totalNumOfLectures += course.numOfLectures;
+                    totalTime += course.time;
                 }
             })
-        })
+        });
 
-        return userCourses;
+        return { totalNumOfLectures, totalTime, data: userCourses };
     }
 }
 

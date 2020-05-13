@@ -3,8 +3,6 @@ export declare const courseList: {
     numOfLectures: number;
     time: number;
     lectures: {
-        available: boolean;
-        checked: boolean;
         title: string;
         time: number;
     }[];

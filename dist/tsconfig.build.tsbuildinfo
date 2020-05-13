@@ -1194,20 +1194,20 @@
         "signature": "22d7eef1c85c98dcdf77c1b43cf9c6d208800dbe1fb0a0c9ae3789b9ce290071"
       },
       "../src/courses/data/courses.data.ts": {
-        "version": "a818c1cea9fb75d783bddf22373d683b7908478f8e780f74ad020b973e9356cc",
-        "signature": "623c8224ce6d82bfa9d452ed1404b70d77dbc639f5c837868ddd4fe6f2dd91f3"
+        "version": "c39585aeefa287eb4d581da5922789c90f06413011b94f4e355bf23b66bee312",
+        "signature": "f5248f88fd23559d85a9fb0f4666fe35d25188356b5d39290d93608b944d3c28"
       },
       "../src/courses/courses.service.ts": {
-        "version": "b74c7ec5894e138ad63d20a72b95f575a06aa45317c2247c0f9e8f5a618f108f",
-        "signature": "f77830a568e1e05adb2255cd4e2b3b3adb0368f1357542b100c9e9a432bcc5bd"
+        "version": "ff0cf234e1b2dca8d7764fb6321e745b554059f93470b9d25aba4c28e7d3d95e",
+        "signature": "76e2c2b76d7f88a80eed4a9b201407b0a75dbae126f913967413f3d1c8042049"
       },
       "../src/users/users.types.ts": {
         "version": "2a45b079dd695c379377b7bad2eeba802d031231ae7bae5de1d776dc0d28a7ed",
         "signature": "fd8e6c7d59a4f3e3508802239b292eb9be1e7b79506165c7f9d4d52f423a2985"
       },
       "../src/users/data/users.data.ts": {
-        "version": "93a86ff3e0c9adb2d5240b571b2dca8886bc0c29c42f2e3712211378ec614ce0",
-        "signature": "eded521481b362106bef5d375065eec55dcd6bb21ee3bd0c788a02261c909653"
+        "version": "f27259b78d07c2dee855f1467c573a5624011faa6ec668fbda55c6fb11516222",
+        "signature": "9ef3827dee36ad8acfc71aadadbf5d644a4915b19cfe1baeb44b7f2e77ad4516"
       },
       "../src/users/users.service.ts": {
         "version": "b09fa23b47ed2ede2a53fc7d749a04e19d6a85d968663f0fd80e65f5beb1c476",
@@ -1227,7 +1227,7 @@
       },
       "../src/users/users.controller.ts": {
         "version": "b1f3c7162bf9a597a35b414c3a49aa9e2813de13c26ff9724dce52161a9382cf",
-        "signature": "b72a57ffefdebb7d2b26be1507ab91e10973beb0df45a87046afacf3fb201659"
+        "signature": "b4e274849477328bef85358d04642325e335b6e188783c90813dc411ff47993c"
       },
       "../node_modules/@types/passport-strategy/index.d.ts": {
         "version": "29d59e921bc723594bbfc98230d24f38f0d5a669f28fcf989b7468f4f95b7c52",
@@ -1402,12 +1402,8 @@
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
       },
       "../src/courses/courses.types.ts": {
-        "version": "bbfc359f1d4c1144630c23d9a68df15d727ab3b7401be472b10a5cda58f4984e",
-        "signature": "ec3c5582dbdb5cb473f58971248d4972cc3fac88fb7b0eb8cbfe142f52aead08"
-      },
-      "../src/courses/data/user-courses.data.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        "version": "5a815c7515344bbe485aaf0dd3fe56727ec3ee1b196e6ab56166dd620e880bff",
+        "signature": "7cc119809da3cb4d97e17d3d70e86b99c21d4a9700565129c16990ca73cade65"
       },
       "../node_modules/@types/anymatch/index.d.ts": {
         "version": "48b52264fa193879a074197839dbb4796fa07e86350ff888e5361e06aa46df76",
@@ -4394,12 +4390,6 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/courses/courses.types.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/courses/data/user-courses.data.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",

@@ -11,7 +11,11 @@ export declare class UserController {
         access_token: string;
     }>;
     getProfile(req: any): any;
-    getCourses(req: any): Promise<any[]>;
+    getCourses(req: any): Promise<{
+        totalNumOfLectures: number;
+        totalTime: number;
+        data: any[];
+    }>;
     authenticationUser(body: IUserData): Promise<IUserRegData>;
     recoveryPassword(body: IUserRecoveryData): Promise<IUserRegData>;
     asyncregistrationUser(body: IUserRegData): void;
