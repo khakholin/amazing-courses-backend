@@ -13,16 +13,16 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("./users.service");
 const local_auth_guard_1 = require("../auth/local-auth.guard");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const auth_service_1 = require("../auth/auth.service");
 const courses_service_1 = require("../courses/courses.service");
 const sendEmail_1 = require("../email/sendEmail");
+const registration_service_1 = require("../registration/registration.service");
 let UserController = class UserController {
-    constructor(authService, usersService, coursesService) {
+    constructor(authService, registrationService, coursesService) {
         this.authService = authService;
-        this.usersService = usersService;
+        this.registrationService = registrationService;
         this.coursesService = coursesService;
     }
     async login(req) {
@@ -34,23 +34,11 @@ let UserController = class UserController {
     async getCourses(req) {
         return this.coursesService.getUserCourses(req.user.availableCourses);
     }
-    async authenticationUser(body) {
-        const response = this.usersService.authenticationUser(body);
-        if (response) {
-            return response;
-        }
-        else {
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.NOT_FOUND,
-                error: 'INVALID_USER'
-            }, common_1.HttpStatus.NOT_FOUND);
-        }
-    }
     async recoveryPassword(body) {
         return sendEmail_1.sendEmail(body.email);
     }
-    asyncregistrationUser(body) {
-        this.usersService.registrationUser(body);
+    async registrationUser(body) {
+        return this.registrationService.registrationUser(body);
     }
 };
 __decorate([
@@ -78,13 +66,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getCourses", null);
 __decorate([
-    common_1.Post('auth'),
-    __param(0, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "authenticationUser", null);
-__decorate([
     common_1.Post('recovery'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -92,16 +73,16 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "recoveryPassword", null);
 __decorate([
-    common_1.Post('reg'),
+    common_1.Post('registration'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "asyncregistrationUser", null);
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "registrationUser", null);
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
-        users_service_1.UserService,
+        registration_service_1.RegistrationService,
         courses_service_1.CoursesService])
 ], UserController);
 exports.UserController = UserController;

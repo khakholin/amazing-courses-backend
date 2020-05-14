@@ -19,6 +19,7 @@ const users_service_1 = require("./users/users.service");
 const local_strategy_1 = require("./auth/local.strategy");
 const auth_service_1 = require("./auth/auth.service");
 const jwt_strategy_1 = require("./auth/jwt.strategy");
+const registration_service_1 = require("./registration/registration.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -39,8 +40,9 @@ AppModule = __decorate([
             app_service_1.AppService,
             auth_service_1.AuthService,
             courses_service_1.CoursesService,
-            local_strategy_1.LocalStrategy,
             jwt_strategy_1.JwtStrategy,
+            local_strategy_1.LocalStrategy,
+            registration_service_1.RegistrationService,
             users_service_1.UserService,
         ],
     })

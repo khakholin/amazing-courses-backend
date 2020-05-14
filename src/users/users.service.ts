@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IUserRegData, IUserData, IUserRecoveryData } from './users.types';
+import { IUserRegData } from './users.types';
 import { userList } from './data/users.data';
 
 export type User = any;
@@ -11,20 +11,12 @@ export class UserService {
         this.testUsers = userList;
     }
 
-    authenticationUser(potentialUser: IUserData) {
-        return this.testUsers.find((user: IUserRegData) => ((user.login === potentialUser.login) && (user.password === potentialUser.password)));
-    }
-
-    recoveryPassword(recoveryData: IUserRecoveryData) {
-        return this.testUsers.find((user: IUserRegData) => user.email === recoveryData.email);
-    }
-
-    registrationUser(newUser: IUserRegData) {
-        this.testUsers.push(newUser);
-    }
-
     async findOne(username: string): Promise<User | undefined> {
         return this.testUsers.find(user => user.username === username);
+    }
+
+    async findEmailDuplicate(email: string): Promise<User | undefined> {
+        return this.testUsers.find(user => user.email === email);
     }
 }
 
