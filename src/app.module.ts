@@ -11,6 +11,7 @@ import { UserService } from './users/users.service';
 import { LocalStrategy } from './auth/local.strategy';
 import { AuthService } from './auth/auth.service';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { RegistrationService } from './registration/registration.service';
 
 @Module({
   imports: [
@@ -29,8 +30,9 @@ import { JwtStrategy } from './auth/jwt.strategy';
     AppService,
     AuthService,
     CoursesService,
-    LocalStrategy,
     JwtStrategy,
+    LocalStrategy,
+    RegistrationService,
     UserService,
   ],
 })

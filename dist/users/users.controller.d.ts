@@ -1,12 +1,12 @@
-import { UserService } from './users.service';
-import { IUserData, IUserRegData, IUserRecoveryData } from './users.types';
+import { IUserRegData, IUserRecoveryData } from './users.types';
 import { AuthService } from 'src/auth/auth.service';
 import { CoursesService } from 'src/courses/courses.service';
+import { RegistrationService } from 'src/registration/registration.service';
 export declare class UserController {
     private authService;
-    private usersService;
+    private registrationService;
     private coursesService;
-    constructor(authService: AuthService, usersService: UserService, coursesService: CoursesService);
+    constructor(authService: AuthService, registrationService: RegistrationService, coursesService: CoursesService);
     login(req: any): Promise<{
         access_token: string;
     }>;
@@ -16,7 +16,8 @@ export declare class UserController {
         totalTime: number;
         data: any[];
     }>;
-    authenticationUser(body: IUserData): Promise<IUserRegData>;
     recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
-    asyncregistrationUser(body: IUserRegData): void;
+    registrationUser(body: IUserRegData): Promise<{
+        message: string;
+    }>;
 }

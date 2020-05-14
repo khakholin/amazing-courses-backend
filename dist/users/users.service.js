@@ -15,17 +15,11 @@ let UserService = class UserService {
     constructor() {
         this.testUsers = users_data_1.userList;
     }
-    authenticationUser(potentialUser) {
-        return this.testUsers.find((user) => ((user.login === potentialUser.login) && (user.password === potentialUser.password)));
-    }
-    recoveryPassword(recoveryData) {
-        return this.testUsers.find((user) => user.email === recoveryData.email);
-    }
-    registrationUser(newUser) {
-        this.testUsers.push(newUser);
-    }
     async findOne(username) {
         return this.testUsers.find(user => user.username === username);
+    }
+    async findEmailDuplicate(email) {
+        return this.testUsers.find(user => user.email === email);
     }
 };
 UserService = __decorate([
