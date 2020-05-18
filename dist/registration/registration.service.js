@@ -18,17 +18,26 @@ let RegistrationService = class RegistrationService {
         this.userService = userService;
         this.testUsers = users_data_1.userList;
     }
-    registrationUser(newUser) {
-        if (this.userService.findEmailDuplicate) {
-            return { message: 'EMAIL_DUPLICATE' };
+    async registrationUser(newUser) {
+        if (await this.userService.findEmailDuplicate(newUser.email)) {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'EMAIL_DUPLICATE',
+            }, common_1.HttpStatus.NOT_FOUND);
         }
         else {
-            if (this.userService.findOne) {
-                return { message: 'USER_DUPLICATE' };
+            if (await this.userService.findOne(newUser.login)) {
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.NOT_FOUND,
+                    message: 'USER_DUPLICATE',
+                }, common_1.HttpStatus.NOT_FOUND);
             }
             else {
                 this.testUsers.push({ email: newUser.email, username: newUser.login, password: newUser.password, userId: this.testUsers.length + 1, availableCourses: [] });
-                return { message: 'SUCCESS' };
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.CREATED,
+                    message: 'SUCCESS',
+                }, common_1.HttpStatus.CREATED);
             }
         }
     }

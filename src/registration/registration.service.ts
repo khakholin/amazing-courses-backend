@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { userList } from '../users/data/users.data';
 import { IUserRegData } from 'src/users/users.types';
 import { UserService } from 'src/users/users.service';
@@ -13,15 +13,24 @@ export class RegistrationService {
         this.testUsers = userList;
     }
 
-    registrationUser(newUser: IUserRegData) {
-        if (this.userService.findEmailDuplicate) {
-            return { message: 'EMAIL_DUPLICATE' };
+    async registrationUser(newUser: IUserRegData): Promise<any> {
+        if (await this.userService.findEmailDuplicate(newUser.email)) {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'EMAIL_DUPLICATE',
+            }, HttpStatus.NOT_FOUND);
         } else {
-            if (this.userService.findOne) {
-                return { message: 'USER_DUPLICATE' };
+            if (await this.userService.findOne(newUser.login)) {
+                throw new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    message: 'USER_DUPLICATE',
+                }, HttpStatus.NOT_FOUND);
             } else {
                 this.testUsers.push({ email: newUser.email, username: newUser.login, password: newUser.password, userId: this.testUsers.length + 1, availableCourses: [] });
-                return { message: 'SUCCESS' };
+                throw new HttpException({
+                    status: HttpStatus.CREATED,
+                    message: 'SUCCESS',
+                }, HttpStatus.CREATED);
             }
         }
     }

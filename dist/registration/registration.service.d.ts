@@ -5,7 +5,5 @@ export declare class RegistrationService {
     private userService;
     private readonly testUsers;
     constructor(userService: UserService);
-    registrationUser(newUser: IUserRegData): {
-        message: string;
-    };
+    registrationUser(newUser: IUserRegData): Promise<any>;
 }

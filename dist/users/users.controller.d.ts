@@ -17,7 +17,5 @@ export declare class UserController {
         data: any[];
     }>;
     recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
-    registrationUser(body: IUserRegData): Promise<{
-        message: string;
-    }>;
+    registrationUser(body: IUserRegData): Promise<any>;
 }

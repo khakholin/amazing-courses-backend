@@ -1230,12 +1230,12 @@
         "signature": "bd9eeb46d57399eeb71e1a4b79cab3e3670ae0b2d02b31398c208a7b59ad078c"
       },
       "../src/registration/registration.service.ts": {
-        "version": "b62d48144988ceac8d2bafdbf9b68453bfdccc60bf40df664ba2b448899ba313",
-        "signature": "34b222256c0afbcfc53bcb128b8be6c99b1dcd51161d22b099936dc678bca7a9"
+        "version": "a8a52a6103f410b3e3f55e6a57e9dbe4e49b8cae3ac7b1bd7ce6b5f44d62f725",
+        "signature": "fa90a0341241f1fc1d2d9d6640a648f475fc536b8960b612322fa4e1473cbd6c"
       },
       "../src/users/users.controller.ts": {
         "version": "5a86c9a31186cda83752bcc18e9ebfddd1b2a85832e1bfb9b03fefbf29066163",
-        "signature": "4a1ea9fdee3fe92d0961e8a9ec9d731f7b11cd91331cfe58eedf4e6fad78caee"
+        "signature": "5ba7cada28b516e8f39a2279e5190696469ef5625daab12e238bf84cc21bedaa"
       },
       "../node_modules/@types/passport-strategy/index.d.ts": {
         "version": "29d59e921bc723594bbfc98230d24f38f0d5a669f28fcf989b7468f4f95b7c52",
