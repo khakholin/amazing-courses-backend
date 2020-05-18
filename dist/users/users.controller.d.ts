@@ -2,11 +2,13 @@ import { IUserRegData, IUserRecoveryData } from './users.types';
 import { AuthService } from 'src/auth/auth.service';
 import { CoursesService } from 'src/courses/courses.service';
 import { RegistrationService } from 'src/registration/registration.service';
+import { UserService } from './users.service';
 export declare class UserController {
     private authService;
-    private registrationService;
     private coursesService;
-    constructor(authService: AuthService, registrationService: RegistrationService, coursesService: CoursesService);
+    private registrationService;
+    private usersService;
+    constructor(authService: AuthService, coursesService: CoursesService, registrationService: RegistrationService, usersService: UserService);
     login(req: any): Promise<{
         access_token: string;
     }>;
@@ -18,4 +20,8 @@ export declare class UserController {
     }>;
     recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
     registrationUser(body: IUserRegData): Promise<any>;
+    testCreat(body: IUserRegData): Promise<any>;
+    testRemove(body: IUserRegData): Promise<any>;
+    testFindAll(): Promise<any[]>;
+    testRemoveAll(): Promise<any>;
 }

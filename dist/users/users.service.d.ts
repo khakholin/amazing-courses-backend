@@ -1,7 +1,13 @@
+import { Model } from 'mongoose';
 export declare type User = any;
 export declare class UserService {
+    private userModel;
     private readonly testUsers;
-    constructor();
+    constructor(userModel: Model<User>);
     findOne(username: string): Promise<User | undefined>;
     findEmailDuplicate(email: string): Promise<User | undefined>;
+    create(createUserDto: any): Promise<User>;
+    remove(removeUserDto: any): Promise<User>;
+    removeAll(): Promise<User>;
+    findAll(): Promise<User[]>;
 }

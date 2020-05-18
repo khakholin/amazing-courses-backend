@@ -1,3 +1,8 @@
+export interface IAvailableCourses {
+    title: string;
+    numAvailableLectures: number;
+    numCheckedLectures: number;
+}
 export interface IUserData {
     login: string;
     password: string;

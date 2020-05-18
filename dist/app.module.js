@@ -7,29 +7,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const passport_1 = require("@nestjs/passport");
 const jwt_1 = require("@nestjs/jwt");
-const auth_constants_1 = require("./auth/auth.constants");
+const mongoose_1 = require("@nestjs/mongoose");
+const passport_1 = require("@nestjs/passport");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
-const courses_controller_1 = require("./courses/courses.controller");
-const courses_service_1 = require("./courses/courses.service");
-const users_controller_1 = require("./users/users.controller");
-const users_service_1 = require("./users/users.service");
-const local_strategy_1 = require("./auth/local.strategy");
+const auth_constants_1 = require("./auth/auth.constants");
 const auth_service_1 = require("./auth/auth.service");
 const jwt_strategy_1 = require("./auth/jwt.strategy");
+const local_strategy_1 = require("./auth/local.strategy");
+const courses_controller_1 = require("./courses/courses.controller");
+const courses_service_1 = require("./courses/courses.service");
 const registration_service_1 = require("./registration/registration.service");
+const users_controller_1 = require("./users/users.controller");
+const users_service_1 = require("./users/users.service");
+const user_schema_1 = require("./users/schemas/user.schema");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     common_1.Module({
         imports: [
-            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
             jwt_1.JwtModule.register({
                 secret: auth_constants_1.jwtConstants.secret,
                 signOptions: { expiresIn: '1w' },
             }),
+            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost/nest'),
+            mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }])
         ],
         controllers: [
             app_controller_1.AppController,

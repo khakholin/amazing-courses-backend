@@ -1,7 +1,14 @@
+export interface IAvailableCourses {
+    title: string;
+    numAvailableLectures: number;
+    numCheckedLectures: number;
+}
+
 export interface IUserData {
     login: string;
     password: string;
 }
+
 export interface ICoursesNames {
     availableCourses: string[];
 }

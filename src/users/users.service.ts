@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { IUserRegData } from './users.types';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
 import { userList } from './data/users.data';
 
 export type User = any;
@@ -7,7 +9,7 @@ export type User = any;
 export class UserService {
     private readonly testUsers: User[];
 
-    constructor() {
+    constructor(@InjectModel('User') private userModel: Model<User>) {
         this.testUsers = userList;
     }
 
@@ -17,6 +19,23 @@ export class UserService {
 
     async findEmailDuplicate(email: string): Promise<User | undefined> {
         return this.testUsers.find(user => user.email === email);
+    }
+
+    async create(createUserDto: any): Promise<User> {
+        const createdUser = new this.userModel(createUserDto);
+        return createdUser.save();
+    }
+
+    async remove(removeUserDto: any): Promise<User> {
+        return this.userModel.deleteOne(removeUserDto);
+    }
+
+    async removeAll(): Promise<User> {
+        return this.userModel.deleteMany({});
+    }
+
+    async findAll(): Promise<User[]> {
+        return this.userModel.find().exec();
     }
 }
 

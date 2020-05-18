@@ -19,11 +19,13 @@ const auth_service_1 = require("../auth/auth.service");
 const courses_service_1 = require("../courses/courses.service");
 const sendEmail_1 = require("../email/sendEmail");
 const registration_service_1 = require("../registration/registration.service");
+const users_service_1 = require("./users.service");
 let UserController = class UserController {
-    constructor(authService, registrationService, coursesService) {
+    constructor(authService, coursesService, registrationService, usersService) {
         this.authService = authService;
-        this.registrationService = registrationService;
         this.coursesService = coursesService;
+        this.registrationService = registrationService;
+        this.usersService = usersService;
     }
     async login(req) {
         return this.authService.login(req.user);
@@ -39,6 +41,18 @@ let UserController = class UserController {
     }
     async registrationUser(body) {
         return this.registrationService.registrationUser(body);
+    }
+    async testCreat(body) {
+        return this.usersService.create({ email: body.email, username: body.login, password: body.password, userId: 0, availableCourses: [] });
+    }
+    async testRemove(body) {
+        return this.usersService.remove({ email: body.email, username: body.login, password: body.password, });
+    }
+    async testFindAll() {
+        return this.usersService.findAll();
+    }
+    async testRemoveAll() {
+        return this.usersService.removeAll();
     }
 };
 __decorate([
@@ -79,11 +93,38 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "registrationUser", null);
+__decorate([
+    common_1.Post('testcreate'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "testCreat", null);
+__decorate([
+    common_1.Post('testremove'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "testRemove", null);
+__decorate([
+    common_1.Get('testfindall'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "testFindAll", null);
+__decorate([
+    common_1.Get('testremoveall'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "testRemoveAll", null);
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
+        courses_service_1.CoursesService,
         registration_service_1.RegistrationService,
-        courses_service_1.CoursesService])
+        users_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=users.controller.js.map
