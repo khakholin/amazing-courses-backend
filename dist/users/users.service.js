@@ -8,56 +8,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("@nestjs/mongoose");
-const mongoose_2 = require("mongoose");
-const users_data_1 = require("./data/users.data");
 let UserService = class UserService {
-    constructor(userModel) {
-        this.userModel = userModel;
-        this.testUsers = users_data_1.userList;
-    }
-    async findUser(userDto) {
-        if (await this.userModel.findOne(userDto)) {
-            return this.userModel.findOne(userDto);
-        }
-        else {
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.NOT_FOUND,
-                message: 'USER_NOT_FOUND',
-            }, common_1.HttpStatus.NOT_FOUND);
-        }
-    }
-    async create(createUserDto) {
-        if (await this.userModel.findOne(createUserDto)) {
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.FORBIDDEN,
-                message: 'USER_DUPLICATE',
-            }, common_1.HttpStatus.FORBIDDEN);
-        }
-        else {
-            const createdUser = new this.userModel(createUserDto);
-            return createdUser.save();
-        }
-    }
-    async remove(removeUserDto) {
-        return this.userModel.deleteOne(removeUserDto);
-    }
-    async removeAll() {
-        return this.userModel.deleteMany({});
-    }
-    async findAll() {
-        return this.userModel.find().exec();
+    constructor() {
     }
 };
 UserService = __decorate([
     common_1.Injectable(),
-    __param(0, mongoose_1.InjectModel('User')),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __metadata("design:paramtypes", [])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=users.service.js.map

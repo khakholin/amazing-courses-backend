@@ -23,6 +23,7 @@ const users_controller_1 = require("./users/users.controller");
 const users_service_1 = require("./users/users.service");
 const user_schema_1 = require("./users/schemas/user.schema");
 const sendEmail_1 = require("./email/sendEmail");
+const course_schema_1 = require("./courses/schemas/course.schema");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -33,8 +34,9 @@ AppModule = __decorate([
                 signOptions: { expiresIn: '1w' },
             }),
             passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
-            mongoose_1.MongooseModule.forRoot('mongodb://localhost/nest'),
-            mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }])
+            mongoose_1.MongooseModule.forRoot('mongodb://localhost/amazingCourses'),
+            mongoose_1.MongooseModule.forFeature([{ name: 'Course', schema: course_schema_1.CourseSchema }]),
+            mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }]),
         ],
         controllers: [
             app_controller_1.AppController,

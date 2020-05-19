@@ -16,6 +16,7 @@ import { UserController } from './users/users.controller';
 import { UserService } from './users/users.service';
 import { UserSchema } from './users/schemas/user.schema';
 import { SendMail } from './email/sendEmail';
+import { CourseSchema } from './courses/schemas/course.schema';
 
 @Module({
   imports: [
@@ -24,8 +25,9 @@ import { SendMail } from './email/sendEmail';
       signOptions: { expiresIn: '1w' },
     }),
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    MongooseModule.forRoot('mongodb://localhost/nest'),
-    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])
+    MongooseModule.forRoot('mongodb://localhost/amazingCourses'),
+    MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
   controllers: [
     AppController,

@@ -1,9 +1,8 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { userList } from '../users/data/users.data';
-import { IUserRegData } from 'src/users/users.types';
-import { UserService } from 'src/users/users.service';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+
+import { IUserRegData } from 'src/users/users.types';
 
 export type User = any;
 
@@ -24,8 +23,12 @@ export class RegistrationService {
                     message: 'USER_DUPLICATE',
                 }, HttpStatus.NOT_FOUND);
             } else {
-                const createdUser = new this.userModel(newUser);
-                return createdUser.save();
+                const createdUser = new this.userModel({ ...newUser, role: "user", availableCourses: [] });
+                createdUser.save();
+                throw new HttpException({
+                    status: HttpStatus.CREATED,
+                    message: 'SUCCESS',
+                }, HttpStatus.CREATED);
             }
         }
     }

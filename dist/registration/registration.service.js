@@ -13,10 +13,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const users_types_1 = require("../users/users.types");
-const users_service_1 = require("../users/users.service");
 const mongoose_1 = require("mongoose");
 const mongoose_2 = require("@nestjs/mongoose");
+const users_types_1 = require("../users/users.types");
 let RegistrationService = class RegistrationService {
     constructor(userModel) {
         this.userModel = userModel;
@@ -36,8 +35,12 @@ let RegistrationService = class RegistrationService {
                 }, common_1.HttpStatus.NOT_FOUND);
             }
             else {
-                const createdUser = new this.userModel(newUser);
-                return createdUser.save();
+                const createdUser = new this.userModel(Object.assign(Object.assign({}, newUser), { role: "user", availableCourses: [] }));
+                createdUser.save();
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.CREATED,
+                    message: 'SUCCESS',
+                }, common_1.HttpStatus.CREATED);
             }
         }
     }

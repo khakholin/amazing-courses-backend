@@ -1,5 +1,5 @@
-import { IUserRegData } from 'src/users/users.types';
 import { Model } from 'mongoose';
+import { IUserRegData } from 'src/users/users.types';
 export declare type User = any;
 export declare class RegistrationService {
     private userModel;

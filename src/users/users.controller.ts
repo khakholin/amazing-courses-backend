@@ -7,7 +7,6 @@ import { AuthService } from 'src/auth/auth.service';
 import { CoursesService } from 'src/courses/courses.service';
 import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
-import { UserService } from './users.service';
 
 @Controller('user')
 export class UserController {
@@ -15,7 +14,6 @@ export class UserController {
         private authService: AuthService,
         private coursesService: CoursesService,
         private registrationService: RegistrationService,
-        private usersService: UserService,
         private sendMail: SendMail,
     ) { }
 
@@ -46,33 +44,4 @@ export class UserController {
     async registrationUser(@Body() body: IUserRegData) {
         return this.registrationService.registrationUser(body);
     }
-
-
-
-    @Post('testcreate')
-    async testCreat(@Body() body: IUserRegData) {
-        return this.usersService.create({ email: body.email, username: body.username, password: body.password, availableCourses: [] });
-    }
-
-    @Post('testfind')
-    async testFind(@Body() body: IUserRegData) {
-        return this.usersService.findUser({ email: body.email, username: body.username, password: body.password });
-    }
-
-    @Post('testremove')
-    async testRemove(@Body() body: IUserRegData) {
-        return this.usersService.remove({ email: body.email, username: body.username, password: body.password, });
-    }
-
-    @Get('testfindall')
-    async testFindAll() {
-        return this.usersService.findAll();
-    }
-
-    @Get('testremoveall')
-    async testRemoveAll() {
-        return this.usersService.removeAll();
-    }
-
-
 }
