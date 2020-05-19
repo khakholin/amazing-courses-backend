@@ -3,8 +3,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { userList } from './data/users.data';
-
 export type User = any;
+
 @Injectable()
 export class UserService {
     private readonly testUsers: User[];
@@ -33,7 +33,7 @@ export class UserService {
     }
 
     async create(createUserDto: any): Promise<User> {
-        if (await this.userModel.findOne({ email: createUserDto.email })) {
+        if (await this.userModel.findOne(createUserDto)) {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,
                 message: 'USER_DUPLICATE',

@@ -44,13 +44,13 @@ let UserController = class UserController {
         return this.registrationService.registrationUser(body);
     }
     async testCreat(body) {
-        return this.usersService.create({ email: body.email, username: body.login, password: body.password, availableCourses: [] });
+        return this.usersService.create({ email: body.email, username: body.username, password: body.password, availableCourses: [] });
     }
     async testFind(body) {
-        return this.usersService.findUser({ email: body.email, username: body.login, password: body.password });
+        return this.usersService.findUser({ email: body.email, username: body.username, password: body.password });
     }
     async testRemove(body) {
-        return this.usersService.remove({ email: body.email, username: body.login, password: body.password, });
+        return this.usersService.remove({ email: body.email, username: body.username, password: body.password, });
     }
     async testFindAll() {
         return this.usersService.findAll();

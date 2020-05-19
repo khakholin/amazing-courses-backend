@@ -51,17 +51,17 @@ export class UserController {
 
     @Post('testcreate')
     async testCreat(@Body() body: IUserRegData) {
-        return this.usersService.create({ email: body.email, username: body.login, password: body.password, availableCourses: [] });
+        return this.usersService.create({ email: body.email, username: body.username, password: body.password, availableCourses: [] });
     }
 
     @Post('testfind')
     async testFind(@Body() body: IUserRegData) {
-        return this.usersService.findUser({ email: body.email, username: body.login, password: body.password });
+        return this.usersService.findUser({ email: body.email, username: body.username, password: body.password });
     }
 
     @Post('testremove')
     async testRemove(@Body() body: IUserRegData) {
-        return this.usersService.remove({ email: body.email, username: body.login, password: body.password, });
+        return this.usersService.remove({ email: body.email, username: body.username, password: body.password, });
     }
 
     @Get('testfindall')

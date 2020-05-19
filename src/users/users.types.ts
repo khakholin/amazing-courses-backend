@@ -15,7 +15,7 @@ export interface ICoursesNames {
 
 export interface IUserRegData {
     email: string;
-    login: string;
+    username: string;
     password: string;
 }
 

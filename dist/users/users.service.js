@@ -39,7 +39,7 @@ let UserService = class UserService {
         }
     }
     async create(createUserDto) {
-        if (await this.userModel.findOne({ email: createUserDto.email })) {
+        if (await this.userModel.findOne(createUserDto)) {
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.FORBIDDEN,
                 message: 'USER_DUPLICATE',

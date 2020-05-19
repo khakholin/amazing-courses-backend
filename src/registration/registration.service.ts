@@ -18,7 +18,7 @@ export class RegistrationService {
                 message: 'EMAIL_DUPLICATE',
             }, HttpStatus.NOT_FOUND);
         } else {
-            if (await this.userModel.findOne({ username: newUser.login })) {
+            if (await this.userModel.findOne({ username: newUser.username })) {
                 throw new HttpException({
                     status: HttpStatus.NOT_FOUND,
                     message: 'USER_DUPLICATE',

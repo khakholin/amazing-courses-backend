@@ -1,5 +1,4 @@
 import * as nodemailer from 'nodemailer';
-import { userList } from '../users/data/users.data';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
