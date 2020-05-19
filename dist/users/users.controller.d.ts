@@ -1,12 +1,14 @@
 import { IUserRegData, IUserRecoveryData } from './users.types';
 import { AuthService } from 'src/auth/auth.service';
 import { CoursesService } from 'src/courses/courses.service';
+import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
 export declare class UserController {
     private authService;
-    private registrationService;
     private coursesService;
-    constructor(authService: AuthService, registrationService: RegistrationService, coursesService: CoursesService);
+    private registrationService;
+    private sendMail;
+    constructor(authService: AuthService, coursesService: CoursesService, registrationService: RegistrationService, sendMail: SendMail);
     login(req: any): Promise<{
         access_token: string;
     }>;

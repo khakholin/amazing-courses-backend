@@ -10,16 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const users_data_1 = require("./data/users.data");
 let UserService = class UserService {
     constructor() {
-        this.testUsers = users_data_1.userList;
-    }
-    async findOne(username) {
-        return this.testUsers.find(user => user.username === username);
-    }
-    async findEmailDuplicate(email) {
-        return this.testUsers.find(user => user.email === email);
     }
 };
 UserService = __decorate([

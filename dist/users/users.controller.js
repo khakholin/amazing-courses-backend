@@ -20,10 +20,11 @@ const courses_service_1 = require("../courses/courses.service");
 const sendEmail_1 = require("../email/sendEmail");
 const registration_service_1 = require("../registration/registration.service");
 let UserController = class UserController {
-    constructor(authService, registrationService, coursesService) {
+    constructor(authService, coursesService, registrationService, sendMail) {
         this.authService = authService;
-        this.registrationService = registrationService;
         this.coursesService = coursesService;
+        this.registrationService = registrationService;
+        this.sendMail = sendMail;
     }
     async login(req) {
         return this.authService.login(req.user);
@@ -35,7 +36,7 @@ let UserController = class UserController {
         return this.coursesService.getUserCourses(req.user.availableCourses);
     }
     async recoveryPassword(body) {
-        return sendEmail_1.sendEmail(body.email);
+        return this.sendMail.recovery(body.email);
     }
     async registrationUser(body) {
         return this.registrationService.registrationUser(body);
@@ -82,8 +83,9 @@ __decorate([
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
+        courses_service_1.CoursesService,
         registration_service_1.RegistrationService,
-        courses_service_1.CoursesService])
+        sendEmail_1.SendMail])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=users.controller.js.map

@@ -5,15 +5,16 @@ import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
 import { CoursesService } from 'src/courses/courses.service';
-import { sendEmail } from 'src/email/sendEmail';
+import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
 
 @Controller('user')
 export class UserController {
     constructor(
         private authService: AuthService,
-        private registrationService: RegistrationService,
         private coursesService: CoursesService,
+        private registrationService: RegistrationService,
+        private sendMail: SendMail,
     ) { }
 
     @UseGuards(LocalAuthGuard)
@@ -36,12 +37,11 @@ export class UserController {
 
     @Post('recovery')
     async recoveryPassword(@Body() body: IUserRecoveryData) {
-        return sendEmail(body.email);
+        return this.sendMail.recovery(body.email);
     }
 
     @Post('registration')
     async registrationUser(@Body() body: IUserRegData) {
         return this.registrationService.registrationUser(body);
     }
-
 }

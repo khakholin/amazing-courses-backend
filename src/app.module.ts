@@ -1,25 +1,33 @@
 import { Module } from '@nestjs/common';
-import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './auth/auth.constants';
+import { MongooseModule } from '@nestjs/mongoose';
+import { PassportModule } from '@nestjs/passport';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CoursesController } from './courses/courses.controller';
-import { CoursesService } from './courses/courses.service';
-import { UserController } from './users/users.controller';
-import { UserService } from './users/users.service';
-import { LocalStrategy } from './auth/local.strategy';
+import { jwtConstants } from './auth/auth.constants';
 import { AuthService } from './auth/auth.service';
 import { JwtStrategy } from './auth/jwt.strategy';
+import { LocalStrategy } from './auth/local.strategy';
+import { CoursesController } from './courses/courses.controller';
+import { CoursesService } from './courses/courses.service';
 import { RegistrationService } from './registration/registration.service';
+import { UserController } from './users/users.controller';
+import { UserService } from './users/users.service';
+import { UserSchema } from './users/schemas/user.schema';
+import { SendMail } from './email/sendEmail';
+import { CourseSchema } from './courses/schemas/course.schema';
 
 @Module({
   imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1w' },
     }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    MongooseModule.forRoot('mongodb://localhost/amazingCourses'),
+    MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
   ],
   controllers: [
     AppController,
@@ -33,6 +41,7 @@ import { RegistrationService } from './registration/registration.service';
     JwtStrategy,
     LocalStrategy,
     RegistrationService,
+    SendMail,
     UserService,
   ],
 })
