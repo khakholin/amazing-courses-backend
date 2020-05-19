@@ -1278,8 +1278,8 @@
         "signature": "9ef3827dee36ad8acfc71aadadbf5d644a4915b19cfe1baeb44b7f2e77ad4516"
       },
       "../src/users/users.service.ts": {
-        "version": "49090945f066de8e5945cc088804d82e833169ac5eb28215a13fcc3a28d5d16b",
-        "signature": "3b96c209cce400732cca80711f9936146e3617b61186765e624409bcdd9a69cf"
+        "version": "947bfc319d6084d084ead042b8bd0c8adbe3a8f6f2e47c4cdeab5ba50d31d050",
+        "signature": "754bd99fda97eed38cab3509a4a5188e395f22a25e8df4e9ae48dfb5da5d74d3"
       },
       "../src/auth/auth.service.ts": {
         "version": "a5756c92095ef9facaa18a162d0602cfb51c01e3eefd2f79163271f9204da60b",
@@ -1322,8 +1322,8 @@
         "signature": "90a8695524debb79017e24c2f023725b9f06f09fb974b39be611209334ee2e8b"
       },
       "../src/registration/registration.service.ts": {
-        "version": "a8a52a6103f410b3e3f55e6a57e9dbe4e49b8cae3ac7b1bd7ce6b5f44d62f725",
-        "signature": "fa90a0341241f1fc1d2d9d6640a648f475fc536b8960b612322fa4e1473cbd6c"
+        "version": "683cb62f5403b4af5398f77863bd64147cb4d8e2512a792a12d6b4012f7f46b6",
+        "signature": "3268148ccb004c07c6d26ec3193f011c20047a2495f4e56dda45404b302d8a0f"
       },
       "../src/auth/local-auth.guard.ts": {
         "version": "081d68ca88368650cab8a51a041f6b409254ec9fb10b68c1a60679f8e7c7e5c3",
@@ -1334,19 +1334,19 @@
         "signature": "e9629b89f6cd33a040577695d89edf882e66287d30c87121f5fc07f404decd25"
       },
       "../src/email/sendEmail.ts": {
-        "version": "0ce4e7fd08ce75d5cef68d00dca821dae94eddd981776b3e8b84414ce328d8b3",
-        "signature": "bd9eeb46d57399eeb71e1a4b79cab3e3670ae0b2d02b31398c208a7b59ad078c"
+        "version": "a003134d26fd8000c26c302d52163ca8ab70b80a83f261d2a7d7cbca597e5c6c",
+        "signature": "cd2b77455120e99c3ae6c6981507ff0a57f2e0a359f6fde781000995e10d1393"
       },
       "../src/users/users.controller.ts": {
-        "version": "9b3c2a2047838d83236459d21db09d2c46285705c0d71f02c905874bad57d97f",
-        "signature": "7bae15e2569b59124e713ea51c9fc646bca2187df2f90d88b2e8e95c9a37d910"
+        "version": "683a18300b03b1d14dd2d5ec5b29516ac27bd42ec1f6bfbf7df22d0fa287e44c",
+        "signature": "56e58b0d7103df5a39870bff0b6a71c54f6134c5e04c5746f4258dca1a354186"
       },
       "../src/users/schemas/user.schema.ts": {
-        "version": "eb7aa2ea0ce00b7addf9d64742294f92e5238cabcd31b8ac0d12dc6704a6d866",
+        "version": "35793a81f63d72c1b392096d30bee734fd1ace23cc2d66152a2a74c122466ad2",
         "signature": "1c21071f2c0d7d9779303a6a204301fb1576821e54fc756baf24e3e726ba2897"
       },
       "../src/app.module.ts": {
-        "version": "e1e8ff95183d48a4f11c82734f26c40b3d97fab4b92945f9c7349358a7c43389",
+        "version": "887b28dc50cbc21074c672455b32f34476e524697d233860504c43e9272da825",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644"
       },
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": {
@@ -4288,6 +4288,8 @@
         "../src/users/data/users.data.ts",
         "../src/users/users.types.ts",
         "../src/users/users.service.ts",
+        "../node_modules/@types/mongoose/index.d.ts",
+        "../node_modules/@nestjs/mongoose/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4311,6 +4313,9 @@
       ],
       "../src/email/sendEmail.ts": [
         "../src/users/data/users.data.ts",
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/mongoose/index.d.ts",
+        "../node_modules/@types/mongoose/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4355,6 +4360,7 @@
         "../src/users/users.controller.ts",
         "../src/users/users.service.ts",
         "../src/users/schemas/user.schema.ts",
+        "../src/email/sendEmail.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -7497,7 +7503,7 @@
         "../src/auth/auth.service.ts"
       ],
       "../src/registration/registration.service.ts": [
-        "../src/users/users.service.ts",
+        "../node_modules/@types/mongoose/index.d.ts",
         "../src/users/users.types.ts"
       ],
       "../src/auth/local-auth.guard.ts": [
@@ -7511,6 +7517,7 @@
         "../src/courses/courses.service.ts",
         "../src/registration/registration.service.ts",
         "../src/users/users.service.ts",
+        "../src/email/sendEmail.ts",
         "../src/users/users.types.ts"
       ],
       "../src/users/schemas/user.schema.ts": [
@@ -8094,6 +8101,9 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/email/sendEmail.ts": [
+        "../node_modules/@types/mongoose/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": []

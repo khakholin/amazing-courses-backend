@@ -27,9 +27,28 @@ let UserService = class UserService {
     async findEmailDuplicate(email) {
         return this.testUsers.find(user => user.email === email);
     }
+    async findUser(userDto) {
+        if (await this.userModel.findOne(userDto)) {
+            return this.userModel.findOne(userDto);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
     async create(createUserDto) {
-        const createdUser = new this.userModel(createUserDto);
-        return createdUser.save();
+        if (await this.userModel.findOne({ email: createUserDto.email })) {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'USER_DUPLICATE',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
+        else {
+            const createdUser = new this.userModel(createUserDto);
+            return createdUser.save();
+        }
     }
     async remove(removeUserDto) {
         return this.userModel.deleteOne(removeUserDto);

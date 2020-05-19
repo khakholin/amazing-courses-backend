@@ -15,6 +15,7 @@ import { RegistrationService } from './registration/registration.service';
 import { UserController } from './users/users.controller';
 import { UserService } from './users/users.service';
 import { UserSchema } from './users/schemas/user.schema';
+import { SendMail } from './email/sendEmail';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { UserSchema } from './users/schemas/user.schema';
     JwtStrategy,
     LocalStrategy,
     RegistrationService,
+    SendMail,
     UserService,
   ],
 })

@@ -22,6 +22,7 @@ const registration_service_1 = require("./registration/registration.service");
 const users_controller_1 = require("./users/users.controller");
 const users_service_1 = require("./users/users.service");
 const user_schema_1 = require("./users/schemas/user.schema");
+const sendEmail_1 = require("./email/sendEmail");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -47,6 +48,7 @@ AppModule = __decorate([
             jwt_strategy_1.JwtStrategy,
             local_strategy_1.LocalStrategy,
             registration_service_1.RegistrationService,
+            sendEmail_1.SendMail,
             users_service_1.UserService,
         ],
     })

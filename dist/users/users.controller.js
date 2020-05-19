@@ -21,11 +21,12 @@ const sendEmail_1 = require("../email/sendEmail");
 const registration_service_1 = require("../registration/registration.service");
 const users_service_1 = require("./users.service");
 let UserController = class UserController {
-    constructor(authService, coursesService, registrationService, usersService) {
+    constructor(authService, coursesService, registrationService, usersService, sendMail) {
         this.authService = authService;
         this.coursesService = coursesService;
         this.registrationService = registrationService;
         this.usersService = usersService;
+        this.sendMail = sendMail;
     }
     async login(req) {
         return this.authService.login(req.user);
@@ -37,13 +38,16 @@ let UserController = class UserController {
         return this.coursesService.getUserCourses(req.user.availableCourses);
     }
     async recoveryPassword(body) {
-        return sendEmail_1.sendEmail(body.email);
+        return this.sendMail.recovery(body.email);
     }
     async registrationUser(body) {
         return this.registrationService.registrationUser(body);
     }
     async testCreat(body) {
-        return this.usersService.create({ email: body.email, username: body.login, password: body.password, userId: 0, availableCourses: [] });
+        return this.usersService.create({ email: body.email, username: body.login, password: body.password, availableCourses: [] });
+    }
+    async testFind(body) {
+        return this.usersService.findUser({ email: body.email, username: body.login, password: body.password });
     }
     async testRemove(body) {
         return this.usersService.remove({ email: body.email, username: body.login, password: body.password, });
@@ -101,6 +105,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "testCreat", null);
 __decorate([
+    common_1.Post('testfind'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "testFind", null);
+__decorate([
     common_1.Post('testremove'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -124,7 +135,8 @@ UserController = __decorate([
     __metadata("design:paramtypes", [auth_service_1.AuthService,
         courses_service_1.CoursesService,
         registration_service_1.RegistrationService,
-        users_service_1.UserService])
+        users_service_1.UserService,
+        sendEmail_1.SendMail])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=users.controller.js.map

@@ -5,7 +5,7 @@ import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
 import { CoursesService } from 'src/courses/courses.service';
-import { sendEmail } from 'src/email/sendEmail';
+import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
 import { UserService } from './users.service';
 
@@ -16,6 +16,7 @@ export class UserController {
         private coursesService: CoursesService,
         private registrationService: RegistrationService,
         private usersService: UserService,
+        private sendMail: SendMail,
     ) { }
 
     @UseGuards(LocalAuthGuard)
@@ -38,7 +39,7 @@ export class UserController {
 
     @Post('recovery')
     async recoveryPassword(@Body() body: IUserRecoveryData) {
-        return sendEmail(body.email);
+        return this.sendMail.recovery(body.email);
     }
 
     @Post('registration')
@@ -46,9 +47,16 @@ export class UserController {
         return this.registrationService.registrationUser(body);
     }
 
+
+
     @Post('testcreate')
     async testCreat(@Body() body: IUserRegData) {
-        return this.usersService.create({ email: body.email, username: body.login, password: body.password, userId: 0, availableCourses: [] });
+        return this.usersService.create({ email: body.email, username: body.login, password: body.password, availableCourses: [] });
+    }
+
+    @Post('testfind')
+    async testFind(@Body() body: IUserRegData) {
+        return this.usersService.findUser({ email: body.email, username: body.login, password: body.password });
     }
 
     @Post('testremove')

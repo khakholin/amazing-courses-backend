@@ -6,6 +6,7 @@ export declare class UserService {
     constructor(userModel: Model<User>);
     findOne(username: string): Promise<User | undefined>;
     findEmailDuplicate(email: string): Promise<User | undefined>;
+    findUser(userDto: any): Promise<User>;
     create(createUserDto: any): Promise<User>;
     remove(removeUserDto: any): Promise<User>;
     removeAll(): Promise<User>;
