@@ -21,12 +21,6 @@ let UserService = class UserService {
         this.userModel = userModel;
         this.testUsers = users_data_1.userList;
     }
-    async findOne(username) {
-        return this.testUsers.find(user => user.username === username);
-    }
-    async findEmailDuplicate(email) {
-        return this.testUsers.find(user => user.email === email);
-    }
     async findUser(userDto) {
         if (await this.userModel.findOne(userDto)) {
             return this.userModel.findOne(userDto);

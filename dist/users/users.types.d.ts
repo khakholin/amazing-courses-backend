@@ -4,7 +4,7 @@ export interface IAvailableCourses {
     numCheckedLectures: number;
 }
 export interface IUserData {
-    login: string;
+    username: string;
     password: string;
 }
 export interface ICoursesNames {

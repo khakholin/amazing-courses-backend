@@ -13,14 +13,6 @@ export class UserService {
         this.testUsers = userList;
     }
 
-    async findOne(username: string): Promise<User | undefined> {
-        return this.testUsers.find(user => user.username === username);
-    }
-
-    async findEmailDuplicate(email: string): Promise<User | undefined> {
-        return this.testUsers.find(user => user.email === email);
-    }
-
     async findUser(userDto: any): Promise<User> {
         if (await this.userModel.findOne(userDto)) {
             return this.userModel.findOne(userDto)

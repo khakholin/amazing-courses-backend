@@ -5,7 +5,7 @@ export interface IAvailableCourses {
 }
 
 export interface IUserData {
-    login: string;
+    username: string;
     password: string;
 }
 
