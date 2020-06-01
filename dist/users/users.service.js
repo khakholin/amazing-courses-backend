@@ -8,15 +8,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
 let UserService = class UserService {
-    constructor() {
+    constructor(userModel) {
+        this.userModel = userModel;
+    }
+    async getAllUsers(role) {
+        if (role === 'admin') {
+            return await this.userModel.find();
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'ACCESS_IS_DENIED',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
     }
 };
 UserService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [])
+    __param(0, mongoose_1.InjectModel('User')),
+    __metadata("design:paramtypes", [mongoose_2.Model])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=users.service.js.map

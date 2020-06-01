@@ -19,12 +19,15 @@ const auth_service_1 = require("../auth/auth.service");
 const courses_service_1 = require("../courses/courses.service");
 const sendEmail_1 = require("../email/sendEmail");
 const registration_service_1 = require("../registration/registration.service");
+const path_1 = require("path");
+const users_service_1 = require("./users.service");
 let UserController = class UserController {
-    constructor(authService, coursesService, registrationService, sendMail) {
+    constructor(authService, coursesService, registrationService, sendMail, userService) {
         this.authService = authService;
         this.coursesService = coursesService;
         this.registrationService = registrationService;
         this.sendMail = sendMail;
+        this.userService = userService;
     }
     async login(req) {
         return this.authService.login(req.user);
@@ -35,11 +38,20 @@ let UserController = class UserController {
     async getCourses(req) {
         return this.coursesService.getUserCourses(req.user.availableCourses);
     }
+    getAllUsers(req) {
+        return this.userService.getAllUsers(req.user.role);
+    }
     async recoveryPassword(body) {
         return this.sendMail.recovery(body.email);
     }
     async registrationUser(body) {
         return this.registrationService.registrationUser(body);
+    }
+    async getFile(fileName, res) {
+        res.sendFile(path_1.join(__dirname, '../../trimmed.mp4'));
+    }
+    async getTest(fileName, res) {
+        return JSON.stringify(fileName);
     }
 };
 __decorate([
@@ -67,6 +79,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getCourses", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('list'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getAllUsers", null);
+__decorate([
     common_1.Post('recovery'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -80,12 +100,28 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "registrationUser", null);
+__decorate([
+    common_1.Get('videos/:fileName'),
+    common_1.Header('Content-Type', 'video/mp4'),
+    __param(0, common_1.Param('fileName')), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getFile", null);
+__decorate([
+    common_1.Get('test/:fileName'),
+    __param(0, common_1.Param('fileName')), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getTest", null);
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
         courses_service_1.CoursesService,
         registration_service_1.RegistrationService,
-        sendEmail_1.SendMail])
+        sendEmail_1.SendMail,
+        users_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=users.controller.js.map

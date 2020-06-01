@@ -10,6 +10,8 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const mongoose_1 = require("@nestjs/mongoose");
 const passport_1 = require("@nestjs/passport");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const auth_constants_1 = require("./auth/auth.constants");
@@ -33,10 +35,11 @@ AppModule = __decorate([
                 secret: auth_constants_1.jwtConstants.secret,
                 signOptions: { expiresIn: '1w' },
             }),
-            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
             mongoose_1.MongooseModule.forRoot('mongodb://localhost/amazingCourses'),
             mongoose_1.MongooseModule.forFeature([{ name: 'Course', schema: course_schema_1.CourseSchema }]),
             mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }]),
+            passport_1.PassportModule.register({ defaultStrategy: 'jwt' }),
+            serve_static_1.ServeStaticModule.forRoot({ rootPath: path_1.join(__dirname, "../web") }),
         ],
         controllers: [
             app_controller_1.AppController,

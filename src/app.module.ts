@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -24,10 +26,11 @@ import { CourseSchema } from './courses/schemas/course.schema';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1w' },
     }),
-    PassportModule.register({ defaultStrategy: 'jwt' }),
     MongooseModule.forRoot('mongodb://localhost/amazingCourses'),
     MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    ServeStaticModule.forRoot({ rootPath: join(__dirname, "../web") }),
   ],
   controllers: [
     AppController,
