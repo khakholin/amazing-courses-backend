@@ -21,7 +21,7 @@ let RegistrationService = class RegistrationService {
         this.userModel = userModel;
     }
     async registrationUser(newUser) {
-        if (await this.userModel.findOne({ email: newUser.email })) {
+        if (await this.userModel.findOne({ email: newUser.email.toLowerCase() })) {
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.NOT_FOUND,
                 message: 'EMAIL_DUPLICATE',
@@ -35,7 +35,7 @@ let RegistrationService = class RegistrationService {
                 }, common_1.HttpStatus.NOT_FOUND);
             }
             else {
-                const createdUser = new this.userModel(Object.assign(Object.assign({}, newUser), { role: "user", availableCourses: [] }));
+                const createdUser = new this.userModel(Object.assign(Object.assign({}, newUser), { availableCourses: [], courseProgress: [], email: newUser.email.toLowerCase(), realName: '', realSurname: '', role: "user", school: '', university: '', workPlace: '' }));
                 createdUser.save();
                 throw new common_1.HttpException({
                     status: common_1.HttpStatus.CREATED,

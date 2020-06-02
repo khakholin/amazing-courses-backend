@@ -1,20 +1,23 @@
-import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request } from '@nestjs/common';
+import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header } from '@nestjs/common';
 
 import { IUserRegData, IUserRecoveryData } from './users.types';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
-import { CoursesService } from 'src/courses/courses.service';
+import { CourseService } from 'src/course/course.service';
 import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
+import { join } from 'path';
+import { UserService } from './users.service';
 
 @Controller('user')
 export class UserController {
     constructor(
         private authService: AuthService,
-        private coursesService: CoursesService,
+        private coursesService: CourseService,
         private registrationService: RegistrationService,
         private sendMail: SendMail,
+        private userService: UserService,
     ) { }
 
     @UseGuards(LocalAuthGuard)
@@ -33,6 +36,12 @@ export class UserController {
     @Post('courses')
     async getCourses(@Request() req) {
         return this.coursesService.getUserCourses(req.user.availableCourses);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('list')
+    getAllUsers(@Request() req) {
+        return this.userService.getAllUsers(req.user.role);
     }
 
     @Post('recovery')

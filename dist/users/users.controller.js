@@ -16,15 +16,17 @@ const common_1 = require("@nestjs/common");
 const local_auth_guard_1 = require("../auth/local-auth.guard");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const auth_service_1 = require("../auth/auth.service");
-const courses_service_1 = require("../courses/courses.service");
+const course_service_1 = require("../course/course.service");
 const sendEmail_1 = require("../email/sendEmail");
 const registration_service_1 = require("../registration/registration.service");
+const users_service_1 = require("./users.service");
 let UserController = class UserController {
-    constructor(authService, coursesService, registrationService, sendMail) {
+    constructor(authService, coursesService, registrationService, sendMail, userService) {
         this.authService = authService;
         this.coursesService = coursesService;
         this.registrationService = registrationService;
         this.sendMail = sendMail;
+        this.userService = userService;
     }
     async login(req) {
         return this.authService.login(req.user);
@@ -34,6 +36,9 @@ let UserController = class UserController {
     }
     async getCourses(req) {
         return this.coursesService.getUserCourses(req.user.availableCourses);
+    }
+    getAllUsers(req) {
+        return this.userService.getAllUsers(req.user.role);
     }
     async recoveryPassword(body) {
         return this.sendMail.recovery(body.email);
@@ -67,6 +72,14 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getCourses", null);
 __decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('list'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "getAllUsers", null);
+__decorate([
     common_1.Post('recovery'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -83,9 +96,10 @@ __decorate([
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
-        courses_service_1.CoursesService,
+        course_service_1.CourseService,
         registration_service_1.RegistrationService,
-        sendEmail_1.SendMail])
+        sendEmail_1.SendMail,
+        users_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=users.controller.js.map

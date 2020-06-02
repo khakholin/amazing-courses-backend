@@ -3,11 +3,17 @@ declare const JwtStrategy_base: new (...args: any[]) => Strategy;
 export declare class JwtStrategy extends JwtStrategy_base {
     constructor();
     validate(payload: any): Promise<{
-        _id: any;
-        username: any;
+        availableCourses: any;
         email: any;
         role: any;
-        availableCourses: any;
+        username: any;
+        _id: any;
+        courseProgress: any;
+        realName: any;
+        realSurname: any;
+        school: any;
+        university: any;
+        workPlace: any;
     }>;
 }
 export {};
