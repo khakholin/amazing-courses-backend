@@ -22,7 +22,19 @@ let JwtStrategy = class JwtStrategy extends passport_1.PassportStrategy(passport
         });
     }
     async validate(payload) {
-        return { _id: payload.sub, username: payload.username, email: payload.email, role: payload.role, availableCourses: payload.availableCourses, };
+        return {
+            availableCourses: payload.availableCourses,
+            email: payload.email,
+            role: payload.role,
+            username: payload.username,
+            _id: payload.sub,
+            courseProgress: payload.courseProgress,
+            realName: payload.realName,
+            realSurname: payload.realSurname,
+            school: payload.school,
+            university: payload.university,
+            workPlace: payload.workPlace,
+        };
     }
 };
 JwtStrategy = __decorate([

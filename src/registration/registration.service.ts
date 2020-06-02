@@ -11,7 +11,7 @@ export class RegistrationService {
     constructor(@InjectModel('User') private userModel: Model<User>) { }
 
     async registrationUser(newUser: IUserRegData): Promise<any> {
-        if (await this.userModel.findOne({ email: newUser.email })) {
+        if (await this.userModel.findOne({ email: newUser.email.toLowerCase() })) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
                 message: 'EMAIL_DUPLICATE',
@@ -23,7 +23,20 @@ export class RegistrationService {
                     message: 'USER_DUPLICATE',
                 }, HttpStatus.NOT_FOUND);
             } else {
-                const createdUser = new this.userModel({ ...newUser, role: "user", availableCourses: [] });
+                const createdUser = new this.userModel(
+                    {
+                        ...newUser,
+                        availableCourses: [],
+                        courseProgress: [],
+                        email: newUser.email.toLowerCase(),
+                        realName: '',
+                        realSurname: '',
+                        role: "user",
+                        school: '',
+                        university: '',
+                        workPlace: '',
+                    }
+                );
                 createdUser.save();
                 throw new HttpException({
                     status: HttpStatus.CREATED,

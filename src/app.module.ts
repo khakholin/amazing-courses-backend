@@ -11,14 +11,14 @@ import { jwtConstants } from './auth/auth.constants';
 import { AuthService } from './auth/auth.service';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { LocalStrategy } from './auth/local.strategy';
-import { CoursesController } from './courses/courses.controller';
-import { CoursesService } from './courses/courses.service';
+import { CourseController } from './course/course.controller';
+import { CourseService } from './course/course.service';
 import { RegistrationService } from './registration/registration.service';
 import { UserController } from './users/users.controller';
 import { UserService } from './users/users.service';
 import { UserSchema } from './users/schemas/user.schema';
 import { SendMail } from './email/sendEmail';
-import { CourseSchema } from './courses/schemas/course.schema';
+import { CourseSchema } from './course/schemas/course.schema';
 
 @Module({
   imports: [
@@ -34,13 +34,13 @@ import { CourseSchema } from './courses/schemas/course.schema';
   ],
   controllers: [
     AppController,
-    CoursesController,
+    CourseController,
     UserController,
   ],
   providers: [
     AppService,
     AuthService,
-    CoursesService,
+    CourseService,
     JwtStrategy,
     LocalStrategy,
     RegistrationService,

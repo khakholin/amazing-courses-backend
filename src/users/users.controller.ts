@@ -4,7 +4,7 @@ import { IUserRegData, IUserRecoveryData } from './users.types';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
-import { CoursesService } from 'src/courses/courses.service';
+import { CourseService } from 'src/course/course.service';
 import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
 import { join } from 'path';
@@ -14,7 +14,7 @@ import { UserService } from './users.service';
 export class UserController {
     constructor(
         private authService: AuthService,
-        private coursesService: CoursesService,
+        private coursesService: CourseService,
         private registrationService: RegistrationService,
         private sendMail: SendMail,
         private userService: UserService,
@@ -52,18 +52,5 @@ export class UserController {
     @Post('registration')
     async registrationUser(@Body() body: IUserRegData) {
         return this.registrationService.registrationUser(body);
-    }
-
-
-
-    @Get('videos/:fileName')
-    @Header('Content-Type', 'video/mp4')
-    async getFile(@Param('fileName') fileName, @Res() res) {
-        res.sendFile(join(__dirname, '../../trimmed.mp4'));
-    }
-
-    @Get('test/:fileName')
-    async getTest(@Param('fileName') fileName, @Res() res) {
-        return JSON.stringify(fileName);
     }
 }

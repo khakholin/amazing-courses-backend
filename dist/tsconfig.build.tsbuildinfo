@@ -1458,7 +1458,7 @@
         "signature": "a9a6d1ac7d8e1b27ed750995232ec31127a73624abfe24dcf9111d466d1dff17"
       },
       "../src/auth/auth.service.ts": {
-        "version": "cc6a3abe28c13a20e4e1e3c450054265e625617d2f9458b82afb51c06a1375fd",
+        "version": "c3831706a4585980f370c99bbe22ef2257ef228eb88d11ec1551636a1df609bb",
         "signature": "ad1b6001b4335e54ef44bf2eacb19f7b4fc0c276fbd9fa665920de69c0395a07"
       },
       "../node_modules/@types/passport-strategy/index.d.ts": {
@@ -1470,8 +1470,8 @@
         "signature": "d306be26f96b4bd9b279cd7da9d1355d5ce4060a2bb254489c1b95c87057eb38"
       },
       "../src/auth/jwt.strategy.ts": {
-        "version": "564a6e2c026f2976f778c15b654bb7836efc9bd5fda7634c02818332d9ac5b27",
-        "signature": "d06bca79086055bb3e1d95180fcc831de422b219f9756c6f98fb052aa936da97"
+        "version": "e1a566fad3ce1acd5ddb201aaa80a0177ca595bbffbfd9b280ee6d4f682f83d4",
+        "signature": "1e15dc78ec28efe09df10f877504ef07c73c6317daacb0c4166e33608e66e5cc"
       },
       "../node_modules/@types/passport-local/index.d.ts": {
         "version": "e50f9ae34bb92232533e3a32848970dd04f874a8f64d3ae48980e062b6489f26",
@@ -1481,33 +1481,37 @@
         "version": "455c310f918f78b829a008f6b3be74825dc015bfa7e19efefa25408914ecfc9c",
         "signature": "5c6b439eaf5629d67c26390c075ea6d5e9d37f0c6d81ac050a57c925e26e6988"
       },
-      "../src/courses/courses.controller.ts": {
-        "version": "874af86f7c3a391e629c4feaeadea0270db69db272a474e2bb1c441227b3e402",
-        "signature": "22d7eef1c85c98dcdf77c1b43cf9c6d208800dbe1fb0a0c9ae3789b9ce290071"
+      "../src/auth/jwt-auth.guard.ts": {
+        "version": "a8dec2a5cd381829103328693799b5a23dd815c5c7744532c6084e1d2d6bbed9",
+        "signature": "e9629b89f6cd33a040577695d89edf882e66287d30c87121f5fc07f404decd25"
       },
-      "../src/courses/data/courses.data.ts": {
+      "../src/course/data/courses.data.ts": {
         "version": "c39585aeefa287eb4d581da5922789c90f06413011b94f4e355bf23b66bee312",
         "signature": "f5248f88fd23559d85a9fb0f4666fe35d25188356b5d39290d93608b944d3c28"
       },
-      "../src/courses/courses.service.ts": {
-        "version": "ff0cf234e1b2dca8d7764fb6321e745b554059f93470b9d25aba4c28e7d3d95e",
-        "signature": "76e2c2b76d7f88a80eed4a9b201407b0a75dbae126f913967413f3d1c8042049"
+      "../src/course/course.types.ts": {
+        "version": "31efc7797595ebb466c90458041c457442cb54e91da3dc5aa4b2211c9628ba43",
+        "signature": "9b578d50934b11e703e5758c65a8ad5059022204b52bd69277a97c0c76b98635"
+      },
+      "../src/course/course.service.ts": {
+        "version": "c67df4e9e555395d1bcc65eb3a347cfdf4ad439c706420de0e903c156a3033bc",
+        "signature": "066319c61c1f02c5cae242f992b2666c4ac395e3b9177cdf255ec6b288a6246b"
+      },
+      "../src/course/course.controller.ts": {
+        "version": "f281096025cc61e62294c3f5e1e0df8afb8c08481323ebc86a410029ed46e928",
+        "signature": "8c8fed3b469976bef4d23e063527ed6c424b2610d46264607ca03a79083b889d"
       },
       "../src/users/users.types.ts": {
         "version": "66dd4e4074bf1de6703ef3a9e03822da2adaebe7c2df9f3791b4264f55dfe4a3",
         "signature": "3ccdf2d6babeb9c88523092707c539c5cb044b3fd060c9db079dffe137ff7516"
       },
       "../src/registration/registration.service.ts": {
-        "version": "1f91ce837206989face8398d62decfcbddd143ada5d6194bca9cfa7b1f65dbb9",
+        "version": "d5cbbaee285eb3edc8ec5272fec49ddb0efadbc8052cc87c551d6ac190a9af10",
         "signature": "13b7932409efeda99fadb464be4906f867cbe28199b498a228724c20e571b229"
       },
       "../src/auth/local-auth.guard.ts": {
         "version": "081d68ca88368650cab8a51a041f6b409254ec9fb10b68c1a60679f8e7c7e5c3",
         "signature": "9116cbf32650ce234338c6f8395ecb044d06f6d939f2f6ca6d21335f4e663b71"
-      },
-      "../src/auth/jwt-auth.guard.ts": {
-        "version": "a8dec2a5cd381829103328693799b5a23dd815c5c7744532c6084e1d2d6bbed9",
-        "signature": "e9629b89f6cd33a040577695d89edf882e66287d30c87121f5fc07f404decd25"
       },
       "../src/email/sendEmail.ts": {
         "version": "12b406a3230ad72a433ee9fe6f6ed9fbf6b70fab1e293e222f97d211c4d9f5b7",
@@ -1518,28 +1522,24 @@
         "signature": "2cf98257007e783afb929019bc6bbc08e1305b37027e5f03cdbfd226012b64df"
       },
       "../src/users/users.controller.ts": {
-        "version": "b1778915f0d02afc688843bbd3ada42a7972b4d7d4dad4460c4df50fe59b3529",
-        "signature": "fd40d907eb4f8505bd171b74f8921251c4fde1cc34dee36186331e56efa277a9"
+        "version": "29ea8a54cf8fc1a0e8546c6080a697cb0cafc8159a1237cdadd888d7b01474b7",
+        "signature": "5cf869a4458d69596e00ee531884aaee4f82d331ca84a30efb7e46566b47152b"
       },
       "../src/users/schemas/user.schema.ts": {
-        "version": "1563f469af31538e171a74ba94977d8f3a4ec3a81a276ddb461175331cc48f7c",
+        "version": "4fa353cce6ef7520ce98cf963412bee0899b40ff61b0c5ae8ef1ee2fe8e14ac8",
         "signature": "1c21071f2c0d7d9779303a6a204301fb1576821e54fc756baf24e3e726ba2897"
       },
-      "../src/courses/schemas/course.schema.ts": {
-        "version": "70962ad552ed2459a483c5655166f121cd89bc69682f9a216d6482eb5662bf4d",
+      "../src/course/schemas/course.schema.ts": {
+        "version": "9751cecc420ab0f89fba738adc4fbdfea830ae051c0c17f74c23026cb5bcf393",
         "signature": "f09e70646a9d8683505df9df54dad99ad4f346e145f5e2124ae31f8157a9f81d"
       },
       "../src/app.module.ts": {
-        "version": "ce5effe4925fbc9062bfac1bc85da2aa48974114795d6a66c7858d6e8498f5c3",
+        "version": "ad0075dcec589756e70db9e667d6b1725d40405a709179fb2e00ca6cabdcd41b",
         "signature": "b82491e2990291580288c5602d4c017238977749d52b17391f0e45d9a29be644"
       },
       "../src/main.ts": {
-        "version": "b5ef05e24fcbd36fed3e720b058b349000e7b81c3f62e5a97589ad741a59505b",
+        "version": "e2882e88da653847894eefb3f42e4c2061e600a0dc63d89f3969751a289a3d9b",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
-      },
-      "../src/courses/courses.types.ts": {
-        "version": "5a815c7515344bbe485aaf0dd3fe56727ec3ee1b196e6ab56166dd620e880bff",
-        "signature": "7cc119809da3cb4d97e17d3d70e86b99c21d4a9700565129c16990ca73cade65"
       },
       "../src/users/data/users.data.ts": {
         "version": "6563ba17fa1e85083a028f7c9288659d93ae6d3bce3c6c0c5622cfaab82f4966",
@@ -4688,22 +4688,43 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/courses/courses.controller.ts": [
+      "../src/auth/jwt-auth.guard.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
+        "../node_modules/@nestjs/passport/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/courses/data/courses.data.ts": [
+      "../src/course/data/courses.data.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/courses/courses.service.ts": [
+      "../src/course/course.types.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/course/course.service.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
-        "../src/courses/data/courses.data.ts",
+        "../src/course/data/courses.data.ts",
+        "../src/course/course.types.ts",
+        "../node_modules/@nestjs/mongoose/index.d.ts",
+        "../node_modules/@types/mongoose/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/course/course.controller.ts": [
+        "../node_modules/@nestjs/common/index.d.ts",
+        "../src/auth/jwt-auth.guard.ts",
+        "../src/course/course.service.ts",
+        "../node_modules/@types/node/path.d.ts",
+        "../src/course/course.types.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4726,14 +4747,6 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/auth/local-auth.guard.ts": [
-        "../node_modules/@nestjs/common/index.d.ts",
-        "../node_modules/@nestjs/passport/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/auth/jwt-auth.guard.ts": [
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/passport/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -4765,7 +4778,7 @@
         "../src/auth/local-auth.guard.ts",
         "../src/auth/jwt-auth.guard.ts",
         "../src/auth/auth.service.ts",
-        "../src/courses/courses.service.ts",
+        "../src/course/course.service.ts",
         "../src/email/sendEmail.ts",
         "../src/registration/registration.service.ts",
         "../node_modules/@types/node/path.d.ts",
@@ -4782,7 +4795,7 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/courses/schemas/course.schema.ts": [
+      "../src/course/schemas/course.schema.ts": [
         "../node_modules/@types/mongoose/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -4802,14 +4815,14 @@
         "../src/auth/auth.service.ts",
         "../src/auth/jwt.strategy.ts",
         "../src/auth/local.strategy.ts",
-        "../src/courses/courses.controller.ts",
-        "../src/courses/courses.service.ts",
+        "../src/course/course.controller.ts",
+        "../src/course/course.service.ts",
         "../src/registration/registration.service.ts",
         "../src/users/users.controller.ts",
         "../src/users/users.service.ts",
         "../src/users/schemas/user.schema.ts",
         "../src/email/sendEmail.ts",
-        "../src/courses/schemas/course.schema.ts",
+        "../src/course/schemas/course.schema.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4818,12 +4831,6 @@
       "../src/main.ts": [
         "../node_modules/@nestjs/core/index.d.ts",
         "../src/app.module.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/courses/courses.types.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -8041,14 +8048,22 @@
         "../node_modules/@types/passport-local/index.d.ts",
         "../src/auth/auth.service.ts"
       ],
+      "../src/auth/jwt-auth.guard.ts": [
+        "../node_modules/@nestjs/passport/index.d.ts"
+      ],
+      "../src/course/course.service.ts": [
+        "../node_modules/@types/mongoose/index.d.ts",
+        "../src/course/course.types.ts"
+      ],
+      "../src/course/course.controller.ts": [
+        "../src/course/course.service.ts",
+        "../src/course/course.types.ts"
+      ],
       "../src/registration/registration.service.ts": [
         "../node_modules/@types/mongoose/index.d.ts",
         "../src/users/users.types.ts"
       ],
       "../src/auth/local-auth.guard.ts": [
-        "../node_modules/@nestjs/passport/index.d.ts"
-      ],
-      "../src/auth/jwt-auth.guard.ts": [
         "../node_modules/@nestjs/passport/index.d.ts"
       ],
       "../src/email/sendEmail.ts": [
@@ -8059,7 +8074,7 @@
       ],
       "../src/users/users.controller.ts": [
         "../src/auth/auth.service.ts",
-        "../src/courses/courses.service.ts",
+        "../src/course/course.service.ts",
         "../src/registration/registration.service.ts",
         "../src/email/sendEmail.ts",
         "../src/users/users.service.ts",
@@ -8068,7 +8083,7 @@
       "../src/users/schemas/user.schema.ts": [
         "../node_modules/@types/mongoose/index.d.ts"
       ],
-      "../src/courses/schemas/course.schema.ts": [
+      "../src/course/schemas/course.schema.ts": [
         "../node_modules/@types/mongoose/index.d.ts"
       ],
       "../node_modules/@types/anymatch/index.d.ts": [

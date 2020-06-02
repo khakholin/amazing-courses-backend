@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose = require("mongoose");
-exports.CourseSchema = new mongoose.Schema({
+import * as mongoose from 'mongoose';
+
+export const CourseSchema = new mongoose.Schema({
     courseFolder: String,
     courseLectures: [
         {
@@ -13,4 +12,3 @@ exports.CourseSchema = new mongoose.Schema({
     courseTime: Number,
     numOfLectures: Number,
 });
-//# sourceMappingURL=course.schema.js.map

@@ -16,10 +16,9 @@ const common_1 = require("@nestjs/common");
 const local_auth_guard_1 = require("../auth/local-auth.guard");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const auth_service_1 = require("../auth/auth.service");
-const courses_service_1 = require("../courses/courses.service");
+const course_service_1 = require("../course/course.service");
 const sendEmail_1 = require("../email/sendEmail");
 const registration_service_1 = require("../registration/registration.service");
-const path_1 = require("path");
 const users_service_1 = require("./users.service");
 let UserController = class UserController {
     constructor(authService, coursesService, registrationService, sendMail, userService) {
@@ -46,12 +45,6 @@ let UserController = class UserController {
     }
     async registrationUser(body) {
         return this.registrationService.registrationUser(body);
-    }
-    async getFile(fileName, res) {
-        res.sendFile(path_1.join(__dirname, '../../trimmed.mp4'));
-    }
-    async getTest(fileName, res) {
-        return JSON.stringify(fileName);
     }
 };
 __decorate([
@@ -100,25 +93,10 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "registrationUser", null);
-__decorate([
-    common_1.Get('videos/:fileName'),
-    common_1.Header('Content-Type', 'video/mp4'),
-    __param(0, common_1.Param('fileName')), __param(1, common_1.Res()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "getFile", null);
-__decorate([
-    common_1.Get('test/:fileName'),
-    __param(0, common_1.Param('fileName')), __param(1, common_1.Res()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "getTest", null);
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,
-        courses_service_1.CoursesService,
+        course_service_1.CourseService,
         registration_service_1.RegistrationService,
         sendEmail_1.SendMail,
         users_service_1.UserService])
