@@ -31,14 +31,29 @@ let UserController = class UserController {
     async login(req) {
         return this.authService.login(req.user);
     }
-    getProfile(req) {
+    async getProfile(req) {
         return req.user;
     }
-    async getCourses(req) {
-        return this.coursesService.getUserCourses(req.user.availableCourses);
+    async getCourses(body) {
+        return this.coursesService.getUserCourses(body);
     }
-    getAllUsers(req) {
+    async getAllUsers(req) {
         return this.userService.getAllUsers(req.user.role);
+    }
+    async getUserAvailableCourses(body) {
+        return this.coursesService.getUserAvailableCourses(body);
+    }
+    async getUserCourseProgress(body) {
+        return this.coursesService.getUserCourseProgress(body);
+    }
+    async changeUserAvailableCourses(body) {
+        return this.coursesService.changeUserAvailableCourses(body);
+    }
+    async changeUserLectureAvailable(body) {
+        return this.coursesService.changeUserLectureAvailable(body);
+    }
+    async changeUserLectureChecked(body) {
+        return this.coursesService.changeUserLectureChecked(body);
     }
     async recoveryPassword(body) {
         return this.sendMail.recovery(body.email);
@@ -61,12 +76,12 @@ __decorate([
     __param(0, common_1.Request()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserController.prototype, "getProfile", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post('courses'),
-    __param(0, common_1.Request()),
+    __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
@@ -77,8 +92,48 @@ __decorate([
     __param(0, common_1.Request()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserController.prototype, "getAllUsers", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('available-courses'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserAvailableCourses", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('course-progress'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserCourseProgress", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('change-courses'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "changeUserAvailableCourses", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('change-available-lecture'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "changeUserLectureAvailable", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('change-check-lecture'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "changeUserLectureChecked", null);
 __decorate([
     common_1.Post('recovery'),
     __param(0, common_1.Body()),

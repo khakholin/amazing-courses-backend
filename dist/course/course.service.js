@@ -13,32 +13,66 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
-const courses_data_1 = require("./data/courses.data");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let CourseService = class CourseService {
-    constructor(courseModel) {
+    constructor(courseModel, userModel) {
         this.courseModel = courseModel;
-        this.courses = courses_data_1.courseList;
+        this.userModel = userModel;
     }
-    getUserCourses(availableCourses) {
+    async getUserCourses(data) {
         let userCourses = [];
         let totalNumOfLectures = 0;
         let totalTime = 0;
-        availableCourses.map((availableCourse) => {
-            this.courses.map((course) => {
-                if (availableCourse.title === course.title) {
-                    userCourses.push(course);
-                    totalNumOfLectures += course.numOfLectures;
-                    totalTime += course.time;
+        if (data.availableCourses) {
+            if (data.availableCourses.length > 1) {
+                for (const course of data.availableCourses) {
+                    const desiredCourse = await this.courseModel.findOne({ courseName: course });
+                    if (desiredCourse) {
+                        userCourses.push(desiredCourse);
+                        totalNumOfLectures += desiredCourse['numOfLectures'];
+                        totalTime += desiredCourse['courseTime'];
+                    }
                 }
-            });
-        });
-        return { totalNumOfLectures, totalTime, data: userCourses };
+            }
+            else {
+                const desiredCourse = await this.courseModel.findOne({ courseName: data.availableCourses[0] });
+                if (desiredCourse) {
+                    userCourses.push(desiredCourse);
+                    totalNumOfLectures += desiredCourse['numOfLectures'];
+                    totalTime += desiredCourse['courseTime'];
+                }
+            }
+        }
+        return { totalNumOfLectures, totalTime, courses: userCourses };
     }
     async getAllCourses() {
         const courses = await this.courseModel.find();
         return courses.map((item) => item.courseName);
+    }
+    async getUserAvailableCourses(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            return user.availableCourses;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    async getUserCourseProgress(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            return user.courseProgress;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
     }
     async createCourse(newCourse) {
         if (await this.courseModel.findOne({ courseName: newCourse.courseName })) {
@@ -56,11 +90,134 @@ let CourseService = class CourseService {
             }, common_1.HttpStatus.CREATED);
         }
     }
+    async changeUserAvailableCourses(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        let index = -1;
+        if (user) {
+            user.availableCourses.find((course, i) => {
+                course === data.courseName ? index = i : index = index;
+            });
+            if (index !== -1) {
+                user.availableCourses.splice(index, 1);
+                await user.save();
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.OK,
+                    message: 'COURSE_SUCCESSFULLY_REMOVED',
+                }, common_1.HttpStatus.OK);
+            }
+            else {
+                user.availableCourses.push(data.courseName);
+                await user.save();
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.OK,
+                    message: 'COURSE_SUCCESSFULLY_ADDED',
+                }, common_1.HttpStatus.OK);
+            }
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    async changeUserLectureAvailable(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        let courseIndex = -1;
+        if (user) {
+            user.courseProgress.find((item, i) => {
+                item.courseName === data.courseName ? courseIndex = i : courseIndex = courseIndex;
+            });
+            if (courseIndex !== -1) {
+                let lectureIndex = -1;
+                user.courseProgress[courseIndex].availableLectures.find((lecture, j) => {
+                    lecture === data.availableLecture ? lectureIndex = j : lectureIndex;
+                });
+                if (lectureIndex !== -1) {
+                    user.courseProgress[courseIndex].availableLectures.splice(lectureIndex, 1);
+                    await user.save();
+                    throw new common_1.HttpException({
+                        status: common_1.HttpStatus.OK,
+                        message: 'LECTURE_SUCCESSFULLY_SET_UNAVAILABLE',
+                    }, common_1.HttpStatus.OK);
+                }
+                else {
+                    user.courseProgress[courseIndex].availableLectures.push(data.availableLecture);
+                    await user.save();
+                    throw new common_1.HttpException({
+                        status: common_1.HttpStatus.OK,
+                        message: 'LECTURE_SUCCESSFULLY_SET_AVAILABLE',
+                    }, common_1.HttpStatus.OK);
+                }
+            }
+            else {
+                user.courseProgress.push({ courseName: data.courseName, availableLectures: [data.availableLecture], checkedLectures: [] });
+                await user.save();
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.OK,
+                    message: 'COURSE_PROGRESS_SUCCESSFULLY_ADDED',
+                }, common_1.HttpStatus.OK);
+            }
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    async changeUserLectureChecked(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        let courseIndex = -1;
+        if (user) {
+            user.courseProgress.find((item, i) => {
+                item.courseName === data.courseName ? courseIndex = i : courseIndex = courseIndex;
+            });
+            if (courseIndex !== -1) {
+                let lectureIndex = -1;
+                user.courseProgress[courseIndex].checkedLectures.find((lecture, j) => {
+                    lecture === data.checkedLecture ? lectureIndex = j : lectureIndex;
+                });
+                if (lectureIndex !== -1) {
+                    user.courseProgress[courseIndex].checkedLectures.splice(lectureIndex, 1);
+                    await user.save();
+                    throw new common_1.HttpException({
+                        status: common_1.HttpStatus.OK,
+                        message: 'LECTURE_SUCCESSFULLY_SET_UNCHECKED',
+                    }, common_1.HttpStatus.OK);
+                }
+                else {
+                    user.courseProgress[courseIndex].checkedLectures.push(data.checkedLecture);
+                    await user.save();
+                    throw new common_1.HttpException({
+                        status: common_1.HttpStatus.OK,
+                        message: 'LECTURE_SUCCESSFULLY_SET_CHECKED',
+                    }, common_1.HttpStatus.OK);
+                }
+            }
+            else {
+                user.courseProgress.push({ courseName: data.courseName, checkedLectures: [data.checkedLecture], availableLectures: [] });
+                await user.save();
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.OK,
+                    message: 'COURSE_PROGRESS_SUCCESSFULLY_ADDED',
+                }, common_1.HttpStatus.OK);
+            }
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
 };
 CourseService = __decorate([
     common_1.Injectable(),
     __param(0, mongoose_1.InjectModel('Course')),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __param(1, mongoose_1.InjectModel('User')),
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model])
 ], CourseService);
 exports.CourseService = CourseService;
 //# sourceMappingURL=course.service.js.map
