@@ -14,13 +14,18 @@ export declare class UserController {
     login(req: any): Promise<{
         access_token: string;
     }>;
-    getProfile(req: any): any;
-    getCourses(req: any): Promise<{
+    getProfile(req: any): Promise<any>;
+    getCourses(body: any): Promise<{
         totalNumOfLectures: number;
         totalTime: number;
-        data: any[];
+        courses: any[];
     }>;
     getAllUsers(req: any): Promise<any[]>;
+    getUserAvailableCourses(body: any): Promise<any>;
+    getUserCourseProgress(body: any): Promise<any>;
+    changeUserAvailableCourses(body: any): Promise<any>;
+    changeUserLectureAvailable(body: any): Promise<any>;
+    changeUserLectureChecked(body: any): Promise<any>;
     recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
     registrationUser(body: IUserRegData): Promise<any>;
 }

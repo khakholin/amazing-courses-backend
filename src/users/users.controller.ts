@@ -28,20 +28,50 @@ export class UserController {
 
     @UseGuards(JwtAuthGuard)
     @Get('profile')
-    getProfile(@Request() req) {
+    async getProfile(@Request() req) {
         return req.user;
     }
 
     @UseGuards(JwtAuthGuard)
     @Post('courses')
-    async getCourses(@Request() req) {
-        return this.coursesService.getUserCourses(req.user.availableCourses);
+    async getCourses(@Body() body) {
+        return this.coursesService.getUserCourses(body);
     }
 
     @UseGuards(JwtAuthGuard)
     @Get('list')
-    getAllUsers(@Request() req) {
+    async getAllUsers(@Request() req) {
         return this.userService.getAllUsers(req.user.role);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('available-courses')
+    async getUserAvailableCourses(@Body() body) {
+        return this.coursesService.getUserAvailableCourses(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('course-progress')
+    async getUserCourseProgress(@Body() body) {
+        return this.coursesService.getUserCourseProgress(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('change-courses')
+    async changeUserAvailableCourses(@Body() body) {
+        return this.coursesService.changeUserAvailableCourses(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('change-available-lecture')
+    async changeUserLectureAvailable(@Body() body) {
+        return this.coursesService.changeUserLectureAvailable(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('change-check-lecture')
+    async changeUserLectureChecked(@Body() body) {
+        return this.coursesService.changeUserLectureChecked(body);
     }
 
     @Post('recovery')

@@ -5,8 +5,8 @@ export const UserSchema = new mongoose.Schema({
     courseProgress: [
         {
             courseName: String,
-            numAvailableLectures: Number,
-            numCheckedLectures: Number,
+            availableLectures: [Number],
+            checkedLectures: [Number],
         }
     ],
     email: String,
