@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
-const courses_service_1 = require("./courses.service");
+const course_service_1 = require("./course.service");
 const path_1 = require("path");
 let CourseController = class CourseController {
     constructor(coursesService) {
@@ -22,6 +22,12 @@ let CourseController = class CourseController {
     }
     async getFile(params, res) {
         res.sendFile(path_1.join(__dirname, '../../videos/' + params.courseFolder + '/' + params.lectureNumber + '.mp4'));
+    }
+    async registrationUser(body) {
+        return this.coursesService.createCourse(body);
+    }
+    async getAllCourses(req) {
+        return this.coursesService.getAllCourses();
     }
 };
 __decorate([
@@ -33,9 +39,25 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "getFile", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('create'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "registrationUser", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('list'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "getAllCourses", null);
 CourseController = __decorate([
     common_1.Controller('course'),
-    __metadata("design:paramtypes", [courses_service_1.CoursesService])
+    __metadata("design:paramtypes", [course_service_1.CourseService])
 ], CourseController);
 exports.CourseController = CourseController;
-//# sourceMappingURL=courses.controller.js.map
+//# sourceMappingURL=course.controller.js.map

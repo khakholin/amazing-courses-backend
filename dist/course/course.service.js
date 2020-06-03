@@ -8,11 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const courses_data_1 = require("./data/courses.data");
-let CoursesService = class CoursesService {
-    constructor() {
+const mongoose_1 = require("@nestjs/mongoose");
+const mongoose_2 = require("mongoose");
+let CourseService = class CourseService {
+    constructor(courseModel) {
+        this.courseModel = courseModel;
         this.courses = courses_data_1.courseList;
     }
     getUserCourses(availableCourses) {
@@ -30,10 +36,31 @@ let CoursesService = class CoursesService {
         });
         return { totalNumOfLectures, totalTime, data: userCourses };
     }
+    async getAllCourses() {
+        const courses = await this.courseModel.find();
+        return courses.map((item) => item.courseName);
+    }
+    async createCourse(newCourse) {
+        if (await this.courseModel.findOne({ courseName: newCourse.courseName })) {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'COURSE_DUPLICATE',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+        else {
+            const createdCourse = new this.courseModel(newCourse);
+            createdCourse.save();
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.CREATED,
+                message: 'SUCCESS',
+            }, common_1.HttpStatus.CREATED);
+        }
+    }
 };
-CoursesService = __decorate([
+CourseService = __decorate([
     common_1.Injectable(),
-    __metadata("design:paramtypes", [])
-], CoursesService);
-exports.CoursesService = CoursesService;
-//# sourceMappingURL=courses.service.js.map
+    __param(0, mongoose_1.InjectModel('Course')),
+    __metadata("design:paramtypes", [mongoose_2.Model])
+], CourseService);
+exports.CourseService = CourseService;
+//# sourceMappingURL=course.service.js.map
