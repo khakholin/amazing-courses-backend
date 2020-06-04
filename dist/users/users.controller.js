@@ -34,6 +34,9 @@ let UserController = class UserController {
     async getProfile(req) {
         return req.user;
     }
+    async getUserData(body) {
+        return this.userService.getUserData(body);
+    }
     async getCourses(body) {
         return this.coursesService.getUserCourses(body);
     }
@@ -54,6 +57,9 @@ let UserController = class UserController {
     }
     async changeUserLectureChecked(body) {
         return this.coursesService.changeUserLectureChecked(body);
+    }
+    async updateUserData(body) {
+        return this.userService.updateUserData(body);
     }
     async recoveryPassword(body) {
         return this.sendMail.recovery(body.email);
@@ -78,6 +84,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getProfile", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('data'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserData", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post('courses'),
@@ -134,6 +148,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changeUserLectureChecked", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('data-update'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateUserData", null);
 __decorate([
     common_1.Post('recovery'),
     __param(0, common_1.Body()),

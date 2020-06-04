@@ -29,4 +29,10 @@ export class CourseController {
     async getAllCourses(@Request() req) {
         return this.coursesService.getAllCourses();
     }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('data')
+    async getCoursesData() {
+        return this.coursesService.getCoursesData();
+    }
 }

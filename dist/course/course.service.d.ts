@@ -12,6 +12,7 @@ export declare class CourseService {
         courses: any[];
     }>;
     getAllCourses(): Promise<any>;
+    getCoursesData(): Promise<any>;
     getUserAvailableCourses(data: any): Promise<any>;
     getUserCourseProgress(data: any): Promise<any>;
     createCourse(newCourse: ICourseData): Promise<any>;

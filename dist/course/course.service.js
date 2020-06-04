@@ -50,6 +50,9 @@ let CourseService = class CourseService {
         const courses = await this.courseModel.find();
         return courses.map((item) => item.courseName);
     }
+    async getCoursesData() {
+        return await this.courseModel.find();
+    }
     async getUserAvailableCourses(data) {
         const user = await this.userModel.findOne({ username: data.username });
         if (user) {
