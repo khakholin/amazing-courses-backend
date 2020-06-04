@@ -61,6 +61,9 @@ let UserController = class UserController {
     async updateUserData(body) {
         return this.userService.updateUserData(body);
     }
+    async updateUserEmail(body) {
+        return this.userService.updateUserEmail(body);
+    }
     async recoveryPassword(body) {
         return this.sendMail.recovery(body.email);
     }
@@ -156,6 +159,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUserData", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('email-update'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateUserEmail", null);
 __decorate([
     common_1.Post('recovery'),
     __param(0, common_1.Body()),

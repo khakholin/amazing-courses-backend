@@ -6,4 +6,5 @@ export declare class UserService {
     getAllUsers(role: string): Promise<any[]>;
     getUserData(data: any): Promise<any[]>;
     updateUserData(data: any): Promise<any[]>;
+    updateUserEmail(data: any): Promise<any[]>;
 }

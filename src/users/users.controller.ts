@@ -86,6 +86,12 @@ export class UserController {
         return this.userService.updateUserData(body);
     }
 
+    @UseGuards(JwtAuthGuard)
+    @Post('email-update')
+    async updateUserEmail(@Body() body) {
+        return this.userService.updateUserEmail(body);
+    }
+
     @Post('recovery')
     async recoveryPassword(@Body() body: IUserRecoveryData) {
         return this.sendMail.recovery(body.email);
