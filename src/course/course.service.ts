@@ -45,6 +45,10 @@ export class CourseService {
         return courses.map((item) => item.courseName)
     }
 
+    async getCoursesData(): Promise<any> {
+        return await this.courseModel.find();
+    }
+
     async getUserAvailableCourses(data): Promise<any> {
         const user = await this.userModel.findOne({ username: data.username });
         if (user) {

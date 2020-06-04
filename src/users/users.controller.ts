@@ -33,6 +33,12 @@ export class UserController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Post('data')
+    async getUserData(@Body() body) {
+        return this.userService.getUserData(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post('courses')
     async getCourses(@Body() body) {
         return this.coursesService.getUserCourses(body);
@@ -72,6 +78,12 @@ export class UserController {
     @Post('change-check-lecture')
     async changeUserLectureChecked(@Body() body) {
         return this.coursesService.changeUserLectureChecked(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('data-update')
+    async updateUserData(@Body() body) {
+        return this.userService.updateUserData(body);
     }
 
     @Post('recovery')

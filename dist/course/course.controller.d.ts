@@ -6,4 +6,5 @@ export declare class CourseController {
     getFile(params: any, res: any): Promise<void>;
     registrationUser(body: ICourseData): Promise<any>;
     getAllCourses(req: any): Promise<any>;
+    getCoursesData(): Promise<any>;
 }

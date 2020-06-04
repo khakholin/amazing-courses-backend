@@ -15,6 +15,7 @@ export declare class UserController {
         access_token: string;
     }>;
     getProfile(req: any): Promise<any>;
+    getUserData(body: any): Promise<any[]>;
     getCourses(body: any): Promise<{
         totalNumOfLectures: number;
         totalTime: number;
@@ -26,6 +27,7 @@ export declare class UserController {
     changeUserAvailableCourses(body: any): Promise<any>;
     changeUserLectureAvailable(body: any): Promise<any>;
     changeUserLectureChecked(body: any): Promise<any>;
+    updateUserData(body: any): Promise<any[]>;
     recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
     registrationUser(body: IUserRegData): Promise<any>;
 }

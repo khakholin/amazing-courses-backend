@@ -29,6 +29,9 @@ let CourseController = class CourseController {
     async getAllCourses(req) {
         return this.coursesService.getAllCourses();
     }
+    async getCoursesData() {
+        return this.coursesService.getCoursesData();
+    }
 };
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
@@ -55,6 +58,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "getAllCourses", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('data'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "getCoursesData", null);
 CourseController = __decorate([
     common_1.Controller('course'),
     __metadata("design:paramtypes", [course_service_1.CourseService])

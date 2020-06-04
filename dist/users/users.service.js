@@ -30,6 +30,32 @@ let UserService = class UserService {
             }, common_1.HttpStatus.FORBIDDEN);
         }
     }
+    async getUserData(data) {
+        return await this.userModel.findOne({ username: data.username });
+    }
+    async updateUserData(data) {
+        const user = await this.userModel.findOne({ username: data.oldUserName });
+        if (user) {
+            user.realName = data.realName;
+            user.realSurname = data.realSurname;
+            user.school = data.school;
+            user.university = data.university;
+            user.username = data.newUserName;
+            user.workPlace = data.workPlace;
+            await user.save();
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.OK,
+                message: 'USER_DATA_SUCCESSFULLY_UPDATED',
+            }, common_1.HttpStatus.OK);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+        return data;
+    }
 };
 UserService = __decorate([
     common_1.Injectable(),
