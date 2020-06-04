@@ -54,7 +54,40 @@ let UserService = class UserService {
                 message: 'USER_NOT_FOUND',
             }, common_1.HttpStatus.NOT_FOUND);
         }
-        return data;
+    }
+    async updateUserEmail(data) {
+        const user = await this.userModel.findOne({ username: data.username, password: data.password });
+        if (user) {
+            user.email = data.newEmail;
+            await user.save();
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.OK,
+                message: 'USER_EMAIL_SUCCESSFULLY_UPDATED',
+            }, common_1.HttpStatus.OK);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'WRONG_PASSWORD',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
+    }
+    async updateUserPassword(data) {
+        const user = await this.userModel.findOne({ username: data.username, password: data.oldPassword });
+        if (user) {
+            user.password = data.newPassword;
+            await user.save();
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.OK,
+                message: 'USER_PASSWORD_SUCCESSFULLY_UPDATED',
+            }, common_1.HttpStatus.OK);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'WRONG_PASSWORD',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
     }
 };
 UserService = __decorate([

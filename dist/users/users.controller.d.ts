@@ -28,6 +28,8 @@ export declare class UserController {
     changeUserLectureAvailable(body: any): Promise<any>;
     changeUserLectureChecked(body: any): Promise<any>;
     updateUserData(body: any): Promise<any[]>;
+    updateUserEmail(body: any): Promise<any[]>;
+    updateUserPassword(body: any): Promise<any[]>;
     recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
     registrationUser(body: IUserRegData): Promise<any>;
 }

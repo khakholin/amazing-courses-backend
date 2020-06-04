@@ -18,6 +18,7 @@ export class UserService {
             }, HttpStatus.FORBIDDEN);
         }
     }
+
     async getUserData(data): Promise<any[]> {
         return await this.userModel.findOne({ username: data.username });
     }
@@ -42,15 +43,40 @@ export class UserService {
                 message: 'USER_NOT_FOUND',
             }, HttpStatus.NOT_FOUND);
         }
-        return data;
-        // if (role === 'admin') {
-        //     return await this.userModel.find();
-        // } else {
-        //     throw new HttpException({
-        //         status: HttpStatus.FORBIDDEN,
-        //         message: 'ACCESS_IS_DENIED',
-        //     }, HttpStatus.FORBIDDEN);
-        // }
+    }
+
+    async updateUserEmail(data): Promise<any[]> {
+        const user = await this.userModel.findOne({ username: data.username, password: data.password });
+        if (user) {
+            user.email = data.newEmail;
+            await user.save();
+            throw new HttpException({
+                status: HttpStatus.OK,
+                message: 'USER_EMAIL_SUCCESSFULLY_UPDATED',
+            }, HttpStatus.OK);
+        } else {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                message: 'WRONG_PASSWORD',
+            }, HttpStatus.FORBIDDEN);
+        }
+    }
+
+    async updateUserPassword(data): Promise<any[]> {
+        const user = await this.userModel.findOne({ username: data.username, password: data.oldPassword });
+        if (user) {
+            user.password = data.newPassword;
+            await user.save();
+            throw new HttpException({
+                status: HttpStatus.OK,
+                message: 'USER_PASSWORD_SUCCESSFULLY_UPDATED',
+            }, HttpStatus.OK);
+        } else {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                message: 'WRONG_PASSWORD',
+            }, HttpStatus.FORBIDDEN);
+        }
     }
 }
 

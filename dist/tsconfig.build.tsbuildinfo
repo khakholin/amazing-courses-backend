@@ -1518,12 +1518,12 @@
         "signature": "cd2b77455120e99c3ae6c6981507ff0a57f2e0a359f6fde781000995e10d1393"
       },
       "../src/users/users.service.ts": {
-        "version": "c3ddb5720dd5cec997be9e018bbe24aa5571d0c0e302e394c03494d38dab5d72",
-        "signature": "585f674d3dfd6f6f51962081c074a3485acffe385754bfc1d9b3f78fd242a69f"
+        "version": "fcc263c674f3c5fa8c53ce3bc723a0c168f4e45766596f11ec8ce02f5ade6e42",
+        "signature": "74da4267a19a0a0c864d79d778f17da0880bc8d60a47cad3db7464dac0410556"
       },
       "../src/users/users.controller.ts": {
-        "version": "94b1da8d584313a0673e7586e2ac1f4d5255e94cbf6e9ea7ba1b18e441ef593e",
-        "signature": "4f9ec4bb977f645abd4a5bfb62090de440be800642099a88644eee5390653a0a"
+        "version": "fe764c7ccb157680df489de6faec164e985585531075b35abb4698492ae3b945",
+        "signature": "9d91a29eb79e29860bb0bcdfdf2c4dcc0f2b364e545b13531a6e3c61c1e82bb7"
       },
       "../src/users/schemas/user.schema.ts": {
         "version": "c7158a10e582fe968f1f15745d54e2193fe0bd35c4aa3dd762203e463e2592f6",
