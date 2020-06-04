@@ -92,6 +92,12 @@ export class UserController {
         return this.userService.updateUserEmail(body);
     }
 
+    @UseGuards(JwtAuthGuard)
+    @Post('password-update')
+    async updateUserPassword(@Body() body) {
+        return this.userService.updateUserPassword(body);
+    }
+
     @Post('recovery')
     async recoveryPassword(@Body() body: IUserRecoveryData) {
         return this.sendMail.recovery(body.email);

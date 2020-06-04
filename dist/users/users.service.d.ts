@@ -7,4 +7,5 @@ export declare class UserService {
     getUserData(data: any): Promise<any[]>;
     updateUserData(data: any): Promise<any[]>;
     updateUserEmail(data: any): Promise<any[]>;
+    updateUserPassword(data: any): Promise<any[]>;
 }

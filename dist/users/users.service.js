@@ -72,6 +72,23 @@ let UserService = class UserService {
             }, common_1.HttpStatus.FORBIDDEN);
         }
     }
+    async updateUserPassword(data) {
+        const user = await this.userModel.findOne({ username: data.username, password: data.oldPassword });
+        if (user) {
+            user.password = data.newPassword;
+            await user.save();
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.OK,
+                message: 'USER_PASSWORD_SUCCESSFULLY_UPDATED',
+            }, common_1.HttpStatus.OK);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'WRONG_PASSWORD',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
+    }
 };
 UserService = __decorate([
     common_1.Injectable(),

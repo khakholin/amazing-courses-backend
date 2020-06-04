@@ -61,6 +61,23 @@ export class UserService {
             }, HttpStatus.FORBIDDEN);
         }
     }
+
+    async updateUserPassword(data): Promise<any[]> {
+        const user = await this.userModel.findOne({ username: data.username, password: data.oldPassword });
+        if (user) {
+            user.password = data.newPassword;
+            await user.save();
+            throw new HttpException({
+                status: HttpStatus.OK,
+                message: 'USER_PASSWORD_SUCCESSFULLY_UPDATED',
+            }, HttpStatus.OK);
+        } else {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                message: 'WRONG_PASSWORD',
+            }, HttpStatus.FORBIDDEN);
+        }
+    }
 }
 
 
