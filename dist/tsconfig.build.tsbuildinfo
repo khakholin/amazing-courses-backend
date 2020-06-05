@@ -1506,7 +1506,7 @@
         "signature": "3ccdf2d6babeb9c88523092707c539c5cb044b3fd060c9db079dffe137ff7516"
       },
       "../src/registration/registration.service.ts": {
-        "version": "d5cbbaee285eb3edc8ec5272fec49ddb0efadbc8052cc87c551d6ac190a9af10",
+        "version": "fddc2212f1ae022852b519b0b3f9319922d1ac03884d2236f159d14ee02e060c",
         "signature": "13b7932409efeda99fadb464be4906f867cbe28199b498a228724c20e571b229"
       },
       "../src/auth/local-auth.guard.ts": {
@@ -1518,7 +1518,7 @@
         "signature": "cd2b77455120e99c3ae6c6981507ff0a57f2e0a359f6fde781000995e10d1393"
       },
       "../src/users/users.service.ts": {
-        "version": "fcc263c674f3c5fa8c53ce3bc723a0c168f4e45766596f11ec8ce02f5ade6e42",
+        "version": "22df4557d7ff875707a3aea115b2df1e3bae69699c0b71241cfad5531be92628",
         "signature": "74da4267a19a0a0c864d79d778f17da0880bc8d60a47cad3db7464dac0410556"
       },
       "../src/users/users.controller.ts": {

@@ -35,7 +35,7 @@ let RegistrationService = class RegistrationService {
                 }, common_1.HttpStatus.NOT_FOUND);
             }
             else {
-                const createdUser = new this.userModel(Object.assign(Object.assign({}, newUser), { availableCourses: [], courseProgress: [], email: newUser.email.toLowerCase(), realName: '', realSurname: '', role: "user", school: '', university: '', workPlace: '' }));
+                const createdUser = new this.userModel(newUser);
                 createdUser.save();
                 throw new common_1.HttpException({
                     status: common_1.HttpStatus.CREATED,

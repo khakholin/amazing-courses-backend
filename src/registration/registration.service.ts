@@ -23,20 +23,7 @@ export class RegistrationService {
                     message: 'USER_DUPLICATE',
                 }, HttpStatus.NOT_FOUND);
             } else {
-                const createdUser = new this.userModel(
-                    {
-                        ...newUser,
-                        availableCourses: [],
-                        courseProgress: [],
-                        email: newUser.email.toLowerCase(),
-                        realName: '',
-                        realSurname: '',
-                        role: "user",
-                        school: '',
-                        university: '',
-                        workPlace: '',
-                    }
-                );
+                const createdUser = new this.userModel(newUser);
                 createdUser.save();
                 throw new HttpException({
                     status: HttpStatus.CREATED,

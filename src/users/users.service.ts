@@ -10,7 +10,11 @@ export class UserService {
 
     async getAllUsers(role: string): Promise<any[]> {
         if (role === 'admin') {
-            return await this.userModel.find();
+            const users = await this.userModel.find();
+            for (const user of users) {
+                user.password = undefined;
+            }
+            return users;
         } else {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,

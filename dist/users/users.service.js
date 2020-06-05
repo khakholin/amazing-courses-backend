@@ -21,7 +21,11 @@ let UserService = class UserService {
     }
     async getAllUsers(role) {
         if (role === 'admin') {
-            return await this.userModel.find();
+            const users = await this.userModel.find();
+            for (const user of users) {
+                user.password = undefined;
+            }
+            return users;
         }
         else {
             throw new common_1.HttpException({
