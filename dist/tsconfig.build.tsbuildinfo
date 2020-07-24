@@ -1498,8 +1498,8 @@
         "signature": "a80e9b4eb7406c9b4a2b7a69717dd3edc81ea7a2cc497cd0a15271ab295d83ff"
       },
       "../src/course/course.controller.ts": {
-        "version": "e1b6fefa857a451a01922f4a9d48db983db5c8bf97096bc8016bdbe0031b5c44",
-        "signature": "16097cf12fccd32c723d9d32a81548f791ff7be1ed0614c090a29eba38f7a116"
+        "version": "fb8c1b96b4fc73c398165d103ae2d4f796168d04fe2812ab899e7af1f7f2fa77",
+        "signature": "7a1c328fae7027528250d8ece45e718b9ca98084c43eefa07419887f938f167c"
       },
       "../src/users/users.types.ts": {
         "version": "66dd4e4074bf1de6703ef3a9e03822da2adaebe7c2df9f3791b4264f55dfe4a3",

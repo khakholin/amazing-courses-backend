@@ -23,7 +23,7 @@ let CourseController = class CourseController {
     async getFile(params, res) {
         res.sendFile(path_1.join(__dirname, '../../videos/' + params.courseFolder + '/' + params.lectureNumber + '.mp4'));
     }
-    async registrationUser(body) {
+    async createCourse(body) {
         return this.coursesService.createCourse(body);
     }
     async getAllCourses(req) {
@@ -49,7 +49,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], CourseController.prototype, "registrationUser", null);
+], CourseController.prototype, "createCourse", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('list'),

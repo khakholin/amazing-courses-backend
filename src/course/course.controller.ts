@@ -20,7 +20,7 @@ export class CourseController {
 
     @UseGuards(JwtAuthGuard)
     @Post('create')
-    async registrationUser(@Body() body: ICourseData) {
+    async createCourse(@Body() body: ICourseData) {
         return this.coursesService.createCourse(body);
     }
 
