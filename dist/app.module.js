@@ -26,6 +26,8 @@ const users_service_1 = require("./users/users.service");
 const user_schema_1 = require("./users/schemas/user.schema");
 const sendEmail_1 = require("./email/sendEmail");
 const course_schema_1 = require("./course/schemas/course.schema");
+const welcome_controller_1 = require("./welcome/welcome.controller");
+const welcome_service_1 = require("./welcome/welcome.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -45,6 +47,7 @@ AppModule = __decorate([
             app_controller_1.AppController,
             course_controller_1.CourseController,
             users_controller_1.UserController,
+            welcome_controller_1.WelcomeController,
         ],
         providers: [
             app_service_1.AppService,
@@ -55,6 +58,7 @@ AppModule = __decorate([
             registration_service_1.RegistrationService,
             sendEmail_1.SendMail,
             users_service_1.UserService,
+            welcome_service_1.WelcomeService,
         ],
     })
 ], AppModule);

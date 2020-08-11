@@ -19,6 +19,8 @@ import { UserService } from './users/users.service';
 import { UserSchema } from './users/schemas/user.schema';
 import { SendMail } from './email/sendEmail';
 import { CourseSchema } from './course/schemas/course.schema';
+import { WelcomeController } from './welcome/welcome.controller';
+import { WelcomeService } from './welcome/welcome.service';
 
 @Module({
   imports: [
@@ -36,6 +38,7 @@ import { CourseSchema } from './course/schemas/course.schema';
     AppController,
     CourseController,
     UserController,
+    WelcomeController,
   ],
   providers: [
     AppService,
@@ -46,6 +49,7 @@ import { CourseSchema } from './course/schemas/course.schema';
     RegistrationService,
     SendMail,
     UserService,
+    WelcomeService,
   ],
 })
 export class AppModule { }
