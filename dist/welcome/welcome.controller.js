@@ -20,7 +20,7 @@ let WelcomeController = class WelcomeController {
         this.welcomeService = welcomeService;
     }
     async recoveryPassword(body) {
-        return this.welcomeService.recovery(body);
+        return this.welcomeService.registration(body);
     }
 };
 __decorate([

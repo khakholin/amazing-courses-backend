@@ -1,4 +1,4 @@
 export declare class WelcomeService {
     constructor();
-    recovery(user: any): Promise<boolean>;
+    registration(user: any): Promise<any>;
 }

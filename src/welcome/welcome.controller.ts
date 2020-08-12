@@ -11,6 +11,6 @@ export class WelcomeController {
 
     @Post('registration')
     async recoveryPassword(@Body() body) {
-        return this.welcomeService.recovery(body);
+        return this.welcomeService.registration(body);
     }
 }

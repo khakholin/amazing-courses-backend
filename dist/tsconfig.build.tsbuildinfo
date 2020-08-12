@@ -1514,8 +1514,8 @@
         "signature": "9116cbf32650ce234338c6f8395ecb044d06f6d939f2f6ca6d21335f4e663b71"
       },
       "../src/email/sendEmail.ts": {
-        "version": "12b406a3230ad72a433ee9fe6f6ed9fbf6b70fab1e293e222f97d211c4d9f5b7",
-        "signature": "cd2b77455120e99c3ae6c6981507ff0a57f2e0a359f6fde781000995e10d1393"
+        "version": "4001895de7f9e85dbf6535d147bd2fd333b621932e60a51a7506f39cbdac1854",
+        "signature": "235446a5fa24ab960de9cb83c8d8d39c26d8f7427fb1ee0dd7866ce94acd225d"
       },
       "../src/users/users.service.ts": {
         "version": "22df4557d7ff875707a3aea115b2df1e3bae69699c0b71241cfad5531be92628",
@@ -1523,7 +1523,7 @@
       },
       "../src/users/users.controller.ts": {
         "version": "fe764c7ccb157680df489de6faec164e985585531075b35abb4698492ae3b945",
-        "signature": "9d91a29eb79e29860bb0bcdfdf2c4dcc0f2b364e545b13531a6e3c61c1e82bb7"
+        "signature": "e1613b0b11f4b160cc7ad20a72fa48f557bb40d74138aadc2d4a74f180fb28b5"
       },
       "../src/users/schemas/user.schema.ts": {
         "version": "c7158a10e582fe968f1f15745d54e2193fe0bd35c4aa3dd762203e463e2592f6",
@@ -1534,12 +1534,12 @@
         "signature": "f09e70646a9d8683505df9df54dad99ad4f346e145f5e2124ae31f8157a9f81d"
       },
       "../src/welcome/welcome.service.ts": {
-        "version": "0cb2f8e7bc266bab3fbf5cc041af2ef0d0ed501dfc69c8bec911195e87153189",
-        "signature": "21df11911c06778a0da7d0aadedb326e9ee3f5f6aac38e9b83acb155c970586d"
+        "version": "0e1a9a65712bb8b7fdd9f7b39230c37e49a9c3cbe83d7908f02cbdac222ad1c5",
+        "signature": "ea97ad11bd57fbda918a63b85cd428a1b5169dfb384e3175441db8c2b89c5221"
       },
       "../src/welcome/welcome.controller.ts": {
-        "version": "ba10c2d41203e288afa049a691dcca602563affc6eca542f55fa275fb10a220f",
-        "signature": "20a5cc59928ca97bb47dd426bc3db25fb1a2f31b67d6c2329f0e6dafd42c3ea9"
+        "version": "1cd0e1bf8f033811d9b8158d4004c18032e46f5793cf2485994d58b990156f3e",
+        "signature": "b2026abdf0e794308f669938a0b129fe5a7c0efb5eb46ecd2567a70900ce258c"
       },
       "../src/app.module.ts": {
         "version": "ee3a9dd59ee4c05bcd2f39f2e14a3a10f5c93f062557fe43e925c480b56f8430",

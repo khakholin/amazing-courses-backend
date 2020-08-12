@@ -30,6 +30,6 @@ export declare class UserController {
     updateUserData(body: any): Promise<any[]>;
     updateUserEmail(body: any): Promise<any[]>;
     updateUserPassword(body: any): Promise<any[]>;
-    recoveryPassword(body: IUserRecoveryData): Promise<boolean>;
+    recoveryPassword(body: IUserRecoveryData): Promise<any>;
     registrationUser(body: IUserRegData): Promise<any>;
 }

@@ -12,7 +12,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const nodemailer = require("nodemailer");
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
@@ -23,20 +22,26 @@ let SendMail = class SendMail {
     async recovery(email) {
         const user = await this.userModel.findOne({ email });
         if (user) {
+            const nodemailer = require('nodemailer');
             const transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: "smtp-mail.outlook.com",
+                port: 587,
+                secure: false,
                 auth: {
-                    user: 'mrnortian@gmail.com',
+                    user: 'amazing-courses@outlook.com',
                     pass: 'Thenortian2015'
+                },
+                tls: {
+                    ciphers: 'SSLv3'
                 }
             });
-            transporter.sendMail({
-                from: '"Amazing Courses" <foo@mail.ru>',
+            let result = await transporter.sendMail({
+                from: 'Amazing Courses<amazing-courses@outlook.com>',
                 to: email,
                 subject: 'Восстановление пароля',
                 html: `<b>Ваш пароль:</b> ${user.password}`,
             });
-            return true;
+            return result;
         }
         else {
             return false;

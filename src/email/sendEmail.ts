@@ -12,21 +12,26 @@ export class SendMail {
     async recovery(email: string) {
         const user = await this.userModel.findOne({ email });
         if (user) {
+            const nodemailer = require('nodemailer');
             const transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: "smtp-mail.outlook.com",
+                port: 587,
+                secure: false,
                 auth: {
-                    user: 'mrnortian@gmail.com',
+                    user: 'amazing-courses@outlook.com',
                     pass: 'Thenortian2015'
+                },
+                tls: {
+                    ciphers: 'SSLv3'
                 }
             });
-
-            transporter.sendMail({
-                from: '"Amazing Courses" <foo@mail.ru>',
+            let result = await transporter.sendMail({
+                from: 'Amazing Courses<amazing-courses@outlook.com>',
                 to: email,
                 subject: 'Восстановление пароля',
                 html: `<b>Ваш пароль:</b> ${user.password}`,
             });
-            return true;
+            return result;
         } else {
             return false;
         }
