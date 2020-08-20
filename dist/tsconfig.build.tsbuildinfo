@@ -1498,7 +1498,7 @@
         "signature": "a80e9b4eb7406c9b4a2b7a69717dd3edc81ea7a2cc497cd0a15271ab295d83ff"
       },
       "../src/course/course.controller.ts": {
-        "version": "fb8c1b96b4fc73c398165d103ae2d4f796168d04fe2812ab899e7af1f7f2fa77",
+        "version": "74d1c434ff0978215c2fcc59b8da9782afab35d50ca123c03074846feb66fc6b",
         "signature": "7a1c328fae7027528250d8ece45e718b9ca98084c43eefa07419887f938f167c"
       },
       "../src/users/users.types.ts": {

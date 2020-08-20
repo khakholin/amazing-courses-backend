@@ -34,7 +34,6 @@ let CourseController = class CourseController {
     }
 };
 __decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('video/:courseFolder/:lectureNumber'),
     common_1.Header('Content-Type', 'video/mp4'),
     __param(0, common_1.Param()), __param(1, common_1.Res()),

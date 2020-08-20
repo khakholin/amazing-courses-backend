@@ -11,7 +11,6 @@ export class CourseController {
         private coursesService: CourseService,
     ) { }
 
-    @UseGuards(JwtAuthGuard)
     @Get('video/:courseFolder/:lectureNumber')
     @Header('Content-Type', 'video/mp4')
     async getFile(@Param() params, @Res() res) {
