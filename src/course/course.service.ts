@@ -96,6 +96,22 @@ export class CourseService {
         }
     }
 
+    async removeCourse(data): Promise<any> {
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        if (course) {
+            await this.courseModel.remove(course);
+            throw new HttpException({
+                status: HttpStatus.OK,
+                message: 'COURSE_SUCCESSFULLY_REMOVED',
+            }, HttpStatus.OK);
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
+
     async changeUserAvailableCourses(data): Promise<any> {
         const user = await this.userModel.findOne({ username: data.username });
         let index = -1;

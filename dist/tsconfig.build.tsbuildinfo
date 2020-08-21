@@ -1466,12 +1466,12 @@
         "signature": "9b578d50934b11e703e5758c65a8ad5059022204b52bd69277a97c0c76b98635"
       },
       "../src/course/course.service.ts": {
-        "version": "569c5bcefe6e14994e1707e22edbe038954a0e5a810b7e34c76dd64c903e8e9c",
-        "signature": "9818ead45233251b18c36f5369c3f5b3059857ccecefa5f077e64d89fe6ed2a7"
+        "version": "d47a296a88c561886e516d6f6d11c9f746440b0f9b240fdccbc9fc157c33b06a",
+        "signature": "b10a4c2cda9914ccfe7526c4b8ac5abbd1af741e983fba2a90d0ee667ba18cd6"
       },
       "../src/course/course.controller.ts": {
-        "version": "74d1c434ff0978215c2fcc59b8da9782afab35d50ca123c03074846feb66fc6b",
-        "signature": "7a1c328fae7027528250d8ece45e718b9ca98084c43eefa07419887f938f167c"
+        "version": "f2f54b3f85b9549717aa836710c11a29f7d304587b69b26599b96601fa79bd8e",
+        "signature": "661013bf959f487c390a1dffe580704e1775c0e39b579cc00ee4cdc11f7b638c"
       },
       "../src/course/schemas/course.schema.ts": {
         "version": "9751cecc420ab0f89fba738adc4fbdfea830ae051c0c17f74c23026cb5bcf393",

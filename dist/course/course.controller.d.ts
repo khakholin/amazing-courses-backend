@@ -5,6 +5,9 @@ export declare class CourseController {
     constructor(coursesService: CourseService);
     getFile(params: any, res: any): Promise<void>;
     createCourse(body: ICourseData): Promise<any>;
+    removeCourse(body: {
+        courseName: string;
+    }): Promise<any>;
     getAllCourses(req: any): Promise<any>;
     getCoursesData(): Promise<any>;
 }

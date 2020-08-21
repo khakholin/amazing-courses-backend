@@ -24,6 +24,12 @@ export class CourseController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Post('remove')
+    async removeCourse(@Body() body: { courseName: string }) {
+        return this.coursesService.removeCourse(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Get('list')
     async getAllCourses(@Request() req) {
         return this.coursesService.getAllCourses();

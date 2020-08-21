@@ -18,6 +18,7 @@ export declare class CourseService {
     getUserAvailableCourses(data: any): Promise<any>;
     getUserCourseProgress(data: any): Promise<any>;
     createCourse(newCourse: ICourseData): Promise<any>;
+    removeCourse(data: any): Promise<any>;
     changeUserAvailableCourses(data: any): Promise<any>;
     changeUserLectureAvailable(data: any): Promise<any>;
     changeUserLectureChecked(data: any): Promise<any>;

@@ -99,6 +99,22 @@ let CourseService = class CourseService {
             }, common_1.HttpStatus.CREATED);
         }
     }
+    async removeCourse(data) {
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        if (course) {
+            await this.courseModel.remove(course);
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.OK,
+                message: 'COURSE_SUCCESSFULLY_REMOVED',
+            }, common_1.HttpStatus.OK);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
     async changeUserAvailableCourses(data) {
         const user = await this.userModel.findOne({ username: data.username });
         let index = -1;
