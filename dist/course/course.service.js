@@ -16,9 +16,10 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let CourseService = class CourseService {
-    constructor(courseModel, userModel) {
+    constructor(courseModel, userModel, testingModel) {
         this.courseModel = courseModel;
         this.userModel = userModel;
+        this.testingModel = testingModel;
     }
     async getUserCourses(data) {
         let userCourses = [];
@@ -86,7 +87,12 @@ let CourseService = class CourseService {
         }
         else {
             const createdCourse = new this.courseModel(newCourse);
+            const createdCourseTesting = new this.testingModel({
+                courseName: newCourse.courseName, numOfLectures: newCourse.numOfLectures,
+                courseTests: newCourse.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })),
+            });
             createdCourse.save();
+            createdCourseTesting.save();
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.CREATED,
                 message: 'SUCCESS',
@@ -219,7 +225,9 @@ CourseService = __decorate([
     common_1.Injectable(),
     __param(0, mongoose_1.InjectModel('Course')),
     __param(1, mongoose_1.InjectModel('User')),
+    __param(2, mongoose_1.InjectModel('Testing')),
     __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model,
         mongoose_2.Model])
 ], CourseService);
 exports.CourseService = CourseService;
