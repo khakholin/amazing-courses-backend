@@ -99,7 +99,7 @@ export class CourseService {
     async removeCourse(data): Promise<any> {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
         if (course) {
-            await this.courseModel.remove(course);
+            await this.courseModel.deleteOne(course);
             throw new HttpException({
                 status: HttpStatus.OK,
                 message: 'COURSE_SUCCESSFULLY_REMOVED',

@@ -102,7 +102,7 @@ let CourseService = class CourseService {
     async removeCourse(data) {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
         if (course) {
-            await this.courseModel.remove(course);
+            await this.courseModel.deleteOne(course);
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.OK,
                 message: 'COURSE_SUCCESSFULLY_REMOVED',

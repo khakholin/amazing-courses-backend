@@ -1466,7 +1466,7 @@
         "signature": "9b578d50934b11e703e5758c65a8ad5059022204b52bd69277a97c0c76b98635"
       },
       "../src/course/course.service.ts": {
-        "version": "d47a296a88c561886e516d6f6d11c9f746440b0f9b240fdccbc9fc157c33b06a",
+        "version": "81d3ef751e5efb977ee33ea88a504fea42ec59199e5862ea08843a6f63f071ca",
         "signature": "b10a4c2cda9914ccfe7526c4b8ac5abbd1af741e983fba2a90d0ee667ba18cd6"
       },
       "../src/course/course.controller.ts": {
