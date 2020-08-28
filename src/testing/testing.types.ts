@@ -29,3 +29,7 @@ export interface IUpdateTest {
         answer: string,
     }[],
 }
+
+export interface IRemoveCourseTests {
+    courseName: string,
+}

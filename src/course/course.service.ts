@@ -76,7 +76,7 @@ export class CourseService {
     }
 
     async createCourse(newCourse: ICourseData): Promise<any> {
-        if (await this.courseModel.findOne({ courseName: newCourse.courseName })) {
+        if (await this.courseModel.findOne({ courseName: newCourse.courseName }) || await this.testingModel.findOne({ courseName: newCourse.courseName })) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
                 message: 'COURSE_DUPLICATE',
@@ -98,8 +98,10 @@ export class CourseService {
 
     async removeCourse(data): Promise<any> {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
-        if (course) {
+        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+        if (course && courseTesting) {
             await this.courseModel.deleteOne(course);
+            await this.testingModel.deleteOne(courseTesting);
             throw new HttpException({
                 status: HttpStatus.OK,
                 message: 'COURSE_SUCCESSFULLY_REMOVED',

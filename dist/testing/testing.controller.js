@@ -25,8 +25,11 @@ let TestingController = class TestingController {
     async updateTest(body) {
         return this.testingService.updateTest(body);
     }
-    async getTest(body) {
-        return this.testingService.getTest(body);
+    async getTestWatch(body) {
+        return this.testingService.getTestWatch(body);
+    }
+    async getTestEdit(body) {
+        return this.testingService.getTestEdit(body);
     }
 };
 __decorate([
@@ -46,12 +49,20 @@ __decorate([
 ], TestingController.prototype, "updateTest", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Post('data'),
+    common_1.Post('data-watch'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], TestingController.prototype, "getTest", null);
+], TestingController.prototype, "getTestWatch", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('data-edit'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TestingController.prototype, "getTestEdit", null);
 TestingController = __decorate([
     common_1.Controller('testing'),
     __metadata("design:paramtypes", [testing_service_1.TestingService])

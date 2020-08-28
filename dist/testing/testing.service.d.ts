@@ -10,5 +10,6 @@ export declare class TestingService {
     constructor(courseModel: Model<Course>, userModel: Model<User>, testingModel: Model<Testing>);
     getCoursesTests(): Promise<any>;
     updateTest(updatedTest: IUpdateTest): Promise<any>;
-    getTest(updatedTest: IGetTestData): Promise<any>;
+    getTestWatch(updatedTest: IGetTestData): Promise<any>;
+    getTestEdit(updatedTest: IGetTestData): Promise<any>;
 }

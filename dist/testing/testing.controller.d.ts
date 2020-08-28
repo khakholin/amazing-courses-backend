@@ -5,5 +5,6 @@ export declare class TestingController {
     constructor(testingService: TestingService);
     getCoursesTests(): Promise<any>;
     updateTest(body: IUpdateTest): Promise<any>;
-    getTest(body: IGetTestData): Promise<any>;
+    getTestWatch(body: IGetTestData): Promise<any>;
+    getTestEdit(body: IGetTestData): Promise<any>;
 }

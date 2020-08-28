@@ -49,7 +49,7 @@ let TestingService = class TestingService {
             }, common_1.HttpStatus.FORBIDDEN);
         }
     }
-    async getTest(updatedTest) {
+    async getTestWatch(updatedTest) {
         const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
         if (course) {
             const lectureData = course.courseTests.find((item) => item.lectureTitle === updatedTest.lectureTitle);
@@ -58,6 +58,19 @@ let TestingService = class TestingService {
                 transformedQuestion.answer = undefined;
                 return transformedQuestion;
             });
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'WRONG_COURSE_NAME',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
+    }
+    async getTestEdit(updatedTest) {
+        const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
+        if (course) {
+            const lectureData = course.courseTests.find((item) => item.lectureTitle === updatedTest.lectureTitle);
+            return lectureData.lectureQuestions;
         }
         else {
             throw new common_1.HttpException({
