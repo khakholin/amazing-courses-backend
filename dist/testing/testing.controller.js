@@ -14,70 +14,58 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
-const course_service_1 = require("./course.service");
-const path_1 = require("path");
-let CourseController = class CourseController {
-    constructor(coursesService) {
-        this.coursesService = coursesService;
+const testing_service_1 = require("./testing.service");
+let TestingController = class TestingController {
+    constructor(testingService) {
+        this.testingService = testingService;
     }
-    async getFile(params, res) {
-        res.sendFile(path_1.join(__dirname, '../../videos/' + params.courseFolder + '/' + params.lectureNumber + '.mp4'));
+    async getCoursesTests() {
+        return this.testingService.getCoursesTests();
     }
-    async createCourse(body) {
-        return this.coursesService.createCourse(body);
+    async updateTest(body) {
+        return this.testingService.updateTest(body);
     }
-    async removeCourse(body) {
-        return this.coursesService.removeCourse(body);
+    async getTestWatch(body) {
+        return this.testingService.getTestWatch(body);
     }
-    async getAllCourses(req) {
-        return this.coursesService.getAllCourses();
-    }
-    async getCoursesData() {
-        return this.coursesService.getCoursesData();
+    async getTestEdit(body) {
+        return this.testingService.getTestEdit(body);
     }
 };
 __decorate([
-    common_1.Get('video/:courseFolder/:lectureNumber'),
-    common_1.Header('Content-Type', 'video/mp4'),
-    __param(0, common_1.Param()), __param(1, common_1.Res()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Object]),
-    __metadata("design:returntype", Promise)
-], CourseController.prototype, "getFile", null);
-__decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Post('create'),
-    __param(0, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], CourseController.prototype, "createCourse", null);
-__decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Post('remove'),
-    __param(0, common_1.Body()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], CourseController.prototype, "removeCourse", null);
-__decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get('list'),
-    __param(0, common_1.Request()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], CourseController.prototype, "getAllCourses", null);
-__decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get('data'),
+    common_1.Get('courses-test'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], CourseController.prototype, "getCoursesData", null);
-CourseController = __decorate([
-    common_1.Controller('course'),
-    __metadata("design:paramtypes", [course_service_1.CourseService])
-], CourseController);
-exports.CourseController = CourseController;
-//# sourceMappingURL=course.controller.js.map
+], TestingController.prototype, "getCoursesTests", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('update'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TestingController.prototype, "updateTest", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('data-watch'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TestingController.prototype, "getTestWatch", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('data-edit'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TestingController.prototype, "getTestEdit", null);
+TestingController = __decorate([
+    common_1.Controller('testing'),
+    __metadata("design:paramtypes", [testing_service_1.TestingService])
+], TestingController);
+exports.TestingController = TestingController;
+//# sourceMappingURL=testing.controller.js.map

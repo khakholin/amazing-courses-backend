@@ -2,17 +2,19 @@ import { Injectable, HttpException, HttpStatus, Param } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { courseList } from './data/courses.data';
 import { ICourseData } from './course.types';
 
 export type Course = any;
 export type User = any;
+export type Testing = any;
 
 @Injectable()
 export class CourseService {
-    constructor(@InjectModel('Course') private courseModel: Model<Course>,
-        @InjectModel('User') private userModel: Model<User>) {
-    }
+    constructor(
+        @InjectModel('Course') private courseModel: Model<Course>,
+        @InjectModel('User') private userModel: Model<User>,
+        @InjectModel('Testing') private testingModel: Model<Testing>,
+    ) { }
 
     async getUserCourses(data) {
         let userCourses: Course[] = [];
@@ -74,18 +76,41 @@ export class CourseService {
     }
 
     async createCourse(newCourse: ICourseData): Promise<any> {
-        if (await this.courseModel.findOne({ courseName: newCourse.courseName })) {
+        if (await this.courseModel.findOne({ courseName: newCourse.courseName }) || await this.testingModel.findOne({ courseName: newCourse.courseName })) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
                 message: 'COURSE_DUPLICATE',
             }, HttpStatus.NOT_FOUND);
         } else {
             const createdCourse = new this.courseModel(newCourse);
+            const createdCourseTesting = new this.testingModel({
+                courseName: newCourse.courseName, numOfLectures: newCourse.numOfLectures,
+                courseTests: newCourse.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })),
+            });
             createdCourse.save();
+            createdCourseTesting.save();
             throw new HttpException({
                 status: HttpStatus.CREATED,
                 message: 'SUCCESS',
             }, HttpStatus.CREATED);
+        }
+    }
+
+    async removeCourse(data): Promise<any> {
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+        if (course && courseTesting) {
+            await this.courseModel.deleteOne(course);
+            await this.testingModel.deleteOne(courseTesting);
+            throw new HttpException({
+                status: HttpStatus.OK,
+                message: 'COURSE_SUCCESSFULLY_REMOVED',
+            }, HttpStatus.OK);
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
         }
     }
 

@@ -16,9 +16,10 @@ const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
 let CourseService = class CourseService {
-    constructor(courseModel, userModel) {
+    constructor(courseModel, userModel, testingModel) {
         this.courseModel = courseModel;
         this.userModel = userModel;
+        this.testingModel = testingModel;
     }
     async getUserCourses(data) {
         let userCourses = [];
@@ -78,7 +79,7 @@ let CourseService = class CourseService {
         }
     }
     async createCourse(newCourse) {
-        if (await this.courseModel.findOne({ courseName: newCourse.courseName })) {
+        if (await this.courseModel.findOne({ courseName: newCourse.courseName }) || await this.testingModel.findOne({ courseName: newCourse.courseName })) {
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.NOT_FOUND,
                 message: 'COURSE_DUPLICATE',
@@ -86,11 +87,34 @@ let CourseService = class CourseService {
         }
         else {
             const createdCourse = new this.courseModel(newCourse);
+            const createdCourseTesting = new this.testingModel({
+                courseName: newCourse.courseName, numOfLectures: newCourse.numOfLectures,
+                courseTests: newCourse.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })),
+            });
             createdCourse.save();
+            createdCourseTesting.save();
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.CREATED,
                 message: 'SUCCESS',
             }, common_1.HttpStatus.CREATED);
+        }
+    }
+    async removeCourse(data) {
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+        if (course && courseTesting) {
+            await this.courseModel.deleteOne(course);
+            await this.testingModel.deleteOne(courseTesting);
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.OK,
+                message: 'COURSE_SUCCESSFULLY_REMOVED',
+            }, common_1.HttpStatus.OK);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
         }
     }
     async changeUserAvailableCourses(data) {
@@ -219,7 +243,9 @@ CourseService = __decorate([
     common_1.Injectable(),
     __param(0, mongoose_1.InjectModel('Course')),
     __param(1, mongoose_1.InjectModel('User')),
+    __param(2, mongoose_1.InjectModel('Testing')),
     __metadata("design:paramtypes", [mongoose_2.Model,
+        mongoose_2.Model,
         mongoose_2.Model])
 ], CourseService);
 exports.CourseService = CourseService;
