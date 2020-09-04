@@ -7,6 +7,12 @@ export const UserSchema = new mongoose.Schema({
             courseName: String,
             availableLectures: [Number],
             checkedLectures: [Number],
+            // lecturesTesting: [
+            //     {
+            //         lectureIndex: Number,
+            //         answers: [String],
+            //     }
+            // ]
         }
     ],
     email: String,
