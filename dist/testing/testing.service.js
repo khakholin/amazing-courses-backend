@@ -79,6 +79,25 @@ let TestingService = class TestingService {
             }, common_1.HttpStatus.FORBIDDEN);
         }
     }
+    async checkTest(checkedTest) {
+        const course = await this.testingModel.findOne({ courseName: checkedTest.courseName });
+        if (course) {
+            let numOfAnswers = 0;
+            const lecture = course.courseTests.find((item) => item.lectureTitle === checkedTest.lectureTitle);
+            lecture.lectureQuestions.map((item, index) => {
+                if (item.answer === checkedTest.lectureAnswers[index]) {
+                    numOfAnswers++;
+                }
+            });
+            return numOfAnswers / lecture.lectureQuestions.length;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'WRONG_COURSE_NAME',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
+    }
 };
 TestingService = __decorate([
     common_1.Injectable(),

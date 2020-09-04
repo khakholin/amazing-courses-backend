@@ -21,9 +21,15 @@ export interface IUpdateTest {
     lectureQuestions: {
         question: string;
         answerOptions: string[];
+        isAnswerOptions: boolean;
         answer: string;
     }[];
 }
 export interface IRemoveCourseTests {
     courseName: string;
+}
+export interface ICheckTest {
+    courseName: string;
+    lectureTitle: string;
+    lectureAnswers: string[];
 }

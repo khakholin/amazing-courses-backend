@@ -1514,19 +1514,19 @@
         "signature": "235446a5fa24ab960de9cb83c8d8d39c26d8f7427fb1ee0dd7866ce94acd225d"
       },
       "../src/testing/testing.types.ts": {
-        "version": "3d15e17ad6f61cd46d0c461f422d0013f460800783de8f1e0982e1cf44248f52",
-        "signature": "82388bb2e6ae7389d2b1aced7c54a86aab440780088dc85bf838994400020d3f"
+        "version": "df8aaaba9c52ac0c143987fb9d1210b5889a424e54bb636fe544363e8edb6aee",
+        "signature": "fa6c87290e47375572b183420fe745df283f61b49d729ded5d38b9d08b275780"
       },
       "../src/testing/testing.service.ts": {
-        "version": "e1573285c75270cb7d7f33cc9b2e889eab91121c56ea6bd2787cb4f06e600abb",
-        "signature": "94ca501b2263ce1eac96fba5c7f01b91117b81ec7c552704dca76b0b8ac8543d"
+        "version": "87e4b3804eb42d35f9b429c438def8731360b735c50c02be0a6153ccb8a73727",
+        "signature": "77446aff2e0996aeedc51d2f8aa3def0cccaeecb565327cd5805fe5550da8835"
       },
       "../src/testing/testing.controller.ts": {
-        "version": "9f5e3a89ca21dfe82d2e4a2f6045121ac2aa3a8fbd39b0294f1acc53a7e981cc",
-        "signature": "4e100746f2df2b2ab311066d7c24858b7af67c294fee3bf0724c96bfb0fad44c"
+        "version": "262da41793baf8fa51cf529647614c4a7ad79edd3ed26475df20bbe93776ef2b",
+        "signature": "4705bc35528785365c86eb96b3ef8d84f1152859b175752ec6b9527dc742b758"
       },
       "../src/testing/schemas/testing.schema.ts": {
-        "version": "258480d31c302d8bd5d5b1079e955432dc941db5f54dc89d81feee763cd27401",
+        "version": "a436411dec2f8739d944dae2e76e64cda2be393237de72dd6f1bec282ac844f6",
         "signature": "3d5f135785f9db23ccfdc0b15f62f104eac801d5cedfae91b58ec4017f490443"
       },
       "../src/auth/local-auth.guard.ts": {

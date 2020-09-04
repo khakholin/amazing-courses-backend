@@ -2,7 +2,7 @@ import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Requ
 
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { join } from 'path';
-import { ITestData, IGetTestData, IUpdateTest, IRemoveCourseTests } from './testing.types';
+import { ITestData, IGetTestData, IUpdateTest, IRemoveCourseTests, ICheckTest } from './testing.types';
 import { TestingService } from './testing.service';
 
 @Controller('testing')
@@ -33,5 +33,11 @@ export class TestingController {
     @Post('data-edit')
     async getTestEdit(@Body() body: IGetTestData) {
         return this.testingService.getTestEdit(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('check')
+    async checkTest(@Body() body: ICheckTest) {
+        return this.testingService.checkTest(body);
     }
 }

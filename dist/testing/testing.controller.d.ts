@@ -1,4 +1,4 @@
-import { IGetTestData, IUpdateTest } from './testing.types';
+import { IGetTestData, IUpdateTest, ICheckTest } from './testing.types';
 import { TestingService } from './testing.service';
 export declare class TestingController {
     private testingService;
@@ -7,4 +7,5 @@ export declare class TestingController {
     updateTest(body: IUpdateTest): Promise<any>;
     getTestWatch(body: IGetTestData): Promise<any>;
     getTestEdit(body: IGetTestData): Promise<any>;
+    checkTest(body: ICheckTest): Promise<any>;
 }

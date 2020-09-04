@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus, Param } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { ITestData, ICourseTests, IGetTestData, IUpdateTest, IRemoveCourseTests } from './testing.types';
+import { ITestData, ICourseTests, IGetTestData, IUpdateTest, IRemoveCourseTests, ICheckTest } from './testing.types';
 import { type } from 'os';
 
 export type Course = any;
@@ -68,6 +68,25 @@ export class TestingService {
         if (course) {
             const lectureData = course.courseTests.find((item) => item.lectureTitle === updatedTest.lectureTitle);
             return lectureData.lectureQuestions;
+        } else {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                message: 'WRONG_COURSE_NAME',
+            }, HttpStatus.FORBIDDEN);
+        }
+    }
+
+    async checkTest(checkedTest: ICheckTest): Promise<any> {
+        const course = await this.testingModel.findOne({ courseName: checkedTest.courseName });
+        if (course) {
+            let numOfAnswers = 0;
+            const lecture = course.courseTests.find((item) => item.lectureTitle === checkedTest.lectureTitle);
+            lecture.lectureQuestions.map((item, index) => {
+                if (item.answer === checkedTest.lectureAnswers[index]) {
+                    numOfAnswers++;
+                }
+            });
+            return numOfAnswers / lecture.lectureQuestions.length;
         } else {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,

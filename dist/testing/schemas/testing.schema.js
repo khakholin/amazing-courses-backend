@@ -11,6 +11,7 @@ exports.TestingSchema = new mongoose.Schema({
                 {
                     question: String,
                     answerOptions: [String],
+                    isAnswerOptions: Boolean,
                     answer: String,
                 }
             ],

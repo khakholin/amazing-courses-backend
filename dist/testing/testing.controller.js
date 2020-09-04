@@ -31,6 +31,9 @@ let TestingController = class TestingController {
     async getTestEdit(body) {
         return this.testingService.getTestEdit(body);
     }
+    async checkTest(body) {
+        return this.testingService.checkTest(body);
+    }
 };
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
@@ -63,6 +66,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TestingController.prototype, "getTestEdit", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('check'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TestingController.prototype, "checkTest", null);
 TestingController = __decorate([
     common_1.Controller('testing'),
     __metadata("design:paramtypes", [testing_service_1.TestingService])
