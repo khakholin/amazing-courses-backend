@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { ICourseData } from './course.types';
+import { IUserTestingProgress } from 'src/users/users.types';
 
 export type Course = any;
 export type User = any;
@@ -40,6 +41,31 @@ export class CourseService {
             }
         }
         return { totalNumOfLectures, totalTime, courses: userCourses };
+    }
+
+    async getTestingProgress(data: IUserTestingProgress) {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            let soughtProgress;
+            user.courseProgress.map(item => {
+                if (item.courseName === data.courseName) {
+                    soughtProgress = item.lecturesTesting.find(lec => lec.lectureTitle === data.lectureTitle);
+                }
+            })
+            if (soughtProgress) {
+                return soughtProgress;
+            } else {
+                throw new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    message: 'COURSE_PROGRESS_NOT_FOUND',
+                }, HttpStatus.NOT_FOUND);
+            }
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
     }
 
     async getAllCourses(): Promise<any> {

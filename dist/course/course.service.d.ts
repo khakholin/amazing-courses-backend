@@ -1,5 +1,6 @@
 import { Model } from 'mongoose';
 import { ICourseData } from './course.types';
+import { IUserTestingProgress } from 'src/users/users.types';
 export declare type Course = any;
 export declare type User = any;
 export declare type Testing = any;
@@ -13,6 +14,7 @@ export declare class CourseService {
         totalTime: number;
         courses: any[];
     }>;
+    getTestingProgress(data: IUserTestingProgress): Promise<any>;
     getAllCourses(): Promise<any>;
     getCoursesData(): Promise<any>;
     getUserAvailableCourses(data: any): Promise<any>;

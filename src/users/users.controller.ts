@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header } from '@nestjs/common';
 
-import { IUserRegData, IUserRecoveryData } from './users.types';
+import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents } from './users.types';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
@@ -33,6 +33,18 @@ export class UserController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Get('usernames')
+    async getAllUsernames() {
+        return this.userService.getAllUsernames();
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('mentors')
+    async getUserMentors(@Body() body) {
+        return this.userService.getUserMentors(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post('data')
     async getUserData(@Body() body) {
         return this.userService.getUserData(body);
@@ -45,9 +57,15 @@ export class UserController {
     }
 
     @UseGuards(JwtAuthGuard)
+    @Post('testing-progress')
+    async getTestingProgress(@Body() body: IUserTestingProgress) {
+        return this.coursesService.getTestingProgress(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Get('list')
     async getAllUsers(@Request() req) {
-        return this.userService.getAllUsers(req.user.role);
+        return this.userService.getAllUsers(req.user.roles);
     }
 
     @UseGuards(JwtAuthGuard)
@@ -60,6 +78,12 @@ export class UserController {
     @Post('course-progress')
     async getUserCourseProgress(@Body() body) {
         return this.coursesService.getUserCourseProgress(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('change-mentors')
+    async changeUserMentors(@Body() body) {
+        return this.userService.changeUserMentors(body);
     }
 
     @UseGuards(JwtAuthGuard)
@@ -106,5 +130,10 @@ export class UserController {
     @Post('registration')
     async registrationUser(@Body() body: IUserRegData) {
         return this.registrationService.registrationUser(body);
+    }
+
+    @Post('get-students')
+    async getUserStudents(@Body() body: IUserStudents) {
+        return this.userService.getUserStudents(body);
     }
 }

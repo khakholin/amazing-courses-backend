@@ -1,6 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { IUserStudents } from './users.types';
 
 export type User = any;
 @Injectable()
@@ -8,8 +9,32 @@ export class UserService {
     constructor(@InjectModel('User') private userModel: Model<User>) {
     }
 
-    async getAllUsers(role: string): Promise<any[]> {
-        if (role === 'admin') {
+    async getAllUsernames(): Promise<any[]> {
+        const users = await this.userModel.find();
+        if (users) {
+            return users.map(user => user.username);
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'USERS_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    async getUserMentors(data): Promise<any[]> {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            return user.mentors;
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    async getAllUsers(roles: string[]): Promise<any[]> {
+        if (roles.find(item => item === 'admin')) {
             const users = await this.userModel.find();
             for (const user of users) {
                 user.password = undefined;
@@ -26,6 +51,59 @@ export class UserService {
     async getUserData(data): Promise<any[]> {
         return await this.userModel.findOne({ username: data.username });
     }
+
+    async changeUserMentors(data): Promise<any[]> {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            const arr = user.mentors;
+            let isMentorAvailable = true;
+            arr.map((item, index) => {
+                if (item === data.mentor) {
+                    user.mentors.splice(index, 1);
+                    isMentorAvailable = false;
+                }
+            });
+            if (isMentorAvailable) {
+                user.mentors.push(data.mentor);
+            }
+            await user.save();
+            throw new HttpException({
+                status: HttpStatus.OK,
+                message: 'USER_MENTORS_SUCCESSFULLY_UPDATED',
+            }, HttpStatus.OK);
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    };
+
+    async getUserStudents(data: IUserStudents): Promise<any[]> {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            if (data.roles.find(role => role === 'mentor')) {
+                const users = await this.userModel.find();
+                let students = [];
+                for (const i of users) {
+                    if (i.mentors.find(item => item === data.username)) {
+                        students.push(i);
+                    };
+                }
+                return students.map(u => u.realName || u.realSurname ? ({ realName: u.realName, realSurname: u.realSurname }) : ({ email: u.email }));
+            } else {
+                throw new HttpException({
+                    status: HttpStatus.FORBIDDEN,
+                    message: 'ACCESS_IS_DENIED',
+                }, HttpStatus.FORBIDDEN);
+            }
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    };
 
     async updateUserData(data): Promise<any[]> {
         const user = await this.userModel.findOne({ username: data.oldUserName });

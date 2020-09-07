@@ -34,20 +34,32 @@ let UserController = class UserController {
     async getProfile(req) {
         return req.user;
     }
+    async getAllUsernames() {
+        return this.userService.getAllUsernames();
+    }
+    async getUserMentors(body) {
+        return this.userService.getUserMentors(body);
+    }
     async getUserData(body) {
         return this.userService.getUserData(body);
     }
     async getCourses(body) {
         return this.coursesService.getUserCourses(body);
     }
+    async getTestingProgress(body) {
+        return this.coursesService.getTestingProgress(body);
+    }
     async getAllUsers(req) {
-        return this.userService.getAllUsers(req.user.role);
+        return this.userService.getAllUsers(req.user.roles);
     }
     async getUserAvailableCourses(body) {
         return this.coursesService.getUserAvailableCourses(body);
     }
     async getUserCourseProgress(body) {
         return this.coursesService.getUserCourseProgress(body);
+    }
+    async changeUserMentors(body) {
+        return this.userService.changeUserMentors(body);
     }
     async changeUserAvailableCourses(body) {
         return this.coursesService.changeUserAvailableCourses(body);
@@ -73,6 +85,9 @@ let UserController = class UserController {
     async registrationUser(body) {
         return this.registrationService.registrationUser(body);
     }
+    async getUserStudents(body) {
+        return this.userService.getUserStudents(body);
+    }
 };
 __decorate([
     common_1.UseGuards(local_auth_guard_1.LocalAuthGuard),
@@ -92,6 +107,21 @@ __decorate([
 ], UserController.prototype, "getProfile", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('usernames'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getAllUsernames", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('mentors'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserMentors", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post('data'),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
@@ -106,6 +136,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getCourses", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('testing-progress'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getTestingProgress", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('list'),
@@ -130,6 +168,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUserCourseProgress", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('change-mentors'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "changeUserMentors", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post('change-courses'),
@@ -192,6 +238,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "registrationUser", null);
+__decorate([
+    common_1.Post('get-students'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserStudents", null);
 UserController = __decorate([
     common_1.Controller('user'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

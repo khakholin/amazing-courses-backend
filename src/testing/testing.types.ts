@@ -36,6 +36,7 @@ export interface IRemoveCourseTests {
 }
 
 export interface ICheckTest {
+    username: string,
     courseName: string,
     lectureTitle: string,
     lectureAnswers: string[],

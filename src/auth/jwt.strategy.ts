@@ -17,10 +17,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         return {
             availableCourses: payload.availableCourses,
             email: payload.email,
-            role: payload.role,
+            roles: payload.roles,
             username: payload.username,
             _id: payload.sub,
             courseProgress: payload.courseProgress,
+            mentors: payload.mentors,
             realName: payload.realName,
             realSurname: payload.realSurname,
             school: payload.school,

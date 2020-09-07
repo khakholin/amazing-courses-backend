@@ -78,15 +78,37 @@ export class TestingService {
 
     async checkTest(checkedTest: ICheckTest): Promise<any> {
         const course = await this.testingModel.findOne({ courseName: checkedTest.courseName });
+        const user = await this.userModel.findOne({ username: checkedTest.username });
         if (course) {
-            let numOfAnswers = 0;
-            const lecture = course.courseTests.find((item) => item.lectureTitle === checkedTest.lectureTitle);
-            lecture.lectureQuestions.map((item, index) => {
-                if (item.answer === checkedTest.lectureAnswers[index]) {
-                    numOfAnswers++;
-                }
-            });
-            return numOfAnswers / lecture.lectureQuestions.length;
+            if (user) {
+                let numOfAnswers = 0;
+                const lecture = course.courseTests.find((item) => item.lectureTitle === checkedTest.lectureTitle);
+                lecture.lectureQuestions.map((item, index) => {
+                    if (item.answer.toLowerCase() === checkedTest.lectureAnswers[index].toLowerCase()) {
+                        numOfAnswers++;
+                    }
+                });
+                const percent = numOfAnswers / lecture.lectureQuestions.length;
+
+                user.courseProgress.map(item => {
+                    if (item.courseName === checkedTest.courseName) {
+                        const arr = item.lecturesTesting.slice();
+                        arr.map((lec, index) => {
+                            if (lec.lectureTitle === checkedTest.lectureTitle) {
+                                item.lecturesTesting.splice(index, 1);
+                            }
+                        })
+                        item.lecturesTesting.push({ lectureTitle: checkedTest.lectureTitle, answers: checkedTest.lectureAnswers, percent: percent.toString() });
+                    }
+                });
+                await user.save();
+                return percent.toString();
+            } else {
+                throw new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    message: 'WRONG_USERNAME',
+                }, HttpStatus.NOT_FOUND);
+            }
         } else {
             throw new HttpException({
                 status: HttpStatus.FORBIDDEN,

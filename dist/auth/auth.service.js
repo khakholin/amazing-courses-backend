@@ -37,8 +37,9 @@ let AuthService = class AuthService {
             university: user.university,
             workPlace: user.workPlace,
             availableCourses: user.availableCourses,
+            mentors: user.mentors,
             email: user.email,
-            role: user.role,
+            roles: user.roles,
             sub: user._id,
             username: user.username,
         };

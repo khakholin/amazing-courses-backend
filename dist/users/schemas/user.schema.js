@@ -8,13 +8,21 @@ exports.UserSchema = new mongoose.Schema({
             courseName: String,
             availableLectures: [Number],
             checkedLectures: [Number],
+            lecturesTesting: [
+                {
+                    lectureTitle: String,
+                    answers: [String],
+                    percent: String,
+                }
+            ]
         }
     ],
+    mentors: [String],
     email: String,
     password: String,
     realName: String,
     realSurname: String,
-    role: String,
+    roles: [String],
     school: String,
     university: String,
     username: String,

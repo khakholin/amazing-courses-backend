@@ -18,3 +18,12 @@ export interface IUserRegData {
 export interface IUserRecoveryData {
     email: string;
 }
+export interface IUserTestingProgress {
+    username: string;
+    courseName: string;
+    lectureTitle: string;
+}
+export interface IUserStudents {
+    roles: string[];
+    username: string;
+}

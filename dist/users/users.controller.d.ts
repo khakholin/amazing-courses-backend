@@ -1,4 +1,4 @@
-import { IUserRegData, IUserRecoveryData } from './users.types';
+import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents } from './users.types';
 import { AuthService } from 'src/auth/auth.service';
 import { CourseService } from 'src/course/course.service';
 import { SendMail } from 'src/email/sendEmail';
@@ -15,15 +15,19 @@ export declare class UserController {
         access_token: string;
     }>;
     getProfile(req: any): Promise<any>;
+    getAllUsernames(): Promise<any[]>;
+    getUserMentors(body: any): Promise<any[]>;
     getUserData(body: any): Promise<any[]>;
     getCourses(body: any): Promise<{
         totalNumOfLectures: number;
         totalTime: number;
         courses: any[];
     }>;
+    getTestingProgress(body: IUserTestingProgress): Promise<any>;
     getAllUsers(req: any): Promise<any[]>;
     getUserAvailableCourses(body: any): Promise<any>;
     getUserCourseProgress(body: any): Promise<any>;
+    changeUserMentors(body: any): Promise<any[]>;
     changeUserAvailableCourses(body: any): Promise<any>;
     changeUserLectureAvailable(body: any): Promise<any>;
     changeUserLectureChecked(body: any): Promise<any>;
@@ -32,4 +36,5 @@ export declare class UserController {
     updateUserPassword(body: any): Promise<any[]>;
     recoveryPassword(body: IUserRecoveryData): Promise<any>;
     registrationUser(body: IUserRegData): Promise<any>;
+    getUserStudents(body: IUserStudents): Promise<any[]>;
 }

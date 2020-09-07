@@ -19,8 +19,32 @@ let UserService = class UserService {
     constructor(userModel) {
         this.userModel = userModel;
     }
-    async getAllUsers(role) {
-        if (role === 'admin') {
+    async getAllUsernames() {
+        const users = await this.userModel.find();
+        if (users) {
+            return users.map(user => user.username);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USERS_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    async getUserMentors(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            return user.mentors;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    async getAllUsers(roles) {
+        if (roles.find(item => item === 'admin')) {
             const users = await this.userModel.find();
             for (const user of users) {
                 user.password = undefined;
@@ -37,6 +61,63 @@ let UserService = class UserService {
     async getUserData(data) {
         return await this.userModel.findOne({ username: data.username });
     }
+    async changeUserMentors(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            const arr = user.mentors;
+            let isMentorAvailable = true;
+            arr.map((item, index) => {
+                if (item === data.mentor) {
+                    user.mentors.splice(index, 1);
+                    isMentorAvailable = false;
+                }
+            });
+            if (isMentorAvailable) {
+                user.mentors.push(data.mentor);
+            }
+            await user.save();
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.OK,
+                message: 'USER_MENTORS_SUCCESSFULLY_UPDATED',
+            }, common_1.HttpStatus.OK);
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    ;
+    async getUserStudents(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            if (data.roles.find(role => role === 'mentor')) {
+                const users = await this.userModel.find();
+                let students = [];
+                for (const i of users) {
+                    if (i.mentors.find(item => item === data.username)) {
+                        students.push(i);
+                    }
+                    ;
+                }
+                return students.map(u => u.realName || u.realSurname ? ({ realName: u.realName, realSurname: u.realSurname }) : ({ email: u.email }));
+            }
+            else {
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.FORBIDDEN,
+                    message: 'ACCESS_IS_DENIED',
+                }, common_1.HttpStatus.FORBIDDEN);
+            }
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    ;
     async updateUserData(data) {
         const user = await this.userModel.findOne({ username: data.oldUserName });
         if (user) {

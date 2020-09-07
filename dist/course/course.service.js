@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const users_types_1 = require("../users/users.types");
 let CourseService = class CourseService {
     constructor(courseModel, userModel, testingModel) {
         this.courseModel = courseModel;
@@ -46,6 +47,32 @@ let CourseService = class CourseService {
             }
         }
         return { totalNumOfLectures, totalTime, courses: userCourses };
+    }
+    async getTestingProgress(data) {
+        const user = await this.userModel.findOne({ username: data.username });
+        if (user) {
+            let soughtProgress;
+            user.courseProgress.map(item => {
+                if (item.courseName === data.courseName) {
+                    soughtProgress = item.lecturesTesting.find(lec => lec.lectureTitle === data.lectureTitle);
+                }
+            });
+            if (soughtProgress) {
+                return soughtProgress;
+            }
+            else {
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.NOT_FOUND,
+                    message: 'COURSE_PROGRESS_NOT_FOUND',
+                }, common_1.HttpStatus.NOT_FOUND);
+            }
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
     }
     async getAllCourses() {
         const courses = await this.courseModel.find();
