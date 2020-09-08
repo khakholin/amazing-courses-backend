@@ -31,9 +31,6 @@ let UserController = class UserController {
     async login(req) {
         return this.authService.login(req.user);
     }
-    async getProfile(req) {
-        return req.user;
-    }
     async getAllUsernames() {
         return this.userService.getAllUsernames();
     }
@@ -97,14 +94,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
-__decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get('profile'),
-    __param(0, common_1.Request()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "getProfile", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('usernames'),

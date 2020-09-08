@@ -22,7 +22,7 @@ let UserService = class UserService {
     async getAllUsernames() {
         const users = await this.userModel.find();
         if (users) {
-            return users.map(user => user.username);
+            return users.map(user => user.email);
         }
         else {
             throw new common_1.HttpException({
@@ -32,7 +32,7 @@ let UserService = class UserService {
         }
     }
     async getUserMentors(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             return user.mentors;
         }
@@ -59,10 +59,10 @@ let UserService = class UserService {
         }
     }
     async getUserData(data) {
-        return await this.userModel.findOne({ username: data.username });
+        return await this.userModel.findOne({ email: data.email });
     }
     async changeUserMentors(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             const arr = user.mentors;
             let isMentorAvailable = true;
@@ -141,7 +141,7 @@ let UserService = class UserService {
         }
     }
     async updateUserEmail(data) {
-        const user = await this.userModel.findOne({ username: data.username, password: data.password });
+        const user = await this.userModel.findOne({ email: data.email, password: data.password });
         if (user) {
             user.email = data.newEmail;
             await user.save();
@@ -158,7 +158,7 @@ let UserService = class UserService {
         }
     }
     async updateUserPassword(data) {
-        const user = await this.userModel.findOne({ username: data.username, password: data.oldPassword });
+        const user = await this.userModel.findOne({ email: data.email, password: data.oldPassword });
         if (user) {
             user.password = data.newPassword;
             await user.save();

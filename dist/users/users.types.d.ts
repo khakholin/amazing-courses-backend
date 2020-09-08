@@ -19,7 +19,7 @@ export interface IUserRecoveryData {
     email: string;
 }
 export interface IUserTestingProgress {
-    username: string;
+    email: string;
     courseName: string;
     lectureTitle: string;
 }

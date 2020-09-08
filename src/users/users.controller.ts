@@ -27,12 +27,6 @@ export class UserController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('profile')
-    async getProfile(@Request() req) {
-        return req.user;
-    }
-
-    @UseGuards(JwtAuthGuard)
     @Get('usernames')
     async getAllUsernames() {
         return this.userService.getAllUsernames();

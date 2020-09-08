@@ -1454,8 +1454,8 @@
         "signature": "653711fba8904aa27fd8911b63cf526e7b334e13a292da4cefdbbe179ac3f3f2"
       },
       "../src/auth/auth.service.ts": {
-        "version": "01a1843d9c92ccb173d5780ef0233b20f433e1225a558d4d301abf02599e3659",
-        "signature": "ad1b6001b4335e54ef44bf2eacb19f7b4fc0c276fbd9fa665920de69c0395a07"
+        "version": "2bc2b54380fe8729fecdcc220da4143a8043df688278fe3d5e9d7d153dccadb8",
+        "signature": "a98912704c527ba6f7ace2fb6c2ef15419f42602a5a67666d4cb1a99d0df305c"
       },
       "../src/auth/jwt-auth.guard.ts": {
         "version": "a8dec2a5cd381829103328693799b5a23dd815c5c7744532c6084e1d2d6bbed9",
@@ -1466,11 +1466,11 @@
         "signature": "9b578d50934b11e703e5758c65a8ad5059022204b52bd69277a97c0c76b98635"
       },
       "../src/users/users.types.ts": {
-        "version": "fcc267842213d6028597cc207716dd3de5264044bb2f972e9f9babca63125ced",
-        "signature": "b544e69b8cab6bbb93f9f0059ce02fd93bd63ab5148ba581e3b43423252db31e"
+        "version": "cebf5775a23ed804aadc80f4668f0c698d40a53c3736022a749aff3e6f4fc834",
+        "signature": "88d5d474d405177268e795a108ee7adb4710d4026eb862f9bf9a98a68cd385d9"
       },
       "../src/course/course.service.ts": {
-        "version": "26312dd30d69207dfb37c63541f63deea7faf31e4ea4acf0e1f6cc814e1f25ae",
+        "version": "c7039cfbe2dd636a62ddaf0258a9bf3078136d8f61d7f813c4368e2fc67ffc3a",
         "signature": "9cfb2f44cbf574ed17e1711c17aae09604c38dae2e7cd879da9828c748477ddc"
       },
       "../src/course/course.controller.ts": {
@@ -1502,8 +1502,8 @@
         "signature": "e50f9ae34bb92232533e3a32848970dd04f874a8f64d3ae48980e062b6489f26"
       },
       "../src/auth/local.strategy.ts": {
-        "version": "455c310f918f78b829a008f6b3be74825dc015bfa7e19efefa25408914ecfc9c",
-        "signature": "5c6b439eaf5629d67c26390c075ea6d5e9d37f0c6d81ac050a57c925e26e6988"
+        "version": "ca694c8f1162f23c445879ef2f9b035c52b9c9c970ff96ff52d8a80e4176272b",
+        "signature": "a9f2e3496110aa5c3930bfc08a0a3a0197662109e4c804e97717fe94432528dc"
       },
       "../src/registration/registration.service.ts": {
         "version": "fddc2212f1ae022852b519b0b3f9319922d1ac03884d2236f159d14ee02e060c",
@@ -1514,11 +1514,11 @@
         "signature": "235446a5fa24ab960de9cb83c8d8d39c26d8f7427fb1ee0dd7866ce94acd225d"
       },
       "../src/testing/testing.types.ts": {
-        "version": "95ee33add97dd82054eb195bd4e103428b09e4b85e6faae15b743baaf1854c58",
-        "signature": "6aab45b550c014e997a3575f2fb01eef446f4fe8da09a5facb7584ef464a0d2b"
+        "version": "1edbc5b5d837c32003fd49a971dea87c980b9be03cc839c2cb45415bc87fa751",
+        "signature": "9f8c339fe137f5257178cffe5bddcd9ee268030c77cd3cf9bc94dffc38ca4dfd"
       },
       "../src/testing/testing.service.ts": {
-        "version": "6e337591427f773c10ea0aca75c82ca8fd846fe6a803133946ee1b7479874771",
+        "version": "7f3835fb7475d3247347d665ad035b8ea817d79245bc336da50aa733733ccfbe",
         "signature": "77446aff2e0996aeedc51d2f8aa3def0cccaeecb565327cd5805fe5550da8835"
       },
       "../src/testing/testing.controller.ts": {
@@ -1534,12 +1534,12 @@
         "signature": "9116cbf32650ce234338c6f8395ecb044d06f6d939f2f6ca6d21335f4e663b71"
       },
       "../src/users/users.service.ts": {
-        "version": "3a5fa6a355d324cc4414bd381b521d1a73a6fc802c48ede1b1f47e69d08005f2",
+        "version": "cd5c10a39fa5ac5e91f98e4d3e5dc866194761b1af05f1444e35c74d2510f13f",
         "signature": "0f52938dc25d6cc223f1266d13e79a98462ceb057a3b25a6cd0dba347b8bc357"
       },
       "../src/users/users.controller.ts": {
-        "version": "a695c539342c7641999159d54adb1d1e54a6b79a5fdfad48e437b9a89b2a69da",
-        "signature": "f146858305add7f63c9e87894de92a48f05cac67faa913792d7e82fc5f933505"
+        "version": "d5122262c7d29d83f3f6a2f0857c34ad66ce2db24a841994b2921f94db1e76ce",
+        "signature": "991fe94c8a8aa0507e223fdce8d20b2ed702b27a27225b7d0f8441d71c3088d3"
       },
       "../src/users/schemas/user.schema.ts": {
         "version": "b47e5132b8d3888cb0fc9871ed076e7d56d788378c469834d6e429f45ca3824f",

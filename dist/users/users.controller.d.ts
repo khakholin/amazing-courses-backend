@@ -14,7 +14,6 @@ export declare class UserController {
     login(req: any): Promise<{
         access_token: string;
     }>;
-    getProfile(req: any): Promise<any>;
     getAllUsernames(): Promise<any[]>;
     getUserMentors(body: any): Promise<any[]>;
     getUserData(body: any): Promise<any[]>;

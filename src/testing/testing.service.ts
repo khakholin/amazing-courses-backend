@@ -78,7 +78,7 @@ export class TestingService {
 
     async checkTest(checkedTest: ICheckTest): Promise<any> {
         const course = await this.testingModel.findOne({ courseName: checkedTest.courseName });
-        const user = await this.userModel.findOne({ username: checkedTest.username });
+        const user = await this.userModel.findOne({ email: checkedTest.email });
         if (course) {
             if (user) {
                 let numOfAnswers = 0;
