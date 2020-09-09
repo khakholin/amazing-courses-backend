@@ -41,7 +41,6 @@ let AuthService = class AuthService {
             email: user.email,
             roles: user.roles,
             sub: user._id,
-            username: user.username,
         };
         return {
             access_token: this.jwtService.sign(payload),

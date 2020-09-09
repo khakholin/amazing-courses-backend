@@ -10,8 +10,16 @@ export const UserSchema = new mongoose.Schema({
             lecturesTesting: [
                 {
                     lectureTitle: String,
-                    answers: [String],
-                    percent: String,
+                    answers: [
+                        {
+                            userAnswer: String,
+                            rightAnswer: String,
+                        }
+                    ],
+                    result: {
+                        right: String,
+                        total: String
+                    },
                 }
             ]
         }
@@ -24,6 +32,5 @@ export const UserSchema = new mongoose.Schema({
     roles: [String],
     school: String,
     university: String,
-    username: String,
     workPlace: String,
 });

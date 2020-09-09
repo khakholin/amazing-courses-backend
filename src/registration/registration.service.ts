@@ -17,19 +17,13 @@ export class RegistrationService {
                 message: 'EMAIL_DUPLICATE',
             }, HttpStatus.NOT_FOUND);
         } else {
-            if (await this.userModel.findOne({ username: newUser.username })) {
-                throw new HttpException({
-                    status: HttpStatus.NOT_FOUND,
-                    message: 'USER_DUPLICATE',
-                }, HttpStatus.NOT_FOUND);
-            } else {
-                const createdUser = new this.userModel(newUser);
-                createdUser.save();
-                throw new HttpException({
-                    status: HttpStatus.CREATED,
-                    message: 'SUCCESS',
-                }, HttpStatus.CREATED);
-            }
+            const createdUser = new this.userModel(newUser);
+            createdUser.email = createdUser.email.toLowerCase();
+            createdUser.save();
+            throw new HttpException({
+                status: HttpStatus.CREATED,
+                message: 'SUCCESS',
+            }, HttpStatus.CREATED);
         }
     }
 }

@@ -22,7 +22,7 @@ let UserService = class UserService {
     async getAllUsernames() {
         const users = await this.userModel.find();
         if (users) {
-            return users.map(user => user.email);
+            return users.map(user => ({ email: user.email, realName: user.realName, realSurname: user.realSurname }));
         }
         else {
             throw new common_1.HttpException({
@@ -43,8 +43,9 @@ let UserService = class UserService {
             }, common_1.HttpStatus.NOT_FOUND);
         }
     }
-    async getAllUsers(roles) {
-        if (roles.find(item => item === 'admin')) {
+    async getAllUsers(data) {
+        const user = await this.userModel.findOne({ email: data.email });
+        if (user.roles.find(item => item === 'admin')) {
             const users = await this.userModel.find();
             for (const user of users) {
                 user.password = undefined;
@@ -90,18 +91,18 @@ let UserService = class UserService {
     }
     ;
     async getUserStudents(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             if (data.roles.find(role => role === 'mentor')) {
                 const users = await this.userModel.find();
                 let students = [];
                 for (const i of users) {
-                    if (i.mentors.find(item => item === data.username)) {
+                    if (i.mentors.find(item => item === data.email)) {
                         students.push(i);
                     }
                     ;
                 }
-                return students.map(u => u.realName || u.realSurname ? ({ realName: u.realName, realSurname: u.realSurname }) : ({ email: u.email }));
+                return students.map(u => ({ realName: u.realName, realSurname: u.realSurname, email: u.email }));
             }
             else {
                 throw new common_1.HttpException({
@@ -119,13 +120,12 @@ let UserService = class UserService {
     }
     ;
     async updateUserData(data) {
-        const user = await this.userModel.findOne({ username: data.oldUserName });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             user.realName = data.realName;
             user.realSurname = data.realSurname;
             user.school = data.school;
             user.university = data.university;
-            user.username = data.newUserName;
             user.workPlace = data.workPlace;
             await user.save();
             throw new common_1.HttpException({

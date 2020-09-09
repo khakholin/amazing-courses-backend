@@ -23,7 +23,9 @@ export declare class UserController {
         courses: any[];
     }>;
     getTestingProgress(body: IUserTestingProgress): Promise<any>;
-    getAllUsers(req: any): Promise<any[]>;
+    getAllUsers(body: {
+        email: string;
+    }): Promise<any[]>;
     getUserAvailableCourses(body: any): Promise<any>;
     getUserCourseProgress(body: any): Promise<any>;
     changeUserMentors(body: any): Promise<any[]>;

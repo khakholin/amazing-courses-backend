@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { IUserStudents } from './users.types';
+import { IUserStudents, IUserRoles } from './users.types';
 
 export type User = any;
 @Injectable()
@@ -12,7 +12,7 @@ export class UserService {
     async getAllUsernames(): Promise<any[]> {
         const users = await this.userModel.find();
         if (users) {
-            return users.map(user => user.email);
+            return users.map(user => ({ email: user.email, realName: user.realName, realSurname: user.realSurname }));
         } else {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
@@ -33,8 +33,9 @@ export class UserService {
         }
     }
 
-    async getAllUsers(roles: string[]): Promise<any[]> {
-        if (roles.find(item => item === 'admin')) {
+    async getAllUsers(data: { email: string }): Promise<any[]> {
+        const user = await this.userModel.findOne({ email: data.email });
+        if (user.roles.find(item => item === 'admin')) {
             const users = await this.userModel.find();
             for (const user of users) {
                 user.password = undefined;
@@ -80,17 +81,17 @@ export class UserService {
     };
 
     async getUserStudents(data: IUserStudents): Promise<any[]> {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             if (data.roles.find(role => role === 'mentor')) {
                 const users = await this.userModel.find();
                 let students = [];
                 for (const i of users) {
-                    if (i.mentors.find(item => item === data.username)) {
+                    if (i.mentors.find(item => item === data.email)) {
                         students.push(i);
                     };
                 }
-                return students.map(u => u.realName || u.realSurname ? ({ realName: u.realName, realSurname: u.realSurname }) : ({ email: u.email }));
+                return students.map(u => ({ realName: u.realName, realSurname: u.realSurname, email: u.email }));
             } else {
                 throw new HttpException({
                     status: HttpStatus.FORBIDDEN,
@@ -106,13 +107,12 @@ export class UserService {
     };
 
     async updateUserData(data): Promise<any[]> {
-        const user = await this.userModel.findOne({ username: data.oldUserName });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             user.realName = data.realName;
             user.realSurname = data.realSurname;
             user.school = data.school;
             user.university = data.university;
-            user.username = data.newUserName;
             user.workPlace = data.workPlace;
             await user.save();
             throw new HttpException({

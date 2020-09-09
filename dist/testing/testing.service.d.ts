@@ -8,9 +8,11 @@ export declare class TestingService {
     private userModel;
     private testingModel;
     constructor(courseModel: Model<Course>, userModel: Model<User>, testingModel: Model<Testing>);
-    getCoursesTests(): Promise<any>;
     updateTest(updatedTest: IUpdateTest): Promise<any>;
-    getTestWatch(updatedTest: IGetTestData): Promise<any>;
+    getTestWatch(test: IGetTestData): Promise<any>;
+    getAvailableLecturesTests(test: {
+        courseName: string;
+    }): Promise<any>;
     getTestEdit(updatedTest: IGetTestData): Promise<any>;
     checkTest(checkedTest: ICheckTest): Promise<any>;
 }

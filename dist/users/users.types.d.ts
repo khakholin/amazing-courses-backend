@@ -3,16 +3,13 @@ export interface IAvailableCourses {
     numAvailableLectures: number;
     numCheckedLectures: number;
 }
-export interface IUserData {
-    username: string;
-    password: string;
-}
 export interface ICoursesNames {
     availableCourses: string[];
 }
 export interface IUserRegData {
     email: string;
-    username: string;
+    realName: string;
+    realSurname: string;
     password: string;
 }
 export interface IUserRecoveryData {
@@ -25,5 +22,8 @@ export interface IUserTestingProgress {
 }
 export interface IUserStudents {
     roles: string[];
-    username: string;
+    email: string;
+}
+export interface IUserRoles {
+    roles: string[];
 }
