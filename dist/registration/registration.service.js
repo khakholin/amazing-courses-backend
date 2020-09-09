@@ -28,20 +28,13 @@ let RegistrationService = class RegistrationService {
             }, common_1.HttpStatus.NOT_FOUND);
         }
         else {
-            if (await this.userModel.findOne({ username: newUser.username })) {
-                throw new common_1.HttpException({
-                    status: common_1.HttpStatus.NOT_FOUND,
-                    message: 'USER_DUPLICATE',
-                }, common_1.HttpStatus.NOT_FOUND);
-            }
-            else {
-                const createdUser = new this.userModel(newUser);
-                createdUser.save();
-                throw new common_1.HttpException({
-                    status: common_1.HttpStatus.CREATED,
-                    message: 'SUCCESS',
-                }, common_1.HttpStatus.CREATED);
-            }
+            const createdUser = new this.userModel(newUser);
+            createdUser.email = createdUser.email.toLowerCase();
+            createdUser.save();
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.CREATED,
+                message: 'SUCCESS',
+            }, common_1.HttpStatus.CREATED);
         }
     }
 };

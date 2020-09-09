@@ -31,9 +31,6 @@ let UserController = class UserController {
     async login(req) {
         return this.authService.login(req.user);
     }
-    async getProfile(req) {
-        return req.user;
-    }
     async getAllUsernames() {
         return this.userService.getAllUsernames();
     }
@@ -49,8 +46,8 @@ let UserController = class UserController {
     async getTestingProgress(body) {
         return this.coursesService.getTestingProgress(body);
     }
-    async getAllUsers(req) {
-        return this.userService.getAllUsers(req.user.roles);
+    async getAllUsers(body) {
+        return this.userService.getAllUsers(body);
     }
     async getUserAvailableCourses(body) {
         return this.coursesService.getUserAvailableCourses(body);
@@ -99,15 +96,7 @@ __decorate([
 ], UserController.prototype, "login", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get('profile'),
-    __param(0, common_1.Request()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "getProfile", null);
-__decorate([
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get('usernames'),
+    common_1.Get('get-users'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -146,8 +135,8 @@ __decorate([
 ], UserController.prototype, "getTestingProgress", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get('list'),
-    __param(0, common_1.Request()),
+    common_1.Post('list'),
+    __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)

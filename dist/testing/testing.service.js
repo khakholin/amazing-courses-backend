@@ -21,9 +21,6 @@ let TestingService = class TestingService {
         this.userModel = userModel;
         this.testingModel = testingModel;
     }
-    async getCoursesTests() {
-        return await this.testingModel.find();
-    }
     async updateTest(updatedTest) {
         const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
         if (course) {
@@ -49,10 +46,10 @@ let TestingService = class TestingService {
             }, common_1.HttpStatus.FORBIDDEN);
         }
     }
-    async getTestWatch(updatedTest) {
-        const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
+    async getTestWatch(test) {
+        const course = await this.testingModel.findOne({ courseName: test.courseName });
         if (course) {
-            const lectureData = course.courseTests.find((item) => item.lectureTitle === updatedTest.lectureTitle);
+            const lectureData = course.courseTests.find((item) => item.lectureTitle === test.lectureTitle);
             return lectureData.lectureQuestions.map(item => {
                 const transformedQuestion = item;
                 transformedQuestion.answer = undefined;
@@ -63,6 +60,18 @@ let TestingService = class TestingService {
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.FORBIDDEN,
                 message: 'WRONG_COURSE_NAME',
+            }, common_1.HttpStatus.FORBIDDEN);
+        }
+    }
+    async getAvailableLecturesTests(test) {
+        const course = await this.testingModel.findOne(test);
+        if (course) {
+            return { courseTests: course.courseTests };
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'COURSE_NOT_FOUND',
             }, common_1.HttpStatus.FORBIDDEN);
         }
     }
@@ -81,17 +90,19 @@ let TestingService = class TestingService {
     }
     async checkTest(checkedTest) {
         const course = await this.testingModel.findOne({ courseName: checkedTest.courseName });
-        const user = await this.userModel.findOne({ username: checkedTest.username });
+        const user = await this.userModel.findOne({ email: checkedTest.email });
         if (course) {
             if (user) {
                 let numOfAnswers = 0;
+                let modifiedAnswers = [];
                 const lecture = course.courseTests.find((item) => item.lectureTitle === checkedTest.lectureTitle);
                 lecture.lectureQuestions.map((item, index) => {
+                    modifiedAnswers.push({ userAnswer: checkedTest.lectureAnswers[index].toLowerCase(), rightAnswer: item.answer.toLowerCase() });
                     if (item.answer.toLowerCase() === checkedTest.lectureAnswers[index].toLowerCase()) {
                         numOfAnswers++;
                     }
                 });
-                const percent = numOfAnswers / lecture.lectureQuestions.length;
+                const result = { right: numOfAnswers, total: lecture.lectureQuestions.length };
                 user.courseProgress.map(item => {
                     if (item.courseName === checkedTest.courseName) {
                         const arr = item.lecturesTesting.slice();
@@ -100,16 +111,16 @@ let TestingService = class TestingService {
                                 item.lecturesTesting.splice(index, 1);
                             }
                         });
-                        item.lecturesTesting.push({ lectureTitle: checkedTest.lectureTitle, answers: checkedTest.lectureAnswers, percent: percent.toString() });
+                        item.lecturesTesting.push({ lectureTitle: checkedTest.lectureTitle, answers: modifiedAnswers, result });
                     }
                 });
                 await user.save();
-                return percent.toString();
+                return { result };
             }
             else {
                 throw new common_1.HttpException({
                     status: common_1.HttpStatus.NOT_FOUND,
-                    message: 'WRONG_USERNAME',
+                    message: 'WRONG_USER',
                 }, common_1.HttpStatus.NOT_FOUND);
             }
         }

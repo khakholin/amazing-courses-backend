@@ -17,11 +17,6 @@ export class TestingService {
         @InjectModel('Testing') private testingModel: Model<Testing>,
     ) { }
 
-    // тестовый метод, не будет на проде
-    async getCoursesTests(): Promise<any> {
-        return await this.testingModel.find();
-    }
-
     async updateTest(updatedTest: IUpdateTest): Promise<any> {
         const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
         if (course) {
@@ -46,10 +41,10 @@ export class TestingService {
         }
     }
 
-    async getTestWatch(updatedTest: IGetTestData): Promise<any> {
-        const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
+    async getTestWatch(test: IGetTestData): Promise<any> {
+        const course = await this.testingModel.findOne({ courseName: test.courseName });
         if (course) {
-            const lectureData = course.courseTests.find((item) => item.lectureTitle === updatedTest.lectureTitle);
+            const lectureData = course.courseTests.find((item) => item.lectureTitle === test.lectureTitle);
             return lectureData.lectureQuestions.map(item => {
                 const transformedQuestion = item;
                 transformedQuestion.answer = undefined;
@@ -62,6 +57,19 @@ export class TestingService {
             }, HttpStatus.FORBIDDEN);
         }
     }
+
+    async getAvailableLecturesTests(test: { courseName: string }): Promise<any> {
+        const course: any = await this.testingModel.findOne(test);
+        if (course) {
+            return { courseTests: course.courseTests };
+        } else {
+            throw new HttpException({
+                status: HttpStatus.FORBIDDEN,
+                message: 'COURSE_NOT_FOUND',
+            }, HttpStatus.FORBIDDEN);
+        }
+    }
+
 
     async getTestEdit(updatedTest: IGetTestData): Promise<any> {
         const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
@@ -78,17 +86,19 @@ export class TestingService {
 
     async checkTest(checkedTest: ICheckTest): Promise<any> {
         const course = await this.testingModel.findOne({ courseName: checkedTest.courseName });
-        const user = await this.userModel.findOne({ username: checkedTest.username });
+        const user = await this.userModel.findOne({ email: checkedTest.email });
         if (course) {
             if (user) {
                 let numOfAnswers = 0;
+                let modifiedAnswers = [];
                 const lecture = course.courseTests.find((item) => item.lectureTitle === checkedTest.lectureTitle);
                 lecture.lectureQuestions.map((item, index) => {
+                    modifiedAnswers.push({ userAnswer: checkedTest.lectureAnswers[index].toLowerCase(), rightAnswer: item.answer.toLowerCase() });
                     if (item.answer.toLowerCase() === checkedTest.lectureAnswers[index].toLowerCase()) {
                         numOfAnswers++;
                     }
                 });
-                const percent = numOfAnswers / lecture.lectureQuestions.length;
+                const result = { right: numOfAnswers, total: lecture.lectureQuestions.length };
 
                 user.courseProgress.map(item => {
                     if (item.courseName === checkedTest.courseName) {
@@ -98,15 +108,15 @@ export class TestingService {
                                 item.lecturesTesting.splice(index, 1);
                             }
                         })
-                        item.lecturesTesting.push({ lectureTitle: checkedTest.lectureTitle, answers: checkedTest.lectureAnswers, percent: percent.toString() });
+                        item.lecturesTesting.push({ lectureTitle: checkedTest.lectureTitle, answers: modifiedAnswers, result });
                     }
                 });
                 await user.save();
-                return percent.toString();
+                return { result };
             } else {
                 throw new HttpException({
                     status: HttpStatus.NOT_FOUND,
-                    message: 'WRONG_USERNAME',
+                    message: 'WRONG_USER',
                 }, HttpStatus.NOT_FOUND);
             }
         } else {

@@ -12,8 +12,8 @@ export class AuthService {
         @InjectModel('User') private userModel: Model<User>
     ) { }
 
-    async validateUser(username: string, password: string): Promise<any> {
-        const user = await this.userModel.findOne({ username, password });
+    async validateUser(email: string, password: string): Promise<any> {
+        const user = await this.userModel.findOne({ email, password });
         if (user) {
             return user;
         }
@@ -33,7 +33,6 @@ export class AuthService {
             email: user.email,
             roles: user.roles,
             sub: user._id,
-            username: user.username,
         };
         return {
             access_token: this.jwtService.sign(payload),

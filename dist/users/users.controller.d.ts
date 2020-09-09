@@ -14,7 +14,6 @@ export declare class UserController {
     login(req: any): Promise<{
         access_token: string;
     }>;
-    getProfile(req: any): Promise<any>;
     getAllUsernames(): Promise<any[]>;
     getUserMentors(body: any): Promise<any[]>;
     getUserData(body: any): Promise<any[]>;
@@ -24,7 +23,9 @@ export declare class UserController {
         courses: any[];
     }>;
     getTestingProgress(body: IUserTestingProgress): Promise<any>;
-    getAllUsers(req: any): Promise<any[]>;
+    getAllUsers(body: {
+        email: string;
+    }): Promise<any[]>;
     getUserAvailableCourses(body: any): Promise<any>;
     getUserCourseProgress(body: any): Promise<any>;
     changeUserMentors(body: any): Promise<any[]>;

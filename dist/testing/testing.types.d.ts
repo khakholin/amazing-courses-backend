@@ -29,7 +29,7 @@ export interface IRemoveCourseTests {
     courseName: string;
 }
 export interface ICheckTest {
-    username: string;
+    email: string;
     courseName: string;
     lectureTitle: string;
     lectureAnswers: string[];

@@ -12,12 +12,6 @@ export class TestingController {
     ) { }
 
     @UseGuards(JwtAuthGuard)
-    @Get('courses-test')
-    async getCoursesTests() {
-        return this.testingService.getCoursesTests();
-    }
-
-    @UseGuards(JwtAuthGuard)
     @Post('update')
     async updateTest(@Body() body: IUpdateTest) {
         return this.testingService.updateTest(body);
@@ -27,6 +21,12 @@ export class TestingController {
     @Post('data-watch')
     async getTestWatch(@Body() body: IGetTestData) {
         return this.testingService.getTestWatch(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('available-tests')
+    async getAvailableLecturesTests(@Body() body: { courseName: string }) {
+        return this.testingService.getAvailableLecturesTests(body);
     }
 
     @UseGuards(JwtAuthGuard)

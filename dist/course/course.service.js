@@ -49,7 +49,7 @@ let CourseService = class CourseService {
         return { totalNumOfLectures, totalTime, courses: userCourses };
     }
     async getTestingProgress(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             let soughtProgress;
             user.courseProgress.map(item => {
@@ -82,7 +82,7 @@ let CourseService = class CourseService {
         return await this.courseModel.find();
     }
     async getUserAvailableCourses(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             return user.availableCourses;
         }
@@ -94,7 +94,7 @@ let CourseService = class CourseService {
         }
     }
     async getUserCourseProgress(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         if (user) {
             return user.courseProgress;
         }
@@ -145,7 +145,7 @@ let CourseService = class CourseService {
         }
     }
     async changeUserAvailableCourses(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         let index = -1;
         if (user) {
             user.availableCourses.find((course, i) => {
@@ -176,7 +176,7 @@ let CourseService = class CourseService {
         }
     }
     async changeUserLectureAvailable(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         let courseIndex = -1;
         if (user) {
             user.courseProgress.find((item, i) => {
@@ -221,7 +221,7 @@ let CourseService = class CourseService {
         }
     }
     async changeUserLectureChecked(data) {
-        const user = await this.userModel.findOne({ username: data.username });
+        const user = await this.userModel.findOne({ email: data.email });
         let courseIndex = -1;
         if (user) {
             user.courseProgress.find((item, i) => {

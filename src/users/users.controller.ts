@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header } from '@nestjs/common';
 
-import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents } from './users.types';
+import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents, IUserRoles } from './users.types';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
@@ -27,13 +27,7 @@ export class UserController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('profile')
-    async getProfile(@Request() req) {
-        return req.user;
-    }
-
-    @UseGuards(JwtAuthGuard)
-    @Get('usernames')
+    @Get('get-users')
     async getAllUsernames() {
         return this.userService.getAllUsernames();
     }
@@ -63,9 +57,9 @@ export class UserController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Get('list')
-    async getAllUsers(@Request() req) {
-        return this.userService.getAllUsers(req.user.roles);
+    @Post('list')
+    async getAllUsers(@Body() body: { email: string }) {
+        return this.userService.getAllUsers(body);
     }
 
     @UseGuards(JwtAuthGuard)

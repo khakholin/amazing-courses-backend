@@ -6,7 +6,9 @@ export declare class UserService {
     constructor(userModel: Model<User>);
     getAllUsernames(): Promise<any[]>;
     getUserMentors(data: any): Promise<any[]>;
-    getAllUsers(roles: string[]): Promise<any[]>;
+    getAllUsers(data: {
+        email: string;
+    }): Promise<any[]>;
     getUserData(data: any): Promise<any[]>;
     changeUserMentors(data: any): Promise<any[]>;
     getUserStudents(data: IUserStudents): Promise<any[]>;
