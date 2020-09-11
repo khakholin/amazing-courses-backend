@@ -6,8 +6,8 @@ exports.UserSchema = new mongoose.Schema({
     courseProgress: [
         {
             courseName: String,
-            availableLectures: [Number],
-            checkedLectures: [Number],
+            availableLectures: [String],
+            checkedLectures: [String],
             lecturesTesting: [
                 {
                     lectureTitle: String,

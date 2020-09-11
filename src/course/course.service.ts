@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { ICourseData } from './course.types';
-import { IUserTestingProgress } from 'src/users/users.types';
+import { IUserTestingProgress, IChangeLectureStatus, IChangeAvailableCourses } from 'src/users/users.types';
 
 export type Course = any;
 export type User = any;
@@ -102,7 +102,7 @@ export class CourseService {
     }
 
     async createCourse(newCourse: ICourseData): Promise<any> {
-        if (await this.courseModel.findOne({ courseName: newCourse.courseName }) || await this.testingModel.findOne({ courseName: newCourse.courseName })) {
+        if (await this.courseModel.findOne({ courseName: newCourse.courseName })) {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
                 message: 'COURSE_DUPLICATE',
@@ -110,7 +110,8 @@ export class CourseService {
         } else {
             const createdCourse = new this.courseModel(newCourse);
             const createdCourseTesting = new this.testingModel({
-                courseName: newCourse.courseName, numOfLectures: newCourse.numOfLectures,
+                courseName: newCourse.courseName,
+                numOfLectures: newCourse.numOfLectures,
                 courseTests: newCourse.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })),
             });
             createdCourse.save();
@@ -122,16 +123,29 @@ export class CourseService {
         }
     }
 
-    async removeCourse(data): Promise<any> {
+    async removeCourse(data: { courseName: string }): Promise<any> {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
-        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
-        if (course && courseTesting) {
-            await this.courseModel.deleteOne(course);
-            await this.testingModel.deleteOne(courseTesting);
-            throw new HttpException({
-                status: HttpStatus.OK,
-                message: 'COURSE_SUCCESSFULLY_REMOVED',
-            }, HttpStatus.OK);
+        if (course) {
+            await this.courseModel.deleteOne({ courseName: data.courseName });
+            const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+            if (courseTesting) {
+                await this.testingModel.deleteOne({ courseName: data.courseName });
+                const users = await this.userModel.find();
+                users.forEach(async user => {
+                    user.availableCourses = user.availableCourses?.filter(course => course !== data.courseName);
+                    user.courseProgress = user.courseProgress?.filter(course => course.courseName !== data.courseName);
+                    await user.save();
+                });
+                throw new HttpException({
+                    status: HttpStatus.OK,
+                    message: 'COURSE_AND_TEST_SUCCESSFULLY_REMOVED',
+                }, HttpStatus.OK);
+            } else {
+                throw new HttpException({
+                    status: HttpStatus.OK,
+                    message: 'COURSE_SUCCESSFULLY_REMOVED',
+                }, HttpStatus.OK);
+            }
         } else {
             throw new HttpException({
                 status: HttpStatus.NOT_FOUND,
@@ -140,15 +154,56 @@ export class CourseService {
         }
     }
 
-    async changeUserAvailableCourses(data): Promise<any> {
+    async removeCourseLecture(data: { courseName: string, lectureTitle: string }): Promise<any> {
+        let isRemovedData = 0;
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        if (course) {
+            const filteredLectures = course.courseLectures.filter(lecture => lecture.lectureTitle !== data.lectureTitle);
+            course.courseLectures = filteredLectures;
+            isRemovedData++;
+            await course.save();
+        }
+        const testing = await this.testingModel.findOne({ courseName: data.courseName });
+        if (testing) {
+            const filteredTests = testing.courseTests.filter(lecture => lecture.lectureTitle !== data.lectureTitle);
+            testing.courseTests = filteredTests;
+            isRemovedData++;
+            await testing.save();
+        }
+        const users = await this.userModel.find();
+        users.forEach(async user => {
+            const selectedCourse = user.courseProgress?.find(course => course.courseName === data.courseName);
+            if (selectedCourse) {
+                selectedCourse.lecturesTesting = selectedCourse.lecturesTesting.filter(testing => testing.lectureTitle !== data.lectureTitle);
+                isRemovedData++;
+            }
+            await user.save();
+        });
+        if (isRemovedData) {
+            return await this.courseModel.find();
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'LECTURE_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    async changeUserAvailableCourses(data: IChangeAvailableCourses): Promise<any> {
         const user = await this.userModel.findOne({ email: data.email });
         let index = -1;
         if (user) {
             user.availableCourses.find((course, i) => {
                 course === data.courseName ? index = i : index = index;
-            })
+            });
             if (index !== -1) {
                 user.availableCourses.splice(index, 1);
+                user.courseProgress.map(progress => {
+                    if (progress.courseName === data.courseName) {
+                        progress.availableLectures = [];
+                        progress.checkedLectures = [];
+                    }
+                });
                 await user.save();
                 throw new HttpException({
                     status: HttpStatus.OK,
@@ -170,7 +225,7 @@ export class CourseService {
         }
     }
 
-    async changeUserLectureAvailable(data): Promise<any> {
+    async changeUserLectureAvailable(data: IChangeLectureStatus): Promise<any> {
         const user = await this.userModel.findOne({ email: data.email });
         let courseIndex = -1;
         if (user) {
@@ -180,7 +235,7 @@ export class CourseService {
             if (courseIndex !== -1) {
                 let lectureIndex = -1;
                 user.courseProgress[courseIndex].availableLectures.find((lecture, j) => {
-                    lecture === data.availableLecture ? lectureIndex = j : lectureIndex;
+                    lecture === data.lectureTitle ? lectureIndex = j : lectureIndex;
                 })
                 if (lectureIndex !== -1) {
                     user.courseProgress[courseIndex].availableLectures.splice(lectureIndex, 1);
@@ -190,7 +245,7 @@ export class CourseService {
                         message: 'LECTURE_SUCCESSFULLY_SET_UNAVAILABLE',
                     }, HttpStatus.OK);
                 } else {
-                    user.courseProgress[courseIndex].availableLectures.push(data.availableLecture);
+                    user.courseProgress[courseIndex].availableLectures.push(data.lectureTitle);
                     await user.save();
                     throw new HttpException({
                         status: HttpStatus.OK,
@@ -198,7 +253,7 @@ export class CourseService {
                     }, HttpStatus.OK);
                 }
             } else {
-                user.courseProgress.push({ courseName: data.courseName, availableLectures: [data.availableLecture], checkedLectures: [] });
+                user.courseProgress.push({ courseName: data.courseName, availableLectures: [data.lectureTitle], checkedLectures: [] });
                 await user.save();
                 throw new HttpException({
                     status: HttpStatus.OK,
@@ -213,7 +268,7 @@ export class CourseService {
         }
     }
 
-    async changeUserLectureChecked(data): Promise<any> {
+    async changeUserLectureChecked(data: IChangeLectureStatus): Promise<any> {
         const user = await this.userModel.findOne({ email: data.email });
         let courseIndex = -1;
         if (user) {
@@ -223,7 +278,7 @@ export class CourseService {
             if (courseIndex !== -1) {
                 let lectureIndex = -1;
                 user.courseProgress[courseIndex].checkedLectures.find((lecture, j) => {
-                    lecture === data.checkedLecture ? lectureIndex = j : lectureIndex;
+                    lecture === data.lectureTitle ? lectureIndex = j : lectureIndex;
                 })
                 if (lectureIndex !== -1) {
                     user.courseProgress[courseIndex].checkedLectures.splice(lectureIndex, 1);
@@ -233,7 +288,7 @@ export class CourseService {
                         message: 'LECTURE_SUCCESSFULLY_SET_UNCHECKED',
                     }, HttpStatus.OK);
                 } else {
-                    user.courseProgress[courseIndex].checkedLectures.push(data.checkedLecture);
+                    user.courseProgress[courseIndex].checkedLectures.push(data.lectureTitle);
                     await user.save();
                     throw new HttpException({
                         status: HttpStatus.OK,
@@ -241,7 +296,7 @@ export class CourseService {
                     }, HttpStatus.OK);
                 }
             } else {
-                user.courseProgress.push({ courseName: data.courseName, checkedLectures: [data.checkedLecture], availableLectures: [] });
+                user.courseProgress.push({ courseName: data.courseName, checkedLectures: [data.lectureTitle], availableLectures: [] });
                 await user.save();
                 throw new HttpException({
                     status: HttpStatus.OK,

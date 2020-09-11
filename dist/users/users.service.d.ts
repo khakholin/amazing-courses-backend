@@ -1,10 +1,11 @@
 import { Model } from 'mongoose';
-import { IUserStudents } from './users.types';
+import { IUserStudents, IChangeRoles } from './users.types';
 export declare type User = any;
 export declare class UserService {
     private userModel;
     constructor(userModel: Model<User>);
     getAllUsernames(): Promise<any[]>;
+    changeRoles(data: IChangeRoles): Promise<any>;
     getUserMentors(data: any): Promise<any[]>;
     getAllUsers(data: {
         email: string;

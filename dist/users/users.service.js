@@ -31,6 +31,20 @@ let UserService = class UserService {
             }, common_1.HttpStatus.NOT_FOUND);
         }
     }
+    async changeRoles(data) {
+        const user = await this.userModel.findOne({ email: data.email });
+        if (user) {
+            user.roles = data.roles;
+            await user.save();
+            return { roles: user.roles };
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
     async getUserMentors(data) {
         const user = await this.userModel.findOne({ email: data.email });
         if (user) {

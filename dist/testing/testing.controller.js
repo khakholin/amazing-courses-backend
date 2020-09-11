@@ -19,6 +19,9 @@ let TestingController = class TestingController {
     constructor(testingService) {
         this.testingService = testingService;
     }
+    async getAllTests(req) {
+        return this.testingService.getAllTests();
+    }
     async updateTest(body) {
         return this.testingService.updateTest(body);
     }
@@ -35,6 +38,14 @@ let TestingController = class TestingController {
         return this.testingService.checkTest(body);
     }
 };
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('list'),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TestingController.prototype, "getAllTests", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post('update'),

@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header } from '@nestjs/common';
 
-import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents, IUserRoles } from './users.types';
+import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents, IUserRoles, IChangeRoles, IChangeLectureStatus, IChangeAvailableCourses } from './users.types';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { AuthService } from 'src/auth/auth.service';
@@ -24,6 +24,12 @@ export class UserController {
     @Post('auth/login')
     async login(@Request() req) {
         return this.authService.login(req.user);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('change-roles')
+    async changeRoles(@Body() body: IChangeRoles) {
+        return this.userService.changeRoles(body);
     }
 
     @UseGuards(JwtAuthGuard)
@@ -82,19 +88,19 @@ export class UserController {
 
     @UseGuards(JwtAuthGuard)
     @Post('change-courses')
-    async changeUserAvailableCourses(@Body() body) {
+    async changeUserAvailableCourses(@Body() body: IChangeAvailableCourses) {
         return this.coursesService.changeUserAvailableCourses(body);
     }
 
     @UseGuards(JwtAuthGuard)
     @Post('change-available-lecture')
-    async changeUserLectureAvailable(@Body() body) {
+    async changeUserLectureAvailable(@Body() body: IChangeLectureStatus) {
         return this.coursesService.changeUserLectureAvailable(body);
     }
 
     @UseGuards(JwtAuthGuard)
     @Post('change-check-lecture')
-    async changeUserLectureChecked(@Body() body) {
+    async changeUserLectureChecked(@Body() body: IChangeLectureStatus) {
         return this.coursesService.changeUserLectureChecked(body);
     }
 

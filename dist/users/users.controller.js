@@ -31,6 +31,9 @@ let UserController = class UserController {
     async login(req) {
         return this.authService.login(req.user);
     }
+    async changeRoles(body) {
+        return this.userService.changeRoles(body);
+    }
     async getAllUsernames() {
         return this.userService.getAllUsernames();
     }
@@ -94,6 +97,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('change-roles'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "changeRoles", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('get-users'),

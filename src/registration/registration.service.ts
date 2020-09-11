@@ -11,19 +11,26 @@ export class RegistrationService {
     constructor(@InjectModel('User') private userModel: Model<User>) { }
 
     async registrationUser(newUser: IUserRegData): Promise<any> {
-        if (await this.userModel.findOne({ email: newUser.email.toLowerCase() })) {
-            throw new HttpException({
-                status: HttpStatus.NOT_FOUND,
-                message: 'EMAIL_DUPLICATE',
-            }, HttpStatus.NOT_FOUND);
+        if (newUser.email && newUser.password && newUser.realName && newUser.realSurname) {
+            if (await this.userModel.findOne({ email: newUser.email.toLowerCase() })) {
+                throw new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    message: 'EMAIL_DUPLICATE',
+                }, HttpStatus.NOT_FOUND);
+            } else {
+                const createdUser = new this.userModel(newUser);
+                createdUser.email = createdUser.email.toLowerCase();
+                createdUser.save();
+                throw new HttpException({
+                    status: HttpStatus.CREATED,
+                    message: 'SUCCESS',
+                }, HttpStatus.CREATED);
+            }
         } else {
-            const createdUser = new this.userModel(newUser);
-            createdUser.email = createdUser.email.toLowerCase();
-            createdUser.save();
             throw new HttpException({
-                status: HttpStatus.CREATED,
-                message: 'SUCCESS',
-            }, HttpStatus.CREATED);
+                status: HttpStatus.FORBIDDEN,
+                message: 'INCORRECT_DATA',
+            }, HttpStatus.FORBIDDEN);
         }
     }
 }

@@ -29,6 +29,9 @@ let CourseController = class CourseController {
     async removeCourse(body) {
         return this.coursesService.removeCourse(body);
     }
+    async removeCourseLecture(body) {
+        return this.coursesService.removeCourseLecture(body);
+    }
     async getAllCourses(req) {
         return this.coursesService.getAllCourses();
     }
@@ -60,6 +63,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "removeCourse", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('lecture-remove'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "removeCourseLecture", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('list'),

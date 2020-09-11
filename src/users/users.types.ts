@@ -33,3 +33,19 @@ export interface IUserStudents {
 export interface IUserRoles {
     roles: string[];
 }
+
+export interface IChangeRoles {
+    roles: string[];
+    email: string;
+}
+
+export interface IChangeLectureStatus {
+    email: string;
+    courseName: string;
+    lectureTitle: string;
+}
+
+export interface IChangeAvailableCourses {
+    email: string;
+    courseName: string;
+}

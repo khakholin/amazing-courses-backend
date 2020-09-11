@@ -21,20 +21,28 @@ let RegistrationService = class RegistrationService {
         this.userModel = userModel;
     }
     async registrationUser(newUser) {
-        if (await this.userModel.findOne({ email: newUser.email.toLowerCase() })) {
-            throw new common_1.HttpException({
-                status: common_1.HttpStatus.NOT_FOUND,
-                message: 'EMAIL_DUPLICATE',
-            }, common_1.HttpStatus.NOT_FOUND);
+        if (newUser.email && newUser.password && newUser.realName && newUser.realSurname) {
+            if (await this.userModel.findOne({ email: newUser.email.toLowerCase() })) {
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.NOT_FOUND,
+                    message: 'EMAIL_DUPLICATE',
+                }, common_1.HttpStatus.NOT_FOUND);
+            }
+            else {
+                const createdUser = new this.userModel(newUser);
+                createdUser.email = createdUser.email.toLowerCase();
+                createdUser.save();
+                throw new common_1.HttpException({
+                    status: common_1.HttpStatus.CREATED,
+                    message: 'SUCCESS',
+                }, common_1.HttpStatus.CREATED);
+            }
         }
         else {
-            const createdUser = new this.userModel(newUser);
-            createdUser.email = createdUser.email.toLowerCase();
-            createdUser.save();
             throw new common_1.HttpException({
-                status: common_1.HttpStatus.CREATED,
-                message: 'SUCCESS',
-            }, common_1.HttpStatus.CREATED);
+                status: common_1.HttpStatus.FORBIDDEN,
+                message: 'INCORRECT_DATA',
+            }, common_1.HttpStatus.FORBIDDEN);
         }
     }
 };

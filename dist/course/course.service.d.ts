@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 import { ICourseData } from './course.types';
-import { IUserTestingProgress } from 'src/users/users.types';
+import { IUserTestingProgress, IChangeLectureStatus, IChangeAvailableCourses } from 'src/users/users.types';
 export declare type Course = any;
 export declare type User = any;
 export declare type Testing = any;
@@ -20,8 +20,14 @@ export declare class CourseService {
     getUserAvailableCourses(data: any): Promise<any>;
     getUserCourseProgress(data: any): Promise<any>;
     createCourse(newCourse: ICourseData): Promise<any>;
-    removeCourse(data: any): Promise<any>;
-    changeUserAvailableCourses(data: any): Promise<any>;
-    changeUserLectureAvailable(data: any): Promise<any>;
-    changeUserLectureChecked(data: any): Promise<any>;
+    removeCourse(data: {
+        courseName: string;
+    }): Promise<any>;
+    removeCourseLecture(data: {
+        courseName: string;
+        lectureTitle: string;
+    }): Promise<any>;
+    changeUserAvailableCourses(data: IChangeAvailableCourses): Promise<any>;
+    changeUserLectureAvailable(data: IChangeLectureStatus): Promise<any>;
+    changeUserLectureChecked(data: IChangeLectureStatus): Promise<any>;
 }

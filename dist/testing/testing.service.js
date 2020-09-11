@@ -21,6 +21,10 @@ let TestingService = class TestingService {
         this.userModel = userModel;
         this.testingModel = testingModel;
     }
+    async getAllTests() {
+        const tests = await this.testingModel.find();
+        return tests;
+    }
     async updateTest(updatedTest) {
         const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
         if (course) {
@@ -34,6 +38,15 @@ let TestingService = class TestingService {
             });
             course.courseTests = mappedCourseTests;
             await course.save();
+            const users = await this.userModel.find();
+            users.forEach(async (user) => {
+                var _a;
+                const selectedCourse = (_a = user.courseProgress) === null || _a === void 0 ? void 0 : _a.find(course => course.courseName === updatedTest.courseName);
+                if (selectedCourse) {
+                    selectedCourse.lecturesTesting = selectedCourse.lecturesTesting.filter(testing => testing.lectureTitle !== updatedTest.lectureTitle);
+                }
+                await user.save();
+            });
             throw new common_1.HttpException({
                 status: common_1.HttpStatus.OK,
                 message: 'COURSE_TESTING_SUCCESSFULLY_UPDATED',

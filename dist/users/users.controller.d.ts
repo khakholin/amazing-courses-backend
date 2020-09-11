@@ -1,4 +1,4 @@
-import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents } from './users.types';
+import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents, IChangeRoles, IChangeLectureStatus, IChangeAvailableCourses } from './users.types';
 import { AuthService } from 'src/auth/auth.service';
 import { CourseService } from 'src/course/course.service';
 import { SendMail } from 'src/email/sendEmail';
@@ -14,6 +14,7 @@ export declare class UserController {
     login(req: any): Promise<{
         access_token: string;
     }>;
+    changeRoles(body: IChangeRoles): Promise<any>;
     getAllUsernames(): Promise<any[]>;
     getUserMentors(body: any): Promise<any[]>;
     getUserData(body: any): Promise<any[]>;
@@ -29,9 +30,9 @@ export declare class UserController {
     getUserAvailableCourses(body: any): Promise<any>;
     getUserCourseProgress(body: any): Promise<any>;
     changeUserMentors(body: any): Promise<any[]>;
-    changeUserAvailableCourses(body: any): Promise<any>;
-    changeUserLectureAvailable(body: any): Promise<any>;
-    changeUserLectureChecked(body: any): Promise<any>;
+    changeUserAvailableCourses(body: IChangeAvailableCourses): Promise<any>;
+    changeUserLectureAvailable(body: IChangeLectureStatus): Promise<any>;
+    changeUserLectureChecked(body: IChangeLectureStatus): Promise<any>;
     updateUserData(body: any): Promise<any[]>;
     updateUserEmail(body: any): Promise<any[]>;
     updateUserPassword(body: any): Promise<any[]>;

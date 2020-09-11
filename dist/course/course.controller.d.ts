@@ -8,6 +8,10 @@ export declare class CourseController {
     removeCourse(body: {
         courseName: string;
     }): Promise<any>;
+    removeCourseLecture(body: {
+        courseName: string;
+        lectureTitle: string;
+    }): Promise<any>;
     getAllCourses(req: any): Promise<any>;
     getCoursesData(): Promise<any>;
 }

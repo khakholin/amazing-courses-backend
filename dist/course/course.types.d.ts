@@ -6,6 +6,6 @@ export interface ICourseData {
     courseFolder: string;
     courseLectures: ILectureData[];
     courseName: string;
-    courseTime: number;
-    numOfLectures: number;
+    courseTime: string;
+    numOfLectures: string;
 }

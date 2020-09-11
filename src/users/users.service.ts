@@ -1,7 +1,7 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { IUserStudents, IUserRoles } from './users.types';
+import { IUserStudents, IUserRoles, IChangeRoles } from './users.types';
 
 export type User = any;
 @Injectable()
@@ -20,6 +20,21 @@ export class UserService {
             }, HttpStatus.NOT_FOUND);
         }
     }
+
+    async changeRoles(data: IChangeRoles): Promise<any> {
+        const user = await this.userModel.findOne({ email: data.email });
+        if (user) {
+            user.roles = data.roles;
+            await user.save();
+            return { roles: user.roles };
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'USER_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
+
 
     async getUserMentors(data): Promise<any[]> {
         const user = await this.userModel.findOne({ email: data.email });

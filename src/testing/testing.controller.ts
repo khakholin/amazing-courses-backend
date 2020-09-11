@@ -12,6 +12,12 @@ export class TestingController {
     ) { }
 
     @UseGuards(JwtAuthGuard)
+    @Get('list')
+    async getAllTests(@Request() req) {
+        return this.testingService.getAllTests();
+    }
+
+    @UseGuards(JwtAuthGuard)
     @Post('update')
     async updateTest(@Body() body: IUpdateTest) {
         return this.testingService.updateTest(body);

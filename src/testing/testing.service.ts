@@ -17,6 +17,11 @@ export class TestingService {
         @InjectModel('Testing') private testingModel: Model<Testing>,
     ) { }
 
+    async getAllTests(): Promise<any> {
+        const tests = await this.testingModel.find();
+        return tests;
+    }
+
     async updateTest(updatedTest: IUpdateTest): Promise<any> {
         const course = await this.testingModel.findOne({ courseName: updatedTest.courseName });
         if (course) {
@@ -29,6 +34,16 @@ export class TestingService {
             });
             course.courseTests = mappedCourseTests;
             await course.save();
+
+            const users = await this.userModel.find();
+            users.forEach(async user => {
+                const selectedCourse = user.courseProgress?.find(course => course.courseName === updatedTest.courseName);
+                if (selectedCourse) {
+                    selectedCourse.lecturesTesting = selectedCourse.lecturesTesting.filter(testing => testing.lectureTitle !== updatedTest.lectureTitle)
+                }
+                await user.save();
+            });
+
             throw new HttpException({
                 status: HttpStatus.OK,
                 message: 'COURSE_TESTING_SUCCESSFULLY_UPDATED',
