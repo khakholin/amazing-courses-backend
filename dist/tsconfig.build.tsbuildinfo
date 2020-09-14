@@ -1462,20 +1462,20 @@
         "signature": "e9629b89f6cd33a040577695d89edf882e66287d30c87121f5fc07f404decd25"
       },
       "../src/course/course.types.ts": {
-        "version": "8128cacae030564af7cba137d08809e28e48284018a708d05d2e45933aa401f8",
-        "signature": "679cc1d37307ef18ee2809270145269a8c05b48aaf5f40fc74abbf8697f23c40"
+        "version": "39d47fbc8998b7bd98716fd823987ad030159e88a04c4887f0df2838547bb69d",
+        "signature": "6928a18a4a0322d33a877d2b4bb17c8c3403047b4b75620b4c0d501df4674736"
       },
       "../src/users/users.types.ts": {
         "version": "dd277f2bc7b51733560ca41c30c5832d31ac0137885925b65e21f5c853fca368",
         "signature": "e0891288c8b69b8b22f133c1bcf76b90f7e209a21c261f20d065381b5003b79b"
       },
       "../src/course/course.service.ts": {
-        "version": "d4a35b9e42d2fb7afd7d764431613ad8421040784a1aa28dc97a34a6b57ea1cf",
-        "signature": "c5aa575807b4a101c8e9c901fc2f6610fdc9148cbc2abe3baafe8f6d4c0610ed"
+        "version": "b1066d9463036ba8e25cb6997e7aabcae0fd89d4fd7c1f650572e175bdf228f6",
+        "signature": "7ffd080c942dd9713299d8eb59d2c83f61974a4970e91cf13d02566c81872a4a"
       },
       "../src/course/course.controller.ts": {
-        "version": "ef8fc20f27e18bf7a3539a0595f4303de00f5acb838d5ec21bed6553a6368b89",
-        "signature": "3104cbcec6edf930bc66e784273e51be6e455e084cccc7520504c40578597c39"
+        "version": "ff02e25ffbb9a2ee2bacd8143354a65f26e43eae86293817f9258be78833bf8a",
+        "signature": "2eb80b124a36acfa2e59c2ae1a76419676c6a05ed2b5772c6a912f4835251de3"
       },
       "../src/course/schemas/course.schema.ts": {
         "version": "9751cecc420ab0f89fba738adc4fbdfea830ae051c0c17f74c23026cb5bcf393",
@@ -1538,7 +1538,7 @@
         "signature": "343348dfee75e55aaee06fe421920a96178dd9b65820f2c94cd40bbdffc283d4"
       },
       "../src/users/users.controller.ts": {
-        "version": "fbd994135d2d543620dc258c6c4a544d7cfe54e4e04fdc35049abbed10232678",
+        "version": "99046509e35cf8234ae26de7f54ddb7b9de9f716be63a236e5f8afe397ecf122",
         "signature": "d8b9f6d4630ebe97343264c4ec88eda030c9e764bde6169adeb2002f5eecb4bb"
       },
       "../src/users/schemas/user.schema.ts": {

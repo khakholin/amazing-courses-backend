@@ -9,3 +9,7 @@ export interface ICourseData {
     courseTime: string;
     numOfLectures: string;
 }
+export interface IAddLectures {
+    courseLectures: ILectureData[];
+    courseName: string;
+}

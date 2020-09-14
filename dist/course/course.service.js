@@ -127,6 +127,29 @@ let CourseService = class CourseService {
             }, common_1.HttpStatus.CREATED);
         }
     }
+    async addLectures(data) {
+        var _a, _b;
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+        if (course) {
+            course.courseLectures = (_a = course.courseLectures) === null || _a === void 0 ? void 0 : _a.concat(data.courseLectures);
+            course.numOfLectures = (+(course.numOfLectures) + +(data.courseLectures.length)).toString();
+            let newLecturesTime = 0;
+            (_b = data.courseLectures) === null || _b === void 0 ? void 0 : _b.map(item => newLecturesTime += +(item.lectureTime));
+            course.courseTime = (+(course.courseTime) + newLecturesTime);
+            await course.save();
+            courseTesting.courseTests = courseTesting === null || courseTesting === void 0 ? void 0 : courseTesting.courseTests.concat(data.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })));
+            courseTesting.numOfLectures = (+(course.numOfLectures) + +(data.courseLectures.length)).toString();
+            await courseTesting.save();
+            return course;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
     async removeCourse(data) {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
         if (course) {
@@ -165,6 +188,9 @@ let CourseService = class CourseService {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
         if (course) {
             const filteredLectures = course.courseLectures.filter(lecture => lecture.lectureTitle !== data.lectureTitle);
+            const deletedLecture = course.courseLectures.find(lecture => lecture.lectureTitle === data.lectureTitle);
+            course.courseTime = (+(course.courseTime) - +(deletedLecture.lectureTime));
+            course.numOfLectures = (+(course.numOfLectures) - 1).toString();
             course.courseLectures = filteredLectures;
             isRemovedData++;
             await course.save();
@@ -172,6 +198,7 @@ let CourseService = class CourseService {
         const testing = await this.testingModel.findOne({ courseName: data.courseName });
         if (testing) {
             const filteredTests = testing.courseTests.filter(lecture => lecture.lectureTitle !== data.lectureTitle);
+            testing.numOfLectures = (+(testing.numOfLectures) - 1).toString();
             testing.courseTests = filteredTests;
             isRemovedData++;
             await testing.save();

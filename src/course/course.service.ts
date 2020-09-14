@@ -2,7 +2,7 @@ import { Injectable, HttpException, HttpStatus, Param } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { ICourseData } from './course.types';
+import { ICourseData, IAddLectures } from './course.types';
 import { IUserTestingProgress, IChangeLectureStatus, IChangeAvailableCourses } from 'src/users/users.types';
 
 export type Course = any;
@@ -123,6 +123,29 @@ export class CourseService {
         }
     }
 
+    async addLectures(data: IAddLectures): Promise<any> {
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+        if (course) {
+            course.courseLectures = course.courseLectures?.concat(data.courseLectures);
+            course.numOfLectures = (+(course.numOfLectures) + +(data.courseLectures.length)).toString();
+            let newLecturesTime = 0;
+            data.courseLectures?.map(item => newLecturesTime += +(item.lectureTime))
+            course.courseTime = (+(course.courseTime) + newLecturesTime);
+            await course.save();
+
+            courseTesting.courseTests = courseTesting?.courseTests.concat(data.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })));
+            courseTesting.numOfLectures = (+(course.numOfLectures) + +(data.courseLectures.length)).toString();
+            await courseTesting.save();
+            return course;
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
+
     async removeCourse(data: { courseName: string }): Promise<any> {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
         if (course) {
@@ -159,6 +182,9 @@ export class CourseService {
         const course = await this.courseModel.findOne({ courseName: data.courseName });
         if (course) {
             const filteredLectures = course.courseLectures.filter(lecture => lecture.lectureTitle !== data.lectureTitle);
+            const deletedLecture = course.courseLectures.find(lecture => lecture.lectureTitle === data.lectureTitle);
+            course.courseTime = (+(course.courseTime) - +(deletedLecture.lectureTime));
+            course.numOfLectures = (+(course.numOfLectures) - 1).toString();
             course.courseLectures = filteredLectures;
             isRemovedData++;
             await course.save();
@@ -166,6 +192,7 @@ export class CourseService {
         const testing = await this.testingModel.findOne({ courseName: data.courseName });
         if (testing) {
             const filteredTests = testing.courseTests.filter(lecture => lecture.lectureTitle !== data.lectureTitle);
+            testing.numOfLectures = (+(testing.numOfLectures) - 1).toString();
             testing.courseTests = filteredTests;
             isRemovedData++;
             await testing.save();

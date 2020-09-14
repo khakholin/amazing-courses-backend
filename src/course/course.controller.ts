@@ -3,7 +3,7 @@ import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Requ
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CourseService } from 'src/course/course.service';
 import { join } from 'path';
-import { ICourseData } from './course.types';
+import { ICourseData, IAddLectures } from './course.types';
 
 @Controller('course')
 export class CourseController {
@@ -21,6 +21,12 @@ export class CourseController {
     @Post('create')
     async createCourse(@Body() body: ICourseData) {
         return this.coursesService.createCourse(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('add-lectures')
+    async addLectures(@Body() body: IAddLectures) {
+        return this.coursesService.addLectures(body);
     }
 
     @UseGuards(JwtAuthGuard)
