@@ -15,6 +15,10 @@ export declare class UserController {
         access_token: string;
     }>;
     changeRoles(body: IChangeRoles): Promise<any>;
+    loadImage(file: any): Promise<{
+        originalname: any;
+        filename: any;
+    }>;
     getAllUsernames(): Promise<any[]>;
     getUserMentors(body: any): Promise<any[]>;
     getUserData(body: any): Promise<any[]>;

@@ -1,5 +1,5 @@
-import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header, Req } from '@nestjs/common';
-
+import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header, Req, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { diskStorage } from 'multer'
 import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents, IUserRoles, IChangeRoles, IChangeLectureStatus, IChangeAvailableCourses } from './users.types';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
@@ -9,6 +9,7 @@ import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
 import { join } from 'path';
 import { UserService } from './users.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('user')
 export class UserController {
@@ -30,6 +31,24 @@ export class UserController {
     @Post('change-roles')
     async changeRoles(@Body() body: IChangeRoles) {
         return this.userService.changeRoles(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('load-image')
+    @UseInterceptors(FileInterceptor('userImage', {
+        storage: diskStorage({
+            destination: join(__dirname, "../../files"),
+            filename: (req, file, cb) => {
+                cb(null, file.originalname)
+            }
+        })
+    }))
+    async loadImage(@UploadedFile() file) {
+        const response = {
+            originalname: file.originalname,
+            filename: file.filename,
+        };
+        return response;
     }
 
     @UseGuards(JwtAuthGuard)

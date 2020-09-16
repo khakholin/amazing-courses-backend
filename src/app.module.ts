@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MulterModule } from '@nestjs/platform-express';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -31,6 +32,7 @@ import { WelcomeService } from './welcome/welcome.service';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1w' },
     }),
+    MulterModule.register(),
     MongooseModule.forRoot('mongodb://localhost/amazingCourses'),
     MongooseModule.forFeature([{ name: 'Course', schema: CourseSchema }]),
     MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),

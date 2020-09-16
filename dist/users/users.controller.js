@@ -13,13 +13,16 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
+const multer_1 = require("multer");
 const local_auth_guard_1 = require("../auth/local-auth.guard");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const auth_service_1 = require("../auth/auth.service");
 const course_service_1 = require("../course/course.service");
 const sendEmail_1 = require("../email/sendEmail");
 const registration_service_1 = require("../registration/registration.service");
+const path_1 = require("path");
 const users_service_1 = require("./users.service");
+const platform_express_1 = require("@nestjs/platform-express");
 let UserController = class UserController {
     constructor(authService, coursesService, registrationService, sendMail, userService) {
         this.authService = authService;
@@ -33,6 +36,13 @@ let UserController = class UserController {
     }
     async changeRoles(body) {
         return this.userService.changeRoles(body);
+    }
+    async loadImage(file) {
+        const response = {
+            originalname: file.originalname,
+            filename: file.filename,
+        };
+        return response;
     }
     async getAllUsernames() {
         return this.userService.getAllUsernames();
@@ -105,6 +115,22 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "changeRoles", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('load-image'),
+    common_1.UseInterceptors(platform_express_1.FileInterceptor('userImage', {
+        storage: multer_1.diskStorage({
+            destination: path_1.join(__dirname, "../../files"),
+            filename: (req, file, cb) => {
+                cb(null, file.originalname);
+            }
+        })
+    })),
+    __param(0, common_1.UploadedFile()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "loadImage", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('get-users'),

@@ -12,6 +12,7 @@ const mongoose_1 = require("@nestjs/mongoose");
 const passport_1 = require("@nestjs/passport");
 const serve_static_1 = require("@nestjs/serve-static");
 const path_1 = require("path");
+const platform_express_1 = require("@nestjs/platform-express");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const auth_service_1 = require("./auth/auth.service");
@@ -40,6 +41,7 @@ AppModule = __decorate([
                 secret: auth_constants_1.jwtConstants.secret,
                 signOptions: { expiresIn: '1w' },
             }),
+            platform_express_1.MulterModule.register(),
             mongoose_1.MongooseModule.forRoot('mongodb://localhost/amazingCourses'),
             mongoose_1.MongooseModule.forFeature([{ name: 'Course', schema: course_schema_1.CourseSchema }]),
             mongoose_1.MongooseModule.forFeature([{ name: 'User', schema: user_schema_1.UserSchema }]),
