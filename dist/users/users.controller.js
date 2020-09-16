@@ -122,7 +122,7 @@ __decorate([
         storage: multer_1.diskStorage({
             destination: path_1.join(__dirname, "../../files"),
             filename: (req, file, cb) => {
-                cb(null, file.originalname);
+                cb(null, req.user.email);
             }
         })
     })),

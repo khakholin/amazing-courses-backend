@@ -39,7 +39,7 @@ export class UserController {
         storage: diskStorage({
             destination: join(__dirname, "../../files"),
             filename: (req, file, cb) => {
-                cb(null, file.originalname)
+                cb(null, req.user.email)
             }
         })
     }))
