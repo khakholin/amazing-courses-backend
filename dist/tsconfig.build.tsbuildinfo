@@ -1461,21 +1461,25 @@
         "version": "a8dec2a5cd381829103328693799b5a23dd815c5c7744532c6084e1d2d6bbed9",
         "signature": "e9629b89f6cd33a040577695d89edf882e66287d30c87121f5fc07f404decd25"
       },
+      "../node_modules/array-move/index.d.ts": {
+        "version": "c814b538d156a987192c371b018596e9656223d39e0aa3b3aa498330f1fb9287",
+        "signature": "c814b538d156a987192c371b018596e9656223d39e0aa3b3aa498330f1fb9287"
+      },
       "../src/course/course.types.ts": {
-        "version": "39d47fbc8998b7bd98716fd823987ad030159e88a04c4887f0df2838547bb69d",
-        "signature": "6928a18a4a0322d33a877d2b4bb17c8c3403047b4b75620b4c0d501df4674736"
+        "version": "e558cce04e7d51e17cd569061f47f6f6062fdcbf75f8bf289e0a7f7e43863273",
+        "signature": "fb108574c41748191c86175bff0fbd1833f59cbef0eb66ed43eceb46cb6c177a"
       },
       "../src/users/users.types.ts": {
         "version": "dd277f2bc7b51733560ca41c30c5832d31ac0137885925b65e21f5c853fca368",
         "signature": "e0891288c8b69b8b22f133c1bcf76b90f7e209a21c261f20d065381b5003b79b"
       },
       "../src/course/course.service.ts": {
-        "version": "b1066d9463036ba8e25cb6997e7aabcae0fd89d4fd7c1f650572e175bdf228f6",
-        "signature": "7ffd080c942dd9713299d8eb59d2c83f61974a4970e91cf13d02566c81872a4a"
+        "version": "d2daa7d244ea02acb2ec55ceccba2b095a2c3047caa9159a175fa6792704617a",
+        "signature": "1fd340e2b67a7851ad4a57cf5b9425db9a96f97b44273add1d8710a3126f1437"
       },
       "../src/course/course.controller.ts": {
-        "version": "ff02e25ffbb9a2ee2bacd8143354a65f26e43eae86293817f9258be78833bf8a",
-        "signature": "2eb80b124a36acfa2e59c2ae1a76419676c6a05ed2b5772c6a912f4835251de3"
+        "version": "18c85a9d5dc7429ad79075c217fa505dcca68321adfe8fabdfa42a14e478a78a",
+        "signature": "59b35d608698f75ba3c4e36c5abb7cdb36d8d12bb8c31bf66edcef829c1070d8"
       },
       "../src/course/schemas/course.schema.ts": {
         "version": "9751cecc420ab0f89fba738adc4fbdfea830ae051c0c17f74c23026cb5bcf393",
@@ -4660,6 +4664,12 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../node_modules/array-move/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/course/course.types.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -4676,6 +4686,7 @@
         "../node_modules/@nestjs/common/index.d.ts",
         "../node_modules/@nestjs/mongoose/index.d.ts",
         "../node_modules/@types/mongoose/index.d.ts",
+        "../node_modules/array-move/index.d.ts",
         "../src/course/course.types.ts",
         "../src/users/users.types.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -8230,6 +8241,12 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../node_modules/@types/anymatch/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/array-move/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",

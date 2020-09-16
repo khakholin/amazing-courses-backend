@@ -13,3 +13,8 @@ export interface IAddLectures {
     courseLectures: ILectureData[];
     courseName: string;
 }
+export interface IMoveLectures {
+    courseName: string;
+    newIndex: number;
+    oldIndex: number;
+}

@@ -29,6 +29,9 @@ let CourseController = class CourseController {
     async addLectures(body) {
         return this.coursesService.addLectures(body);
     }
+    async moveLectures(body) {
+        return this.coursesService.moveLectures(body);
+    }
     async removeCourse(body) {
         return this.coursesService.removeCourse(body);
     }
@@ -66,6 +69,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], CourseController.prototype, "addLectures", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('move-lectures'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], CourseController.prototype, "moveLectures", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Post('remove'),

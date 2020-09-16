@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const arrayMove = require("array-move");
 const users_types_1 = require("../users/users.types");
 let CourseService = class CourseService {
     constructor(courseModel, userModel, testingModel) {
@@ -140,6 +141,23 @@ let CourseService = class CourseService {
             await course.save();
             courseTesting.courseTests = courseTesting === null || courseTesting === void 0 ? void 0 : courseTesting.courseTests.concat(data.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })));
             courseTesting.numOfLectures = (+(course.numOfLectures) + +(data.courseLectures.length)).toString();
+            await courseTesting.save();
+            return course;
+        }
+        else {
+            throw new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND);
+        }
+    }
+    async moveLectures(data) {
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+        if (course) {
+            course.courseLectures = arrayMove(course.courseLectures, data.oldIndex, data.newIndex);
+            await course.save();
+            courseTesting.courseTests = arrayMove(courseTesting.courseTests, data.oldIndex, data.newIndex);
             await courseTesting.save();
             return course;
         }

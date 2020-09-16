@@ -1,8 +1,9 @@
 import { Injectable, HttpException, HttpStatus, Param } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import * as arrayMove from 'array-move';
 
-import { ICourseData, IAddLectures } from './course.types';
+import { ICourseData, IAddLectures, IMoveLectures } from './course.types';
 import { IUserTestingProgress, IChangeLectureStatus, IChangeAvailableCourses } from 'src/users/users.types';
 
 export type Course = any;
@@ -136,6 +137,24 @@ export class CourseService {
 
             courseTesting.courseTests = courseTesting?.courseTests.concat(data.courseLectures.map(item => ({ lectureTitle: item.lectureTitle, lectureQuestions: [] })));
             courseTesting.numOfLectures = (+(course.numOfLectures) + +(data.courseLectures.length)).toString();
+            await courseTesting.save();
+            return course;
+        } else {
+            throw new HttpException({
+                status: HttpStatus.NOT_FOUND,
+                message: 'COURSE_NOT_FOUND',
+            }, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    async moveLectures(data: IMoveLectures): Promise<any> {
+        const course = await this.courseModel.findOne({ courseName: data.courseName });
+        const courseTesting = await this.testingModel.findOne({ courseName: data.courseName });
+        if (course) {
+            course.courseLectures = arrayMove(course.courseLectures, data.oldIndex, data.newIndex);
+            await course.save();
+
+            courseTesting.courseTests = arrayMove(courseTesting.courseTests, data.oldIndex, data.newIndex);
             await courseTesting.save();
             return course;
         } else {
