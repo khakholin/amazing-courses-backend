@@ -1,4 +1,5 @@
-import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header, Req } from '@nestjs/common';
+import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header, Req, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { diskStorage } from 'multer'
 
 import { IUserRegData, IUserRecoveryData, IUserTestingProgress, IUserStudents, IUserRoles, IChangeRoles, IChangeLectureStatus, IChangeAvailableCourses } from './users.types';
 import { LocalAuthGuard } from 'src/auth/local-auth.guard';
@@ -9,6 +10,7 @@ import { SendMail } from 'src/email/sendEmail';
 import { RegistrationService } from 'src/registration/registration.service';
 import { join } from 'path';
 import { UserService } from './users.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('user')
 export class UserController {
@@ -30,6 +32,60 @@ export class UserController {
     @Post('change-roles')
     async changeRoles(@Body() body: IChangeRoles) {
         return this.userService.changeRoles(body);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('load-image')
+    @UseInterceptors(FileInterceptor('userImage', {
+        storage: diskStorage({
+            destination: join(__dirname, "../../files"),
+            filename: (req, file, cb) => {
+                cb(null, req.user.email)
+            }
+        })
+    }))
+    async loadImage(@UploadedFile() file) {
+        const response = {
+            originalname: file.originalname,
+            filename: file.filename,
+        };
+        return response;
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get('get-image')
+    @Header('Content-Type', 'image/png')
+    async getImage(@Req() req, @Res() res) {
+        const fs = require('fs');
+        const path = join(__dirname, '../../files/' + req.user.email);
+        if (fs.existsSync(path)) {
+            res.sendFile(path);
+        } else {
+            res.set('Content-Type', 'text/html').status(404).send(
+                new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    message: 'USER_IMAGE_NOT_FOUND',
+                }, HttpStatus.NOT_FOUND)
+            );
+        }
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('get-user-image')
+    @Header('Content-Type', 'image/png')
+    async getUserImage(@Body() body, @Res() res) {
+        const fs = require('fs');
+        const path = join(__dirname, '../../files/' + body.email);
+        if (fs.existsSync(path)) {
+            res.sendFile(path);
+        } else {
+            res.set('Content-Type', 'text/html').status(404).send(
+                new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    message: 'USER_IMAGE_NOT_FOUND',
+                }, HttpStatus.NOT_FOUND)
+            );
+        }
     }
 
     @UseGuards(JwtAuthGuard)
