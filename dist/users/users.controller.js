@@ -44,6 +44,32 @@ let UserController = class UserController {
         };
         return response;
     }
+    async getImage(req, res) {
+        const fs = require('fs');
+        const path = path_1.join(__dirname, '../../files/' + req.user.email);
+        if (fs.existsSync(path)) {
+            res.sendFile(path);
+        }
+        else {
+            res.set('Content-Type', 'text/html').status(404).send(new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_IMAGE_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND));
+        }
+    }
+    async getUserImage(body, res) {
+        const fs = require('fs');
+        const path = path_1.join(__dirname, '../../files/' + body.email);
+        if (fs.existsSync(path)) {
+            res.sendFile(path);
+        }
+        else {
+            res.set('Content-Type', 'text/html').status(404).send(new common_1.HttpException({
+                status: common_1.HttpStatus.NOT_FOUND,
+                message: 'USER_IMAGE_NOT_FOUND',
+            }, common_1.HttpStatus.NOT_FOUND));
+        }
+    }
     async getAllUsernames() {
         return this.userService.getAllUsernames();
     }
@@ -131,6 +157,24 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "loadImage", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get('get-image'),
+    common_1.Header('Content-Type', 'image/png'),
+    __param(0, common_1.Req()), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getImage", null);
+__decorate([
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Post('get-user-image'),
+    common_1.Header('Content-Type', 'image/png'),
+    __param(0, common_1.Body()), __param(1, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserImage", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get('get-users'),

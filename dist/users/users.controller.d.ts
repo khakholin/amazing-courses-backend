@@ -19,6 +19,8 @@ export declare class UserController {
         originalname: any;
         filename: any;
     }>;
+    getImage(req: any, res: any): Promise<void>;
+    getUserImage(body: any, res: any): Promise<void>;
     getAllUsernames(): Promise<any[]>;
     getUserMentors(body: any): Promise<any[]>;
     getUserData(body: any): Promise<any[]>;

@@ -106,7 +106,7 @@ export class UserService {
                         students.push(i);
                     };
                 }
-                return students.map(u => ({ realName: u.realName, realSurname: u.realSurname, email: u.email }));
+                return students.map(u => ({ realName: u.realName, realSurname: u.realSurname, email: u.email, school: u.school }));
             } else {
                 throw new HttpException({
                     status: HttpStatus.FORBIDDEN,
