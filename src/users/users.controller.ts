@@ -38,7 +38,7 @@ export class UserController {
     @Post('load-image')
     @UseInterceptors(FileInterceptor('userImage', {
         storage: diskStorage({
-            destination: join(__dirname, "../../files"),
+            destination: join(__dirname, "../../../files"),
             filename: (req, file, cb) => {
                 cb(null, req.user.email)
             }
@@ -57,7 +57,7 @@ export class UserController {
     @Header('Content-Type', 'image/png')
     async getImage(@Req() req, @Res() res) {
         const fs = require('fs');
-        const path = join(__dirname, '../../files/' + req.user.email);
+        const path = join(__dirname, '../../../files/' + req.user.email);
         if (fs.existsSync(path)) {
             res.sendFile(path);
         } else {
@@ -75,7 +75,7 @@ export class UserController {
     @Header('Content-Type', 'image/png')
     async getUserImage(@Body() body, @Res() res) {
         const fs = require('fs');
-        const path = join(__dirname, '../../files/' + body.email);
+        const path = join(__dirname, '../../../files/' + body.email);
         if (fs.existsSync(path)) {
             res.sendFile(path);
         } else {
