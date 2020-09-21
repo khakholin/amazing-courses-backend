@@ -46,7 +46,7 @@ let UserController = class UserController {
     }
     async getImage(req, res) {
         const fs = require('fs');
-        const path = path_1.join(__dirname, '../../files/' + req.user.email);
+        const path = path_1.join(__dirname, '../../../files/' + req.user.email);
         if (fs.existsSync(path)) {
             res.sendFile(path);
         }
@@ -59,7 +59,7 @@ let UserController = class UserController {
     }
     async getUserImage(body, res) {
         const fs = require('fs');
-        const path = path_1.join(__dirname, '../../files/' + body.email);
+        const path = path_1.join(__dirname, '../../../files/' + body.email);
         if (fs.existsSync(path)) {
             res.sendFile(path);
         }
@@ -146,7 +146,7 @@ __decorate([
     common_1.Post('load-image'),
     common_1.UseInterceptors(platform_express_1.FileInterceptor('userImage', {
         storage: multer_1.diskStorage({
-            destination: path_1.join(__dirname, "../../files"),
+            destination: path_1.join(__dirname, "../../../files"),
             filename: (req, file, cb) => {
                 cb(null, req.user.email);
             }
