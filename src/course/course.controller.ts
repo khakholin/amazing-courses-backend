@@ -1,9 +1,11 @@
-import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header } from '@nestjs/common';
+import { Body, Controller, Post, Get, HttpException, HttpStatus, UseGuards, Request, Param, Res, Header, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { diskStorage } from 'multer'
 
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CourseService } from 'src/course/course.service';
 import { join } from 'path';
 import { ICourseData, IAddLectures, IMoveLectures } from './course.types';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('course')
 export class CourseController {
@@ -57,5 +59,41 @@ export class CourseController {
     @Get('data')
     async getCoursesData() {
         return this.coursesService.getCoursesData();
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('load-image')
+    @UseInterceptors(FileInterceptor('testingImage', {
+        storage: diskStorage({
+            destination: join(__dirname, "../../../files"),
+            filename: (req, file, cb) => {
+                cb(null, file.originalname)
+            }
+        })
+    }))
+    async loadImage(@UploadedFile() file) {
+        const response = {
+            originalname: file.originalname,
+            filename: file.filename,
+        };
+        return response;
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Post('get-image')
+    @Header('Content-Type', 'image/png')
+    async getUserImage(@Body() body, @Res() res) {
+        const fs = require('fs');
+        const path = join(__dirname, '../../../files/' + body.fileName);
+        if (fs.existsSync(path)) {
+            res.sendFile(path);
+        } else {
+            res.set('Content-Type', 'text/html').status(404).send(
+                new HttpException({
+                    status: HttpStatus.NOT_FOUND,
+                    message: 'TESTING_IMAGE_NOT_FOUND',
+                }, HttpStatus.NOT_FOUND)
+            );
+        }
     }
 }

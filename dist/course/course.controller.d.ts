@@ -16,4 +16,9 @@ export declare class CourseController {
     }): Promise<any>;
     getAllCourses(req: any): Promise<any>;
     getCoursesData(): Promise<any>;
+    loadImage(file: any): Promise<{
+        originalname: any;
+        filename: any;
+    }>;
+    getUserImage(body: any, res: any): Promise<void>;
 }
