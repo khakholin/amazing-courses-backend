@@ -53,7 +53,7 @@ export class CourseService {
                     soughtProgress = item.lecturesTesting.find(lec => lec.lectureTitle === data.lectureTitle);
                 }
             })
-            if (soughtProgress) {
+            if (soughtProgress.answers.length) {
                 return soughtProgress;
             } else {
                 throw new HttpException({
@@ -244,10 +244,13 @@ export class CourseService {
             });
             if (index !== -1) {
                 user.availableCourses.splice(index, 1);
-                user.courseProgress.map(progress => {
+                user.courseProgress.map(async progress => {
                     if (progress.courseName === data.courseName) {
+
                         progress.availableLectures = [];
                         progress.checkedLectures = [];
+                        progress.lecturesTesting = [];
+
                     }
                 });
                 await user.save();
@@ -257,6 +260,15 @@ export class CourseService {
                 }, HttpStatus.OK);
             } else {
                 user.availableCourses.push(data.courseName);
+                const course = await this.courseModel.findOne({ courseName: data.courseName });
+                user.courseProgress.push({
+                    courseName: data.courseName,
+                    availableLectures: [],
+                    checkedLectures: [],
+                    lecturesTesting: course.courseLectures.map(item => {
+                        return { lectureTitle: item.lectureTitle, answers: [], result: {} };
+                    })
+                });
                 await user.save();
                 throw new HttpException({
                     status: HttpStatus.OK,

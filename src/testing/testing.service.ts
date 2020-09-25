@@ -114,10 +114,9 @@ export class TestingService {
                     }
                 });
                 const result = { right: numOfAnswers, total: lecture.lectureQuestions.length };
-
                 user.courseProgress.map(item => {
                     if (item.courseName === checkedTest.courseName) {
-                        const arr = item.lecturesTesting.slice();
+                        const arr = item.lecturesTesting ? item.lecturesTesting.slice() : [];
                         arr.map((lec, index) => {
                             if (lec.lectureTitle === checkedTest.lectureTitle) {
                                 item.lecturesTesting.splice(index, 1);

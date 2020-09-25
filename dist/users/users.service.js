@@ -116,7 +116,7 @@ let UserService = class UserService {
                     }
                     ;
                 }
-                return students.map(u => ({ realName: u.realName, realSurname: u.realSurname, email: u.email, school: u.school }));
+                return students;
             }
             else {
                 throw new common_1.HttpException({
